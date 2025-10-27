@@ -1,0 +1,398 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="google-site-verification" content="Yk9zafJ8ceV_JQAeiRq9OIHPHCxHEg23hTIWz_2qyU0" />
+<meta name="robots" content="index, follow">
+<meta name="author" content="Malawi National Council of Sports">
+<title>Malawi National Council of Sports</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+<!-- Ionicons -->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+<style>
+/* General Styles */
+body, h1, h2, h3, p, ul, li, a, input, textarea, button { margin: 0; padding: 0; font-family: 'Poppins', Arial, sans-serif; }
+body { background: linear-gradient(to bottom right, #000, #006b3f, #ff0000); color: #fff; line-height: 1.7; }
+a { color: #ffd700; text-decoration: none; }
+a:hover { text-decoration: underline; }
+section { padding: 60px 25px; text-align: center; }
+section:nth-child(even) { background: rgba(255, 255, 255, 0.05); }
+h1, h2, h3 { color: #ffd700; text-transform: uppercase; }
+p { margin: 15px 0; }
+button { cursor: pointer; }
+
+/* Header */
+header { background: rgba(0, 0, 0, 0.95); padding: 15px 20px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 3px 10px rgba(255, 255, 255, 0.15); }
+.header-container { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.header-left { display: flex; align-items: center; gap: 12px; }
+.header-logo { width: 90px; border-radius: 10px; background: white; padding: 5px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
+.site-title { font-size: 1.6rem; color: #ffd700; text-shadow: 1px 1px 4px black; }
+
+/* Navigation */
+nav { text-align: center; margin-top: 10px; }
+nav a { color: white; margin: 0 12px; font-weight: 600; }
+nav a:hover { color: #ffd700; }
+.search-bar { display: inline-block; margin-left: 10px; }
+.search-bar input { padding: 6px 10px; border-radius: 5px; border: none; width: 180px; }
+.search-bar button { padding: 6px 12px; border: none; border-radius: 5px; background: #ffd700; font-weight: bold; color: black; }
+.search-bar button:hover { background: white; color: black; }
+
+/* Sports News Buttons */
+#news { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; padding: 40px 20px; }
+#news a { display: inline-block; padding: 12px 22px; font-size: 1.1rem; font-weight: 600; color: #fff; background: linear-gradient(135deg, #006b3f, #ff0000); border-radius: 12px; box-shadow: 0 6px 15px rgba(0,0,0,0.3); text-decoration: none; transition: all 0.3s ease; }
+#news a:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.45); background: linear-gradient(135deg, #ffd700, #ff4500); color: #000; }
+
+/* Gallery */
+.gallery-heading { text-align: center; margin-bottom: 30px; } /* Center heading */
+.gallery-container { position: relative; max-width: 1000px; margin: 40px auto; overflow: hidden; }
+.gallery-track { display: flex; transition: transform 0.6s ease-in-out; will-change: transform; }
+.gallery-item { min-width: 280px; margin: 0 10px; position: relative; border-radius: 15px; overflow: hidden; box-shadow: 0 0 10px rgba(255, 255, 255, 0.12); }
+.gallery-item img { width: 100%; height: 200px; object-fit: cover; border-radius: 15px; display: block; }
+.gallery-caption { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); color: #ffd700; padding: 8px 0; font-weight: bold; text-align: center; }
+.arrow-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: #ffd700; border: none; font-size: 2rem; padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+.arrow-left { left: 6px; }
+.arrow-right { right: 6px; }
+.arrow-btn:hover { background: #ffd700; color: black; }
+
+/* Admin Section */
+.pdf-upload { background: rgba(255, 255, 255, 0.12); padding: 18px; border-radius: 10px; max-width: 640px; margin: 18px auto; text-align: left; }
+.pdf-upload label { display: block; margin-bottom: 6px; font-weight: 600; color: #fff; }
+.pdf-upload select, input, textarea { width: 100%; padding: 10px; margin: 10px 0; border-radius: 6px; border: none; }
+.pdf-upload button { padding: 10px 20px; background: #ffd700; border: none; border-radius: 6px; font-weight: 700; color: black; cursor: pointer; }
+.pdf-viewer { background: rgba(255, 255, 255, 0.06); padding: 14px; border-radius: 10px; margin: 15px 0; overflow: auto; max-height: 500px; }
+
+/* Contact / Footer */
+#contact { background: rgba(0,0,0,0.95); padding: 50px 20px; text-align: center; }
+.social-icons { margin-top: 15px; }
+.social-icons a { color: #ffd700; margin: 0 12px; font-size: 2.2rem; transition: 0.25s; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; padding: 8px; }
+.social-icons a:hover { color: white; transform: scale(1.15); background: rgba(255,255,255,0.05); }
+.contact-info { margin-top: 20px; font-size: 1rem; }
+.contact-info ion-icon, .contact-info .fa { color: #ffd700; vertical-align: middle; margin-right: 8px; font-size: 1.3rem; }
+#footer p { color: #aaa; margin-top: 15px; font-size: 0.95rem; }
+
+/* Password field wrapper */
+.input-with-icon { position: relative; }
+.input-with-icon input[type="password"], .input-with-icon input[type="text"] { padding-right: 42px; }
+.toggle-pass { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.05rem; color: #ffd700; }
+
+/* smaller screens */
+@media(max-width:600px){
+  .gallery-item{min-width:220px;}
+  .header-logo{width:70px;}
+  .site-title{font-size:1.1rem;}
+}
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <div class="header-left">
+      <img src="https://pbs.twimg.com/profile_images/1504734702917279754/rb3u7Mgr_400x400.jpg" alt="Malawi Sports Logo" class="header-logo">
+      <div class="site-title">Malawi National Council of Sports</div>
+    </div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#news">News</a>
+      <a href="#publications">Publications</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+      <span class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button type="button" onclick="googleSearch()">Search</button>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<section id="home">
+  <h2>Welcome to the Malawi National Council of Sports</h2>
+  <p>Empowering athletes and promoting sports development across Malawi.</p>
+</section>
+
+<section id="about"> 
+  <h2>About Us</h2>
+  <p>The Malawi National Council of Sports (MNCS) was established by an act of Parliament in 1974 to oversee and promote sports in Malawi. It focuses on women in sport, professional and recreational sports, sports for people with disabilities, and anti-doping initiatives.</p>
+
+  <h3>Vision Statement</h3>
+  <p>We are a professional, most efficient, and effective sports development catalytic organization, successfully providing progressive and quality sports services in Malawi.</p>
+
+  <h3>Mission Statement</h3>
+  <p>We are a sports body entrusted with the responsibility to Manage, Control, Develop and Promote sport at all levels.</p>
+
+  <h3>Composition of the Secretariat</h3>
+  <p>While the Board gives policy direction, the Secretariat is charged with operationalising policy and other day-to-day matters of the Council. The Secretariat is headed by the Chief Executive Officer of the Council and divided into five (5) main departments: the Chief Executive Officer’s Office, Sports and Recreation Development, Finance, Human Resources and Administration, and Marketing, Planning, and Infrastructure services.</p>
+</section>
+
+<section id="news">
+  <h2>Sports News & Updates</h2>
+  <a href="https://www.google.com/search?q=Football+News+Malawi" target="_blank">Football News</a>
+  <a href="https://www.google.com/search?q=Netball+News+Malawi" target="_blank">Netball News</a>
+  <a href="https://www.google.com/search?q=Basketball+News+Malawi" target="_blank">Basketball News</a>
+  <a href="https://www.google.com/search?q=Athletics+News+Malawi" target="_blank">Athletics News</a>
+  <a href="https://www.google.com/search?q=Malawi+News" target="_blank">Malawi News</a>
+  <a href="https://www.google.com/search?q=Malawi+Academy+of+Sports+Training" target="_blank">Training Updates - Malawi Academy for Sports</a>
+</section>
+
+<!-- Gallery Section -->
+<section id="gallery">
+  <h2 class="gallery-heading">Sports Gallery</h2>
+  <div class="gallery-container">
+    <button class="arrow-btn arrow-left" onclick="manualPrev()">&#10094;</button>
+    <div class="gallery-viewport" style="overflow:hidden;">
+      <div class="gallery-track" id="galleryTrack">
+        <div class="gallery-item"><img src="https://bolayapazed.com/wp-content/uploads/2023/08/1691064757614-jpg.webp" alt="Football"><div class="gallery-caption">Football</div></div>
+        <div class="gallery-item"><img src="https://www.nyasatimes.com/wp-content/uploads/MVP-from-MAGU-jumps-high-during-the-game.jpg" alt="Basketball"><div class="gallery-caption">Basketball</div></div>
+        <div class="gallery-item"><img src="https://www.nyasatimes.com/wp-content/uploads/image-101.jpeg" alt="Netball"><div class="gallery-caption">Netball</div></div>
+        <div class="gallery-item"><img src="https://www.nyasatimes.com/wp-content/uploads/IMG-20190404-WA0081.jpg" alt="Women Football"><div class="gallery-caption">Women Football</div></div>
+        <div class="gallery-item"><img src="https://malawisport.mw/wp-content/uploads/2024/11/kata-zim.jpg" alt="Karate"><div class="gallery-caption">Karate</div></div>
+        <div class="gallery-item"><img src="https://res.cloudinary.com/duu3v9gfg/image/fetch/t_fit_1920/https://78884ca60822a34fb0e6-082b8fd5551e97bc65e327988b444396.ssl.cf3.rackcdn.com/up/2018/01/malawi-01-1514914573-1514914573.jpg" alt="Judo"><div class="gallery-caption">Judo</div></div>
+        <div class="gallery-item"><img src="https://tse1.mm.bing.net/th/id/OIP.UIyT6VkIOi3o7fSH_NqDLwHaE8?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Volleyball"><div class="gallery-caption">Volleyball</div></div>
+        <div class="gallery-item"><img src="https://tse4.mm.bing.net/th/id/OIP.ussmU6wwIrA_4EG8UGFXjAHaEL?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Lawn Tennis"><div class="gallery-caption">Lawn Tennis</div></div>
+        <div class="gallery-item"><img src="https://www.nyasatimes.com/wp-content/uploads/Mkwanda-at-the-receiving-end.jpg" alt="Boxing"><div class="gallery-caption">Boxing</div></div>
+        <div class="gallery-item"><img src="https://www.teamsa.co.za/wp-content/uploads/2018/03/1-10.jpg" alt="Swimming"><div class="gallery-caption">Swimming</div></div>
+        <div class="gallery-item"><img src="https://dgalywyr863hv.cloudfront.net/pictures/clubs/698521/15818901/2/large.jpg" alt="Cycling"><div class="gallery-caption">Cycling</div></div>
+        <div class="gallery-item"><img src="https://www.nyasatimes.com/wp-content/uploads/a-Nyasa-Times-pic-5326.jpg" alt="Chess"><div class="gallery-caption">Chess</div></div>
+      </div>
+    </div>
+    <button class="arrow-btn arrow-right" onclick="manualNext()">&#10095;</button>
+  </div>
+</section>
+
+<section id="publications">
+  <h3>Reports, Policies & Publications / Admin Section</h3>
+
+  <div class="pdf-upload" id="createAccountBox">
+    <h4 style="color:#ffd700;">Create Admin Account</h4>
+    <label>Email:</label>
+    <input type="email" id="adminEmail" placeholder="Enter Email" required>
+    <label>Password:</label>
+    <div class="input-with-icon">
+      <input type="password" id="adminPassword" placeholder="Enter Password" required>
+      <span class="toggle-pass" id="toggleAdminPass" title="Show/Hide Password"><i class="fa fa-eye"></i></span>
+    </div>
+    <div style="display:flex; align-items:center; gap:12px; margin-top:8px;">
+      <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" id="rememberMe"> Remember Me</label>
+      <a href="#" id="forgotPasswordLink" style="margin-left:auto; color:#ffd700;">Forgot Password?</a>
+    </div>
+    <p style="margin-top:10px;">Don't have an account? <a href="#" id="registerLink">Register</a></p>
+    <button type="button" onclick="createAccount()">Create Account via Google</button>
+  </div>
+
+  <div class="pdf-upload">
+    <h4 style="color:#ffd700;">Upload Document</h4>
+    <label>Document Type:</label>
+    <select id="docCategory">
+      <option value="annual-report">Annual Reports</option>
+      <option value="monthly-report">Monthly Reports</option>
+      <option value="youth-programs">Youth Programs Reports</option>
+      <option value="policy">Policy</option>
+      <option value="strategic-plan">Strategic Plan</option>
+      <option value="financial-report">Financial Reports</option>
+      <option value="activities-report">Activities Reports</option>
+      <option value="other">Other Reports</option>
+    </select>
+    <label>Upload Document (PDF/Word):</label>
+    <input type="file" id="fileUpload" accept=".pdf,.doc,.docx">
+    <button type="button" onclick="uploadFile()">Upload & View Document</button>
+  </div>
+
+  <div class="pdf-viewer" id="pdfViewer"><p>No document loaded yet.</p></div>
+
+  <div class="pdf-upload">
+    <h4 style="color:#ffd700;">Send Uploaded Report via Email</h4>
+    <label>Recipient Email:</label>
+    <input type="email" id="emailRecipient" placeholder="Enter recipient email" required>
+    <label>CC (optional):</label>
+    <input list="ccHistoryList" id="emailCC" placeholder="Enter CC email or choose from saved">
+    <datalist id="ccHistoryList"></datalist>
+    <small style="display:block; color:#ddd;">Saved CCs appear as suggestions. They are auto-saved (max 7) when you send emails or create admin accounts.</small>
+    <label>Subject:</label>
+    <input type="text" id="emailSubject" placeholder="Enter email subject" required>
+    <label>Message:</label>
+    <textarea id="emailMessage" rows="5" placeholder="Enter your message"></textarea>
+    <label>Select Uploaded Document:</label>
+    <select id="uploadedDocSelect">
+      <option value="">--Select Document--</option>
+    </select>
+    <button type="button" onclick="sendReport()">Send Report via Gmail</button>
+  </div>
+</section>
+
+<section id="contact"> 
+  <h2>Contact</h2>
+  <div class="contact-info">
+    <p>
+      <i class="fa fa-map-marker" aria-hidden="true"></i>
+      <a href="https://www.google.com/maps?q=-13.9626,33.7741" target="_blank" style="color:#ffd700; text-decoration:none;">
+        Malawi National Council of Sports / Kamuzu Institute for Sports, Lilongwe Malawi
+      </a>
+    </p>
+    <p><ion-icon name="call-outline"></ion-icon> +265 991 631 170</p>
+    <p><ion-icon name="mail-outline"></ion-icon> info@malawisports.gov.mw</p>
+    <a href="https://www.youtube.com/results?search_query=Malawi+National+Council+of+Sports" target="_blank">
+      <i class="fa fa-youtube-play" aria-hidden="true" style="font-size:24px;"></i>
+    </a>
+  </div>
+
+  <div class="social-icons">
+    <a href="https://www.facebook.com" target="_blank"><ion-icon name="logo-facebook"></ion-icon></a>
+    <a href="https://twitter.com" target="_blank"><ion-icon name="logo-twitter"></ion-icon></a>
+    <a href="https://wa.me/265991631170" target="_blank"><ion-icon name="logo-whatsapp"></ion-icon></a>
+  </div>
+</section>
+
+<footer id="footer">
+  <p>&copy; 2025 Malawi National Council of Sports. Designed by Arthur Sangulukani Developers Network. All rights reserved.</p>
+</footer>
+
+<script>
+// Google Search
+function googleSearch(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  if(!q){ alert('Please enter a search term.'); return; }
+  if(q === 'google'){ window.open('https://www.google.com', '_blank'); return; }
+  window.open(`https://www.google.com/search?q=${encodeURIComponent(q)}+Malawi+Sports`, '_blank');
+}
+
+// ----------------- CC History (localStorage) -----------------
+const CC_KEY = 'mncs_cc_list'; // stored as JSON array, newest first
+function loadCCHistory(){
+  try{
+    const raw = localStorage.getItem(CC_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    const datalist = document.getElementById('ccHistoryList');
+    datalist.innerHTML = '';
+    arr.forEach(email => {
+      const opt = document.createElement('option');
+      opt.value = email;
+      datalist.appendChild(opt);
+    });
+  }catch(e){ console.error('CC load error', e); }
+}
+function saveCCHistory(email){
+  if(!email) return;
+  email = email.trim();
+  if(!validateEmail(email)) return;
+  try{
+    let arr = JSON.parse(localStorage.getItem(CC_KEY) || '[]');
+    arr = arr.filter(e => e.toLowerCase() !== email.toLowerCase());
+    arr.unshift(email);
+    if(arr.length > 7) arr = arr.slice(0,7);
+    localStorage.setItem(CC_KEY, JSON.stringify(arr));
+    loadCCHistory();
+  }catch(e){ console.error('CC save error', e); }
+}
+
+// ----------------- Email send and file upload -----------------
+function uploadFile(){
+  const fileInput = document.getElementById("fileUpload");
+  const docSelect = document.getElementById("uploadedDocSelect");
+  if(fileInput.files.length === 0){ alert("Please select a file."); return; }
+  const fileName = fileInput.files[0].name;
+  const option = document.createElement("option");
+  option.value = fileName;
+  option.text = fileName;
+  const exists = Array.from(docSelect.options).some(o => o.value === fileName);
+  if(!exists) docSelect.add(option);
+  document.getElementById("pdfViewer").innerHTML = `<p>Uploaded Document: ${fileName}</p>`;
+}
+
+function validateEmail(email){
+  if(!email) return false;
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
+
+function sendReport(){
+  const recipient = document.getElementById("emailRecipient").value.trim();
+  const cc = document.getElementById("emailCC").value.trim();
+  const subject = document.getElementById("emailSubject").value.trim();
+  const message = document.getElementById("emailMessage").value.trim();
+  const file = document.getElementById("uploadedDocSelect").value;
+  if(!recipient || !subject || !file){ alert("Please fill required fields and select a document."); return; }
+  if(!validateEmail(recipient)){ alert('Recipient email is invalid.'); return; }
+  if(cc && !validateEmail(cc)){ alert('CC email is invalid.'); return; }
+  if(cc) saveCCHistory(cc);
+  let mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipient)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+  if(cc) mailtoLink += `&cc=${encodeURIComponent(cc)}`;
+  window.open(mailtoLink, '_blank');
+}
+
+// ----------------- Admin create account (redirect to Google signup) -----------------
+function createAccount(){
+  const email = document.getElementById('adminEmail').value.trim();
+  if(email && validateEmail(email)) saveCCHistory(email);
+  window.open('https://accounts.google.com/signup', '_blank');
+}
+
+// Toggle password show/hide
+document.getElementById('toggleAdminPass').addEventListener('click', function(){
+  const p = document.getElementById('adminPassword');
+  const icon = this.querySelector('i');
+  if(p.type === 'password'){ p.type = 'text'; icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash'); }
+  else { p.type = 'password'; icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye'); }
+});
+
+// ----------------- Gallery Sliding -----------------
+let galleryIndex = 0;
+const track = document.getElementById('galleryTrack');
+let autoSlideInterval = null;
+function updateGalleryPosition(){
+  const item = track.querySelector('.gallery-item');
+  if(!item) return;
+  const itemWidth = item.offsetWidth + 20;
+  track.style.transform = `translateX(${-galleryIndex * itemWidth}px)`;
+}
+function nextSlide(){
+  const items = track.children.length;
+  galleryIndex++;
+  if(galleryIndex >= items) galleryIndex = 0;
+  updateGalleryPosition();
+}
+function prevSlide(){
+  const items = track.children.length;
+  galleryIndex--;
+  if(galleryIndex < 0) galleryIndex = items - 1;
+  updateGalleryPosition();
+}
+function manualNext(){ stopAutoSlide(); nextSlide(); startAutoSlide(); }
+function manualPrev(){ stopAutoSlide(); prevSlide(); startAutoSlide(); }
+
+function startAutoSlide(){
+  if(autoSlideInterval) return;
+  autoSlideInterval = setInterval(nextSlide, 4000); // optimized 4 seconds
+}
+function stopAutoSlide(){
+  if(autoSlideInterval){ clearInterval(autoSlideInterval); autoSlideInterval = null; }
+}
+
+window.addEventListener('resize', updateGalleryPosition);
+window.addEventListener('load', function(){
+  loadCCHistory();
+  try{
+    const last = localStorage.getItem('mncs_last_admin');
+    if(last) document.getElementById('adminEmail').value = last;
+  }catch(e){}
+  updateGalleryPosition();
+  startAutoSlide();
+});
+
+const galleryContainer = document.querySelector('.gallery-container');
+galleryContainer.addEventListener('mouseenter', stopAutoSlide);
+galleryContainer.addEventListener('mouseleave', startAutoSlide);
+</script>
+
+</body>
+</html>
