@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <!-- Main Website -->
   <url><loc>https://wsangulukani-alt.github.io/Mncssports-websites/</loc></url>
-
-  <!-- Wiki Pages -->
-  <url><loc>https://github.com/wsangulukani/Mncssports-websites/wiki/Home</loc></url>
-  <url><loc>https://github.com/wsangulukani/Mncssports-websites/wiki/About-Us</loc></url>
-  <url><loc>https://github.com/wsangulukani/Mncssports-websites/wiki/Sports-Programs</loc></url>
-  <url><loc>https://github.com/wsangulukani/Mncssports-websites/wiki/News-Updates</loc></url>
-  <url><loc>https://github.com/wsangulukani/Mncssports-websites/wiki/Publications</loc></url>
-  <url><loc>https://github.com/wsangulukani/Mncssports-websites/wiki/Contact</loc></url>
-
+  <url><loc>https://wsangulukani-alt.github.io/Mncssports-websites/about.html</loc></url>
+  <url><loc>https://wsangulukani-alt.github.io/Mncssports-websites/news.html</loc></url>
+  <url><loc>https://wsangulukani-alt.github.io/Mncssports-websites/contact.html</loc></url>
 </urlset>
