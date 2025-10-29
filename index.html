@@ -187,7 +187,7 @@ nav a:hover { color: #ffd700; }
       <a href="#" id="forgotPasswordLink" style="margin-left:auto; color:#ffd700;">Forgot Password?</a>
     </div>
     <p style="margin-top:10px;">Don't have an account? <a href="#" id="registerLink">Register</a></p>
-    <button type="button" onclick="createAccount()">Create Account via Google</button>
+    <button type="button" id="gmailSignInBtn">Sign in with Google to Send Emails</button>
   </div>
 
   <div class="pdf-upload">
@@ -215,9 +215,11 @@ nav a:hover { color: #ffd700; }
     <label>Recipient Email:</label>
     <input type="email" id="emailRecipient" placeholder="Enter recipient email" required>
     <label>CC (optional):</label>
-    <input list="ccHistoryList" id="emailCC" placeholder="Enter CC email or choose from saved">
+    <input list="ccHistoryList" id="emailCC" placeholder="Enter CC email(s) separated by commas or choose from saved">
     <datalist id="ccHistoryList"></datalist>
-    <small style="display:block; color:#ddd;">Saved CCs appear as suggestions. They are auto-saved (max 7) when you send emails or create admin accounts.</small>
+    <label>BCC (optional):</label>
+    <input type="text" id="emailBCC" placeholder="Enter BCC email(s) separated by commas (not saved)">
+    <small style="display:block; color:#ddd;">Saved CCs appear as suggestions. They are auto-saved (max 7) when you send emails or create admin accounts. BCC is not saved.</small>
     <label>Subject:</label>
     <input type="text" id="emailSubject" placeholder="Enter email subject" required>
     <label>Message:</label>
@@ -226,7 +228,7 @@ nav a:hover { color: #ffd700; }
     <select id="uploadedDocSelect">
       <option value="">--Select Document--</option>
     </select>
-    <button type="button" onclick="sendReport()">Send Report via Gmail</button>
+    <button type="button" id="sendEmailBtn" onclick="sendReport()">Send Report via Gmail</button>
   </div>
 </section>
 
@@ -396,4 +398,5 @@ galleryContainer.addEventListener('mouseleave', startAutoSlide);
 
 </body>
 </html>
+
 
