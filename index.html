@@ -319,18 +319,45 @@ function validateEmail(email){
 
 function sendReport(){
   const recipient = document.getElementById("emailRecipient").value.trim();
-  const cc = document.getElementById("emailCC").value.trim();
+  const ccRaw = document.getElementById("emailCC").value.trim();
+  const bccRaw = document.getElementById("emailBCC").value.trim();
   const subject = document.getElementById("emailSubject").value.trim();
   const message = document.getElementById("emailMessage").value.trim();
   const file = document.getElementById("uploadedDocSelect").value;
+
   if(!recipient || !subject || !file){ alert("Please fill required fields and select a document."); return; }
   if(!validateEmail(recipient)){ alert('Recipient email is invalid.'); return; }
-  if(cc && !validateEmail(cc)){ alert('CC email is invalid.'); return; }
-  if(cc) saveCCHistory(cc);
+
+  // ---------------- Handle CC ----------------
+  let ccList = [];
+  if(ccRaw){
+    splitAndCleanEmails(ccRaw).forEach(e => {
+      if(validateEmail(e)) ccList.push(e);
+      saveCCHistory(e);
+    });
+  }
+
+  // ---------------- Handle BCC ----------------
+  let bccList = [];
+  if(bccRaw){
+    splitAndCleanEmails(bccRaw).forEach(e => {
+      if(validateEmail(e)) bccList.push(e);
+      saveCCHistory(e); // save BCC email as well
+    });
+  }
+
+  // ---------------- Handle Recipient ----------------
+  saveCCHistory(recipient); // save recipient email to history
+
+  // Build Gmail compose link
   let mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipient)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
-  if(cc) mailtoLink += `&cc=${encodeURIComponent(cc)}`;
+  if(ccList.length) mailtoLink += `&cc=${encodeURIComponent(ccList.join(','))}`;
+  if(bccList.length) mailtoLink += `&bcc=${encodeURIComponent(bccList.join(','))}`;
+
+  // Open Gmail compose
   window.open(mailtoLink, '_blank');
 }
+
 
 // ----------------- Admin create account (redirect to Google signup) -----------------
 function createAccount(){
@@ -398,6 +425,7 @@ galleryContainer.addEventListener('mouseleave', startAutoSlide);
 
 </body>
 </html>
+
 
 
 
