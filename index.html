@@ -173,22 +173,67 @@ nav a:hover { color: #ffd700; }
 <section id="publications">
   <h3>Reports, Policies & Publications / Admin Section</h3>
 
-  <div class="pdf-upload" id="createAccountBox">
-    <h4 style="color:#ffd700;">Create Admin Account</h4>
-    <label>Email:</label>
-    <input type="email" id="adminEmail" placeholder="Enter Email" required>
-    <label>Password:</label>
-    <div class="input-with-icon">
-      <input type="password" id="adminPassword" placeholder="Enter Password" required>
-      <span class="toggle-pass" id="toggleAdminPass" title="Show/Hide Password"><i class="fa fa-eye"></i></span>
-    </div>
-    <div style="display:flex; align-items:center; gap:12px; margin-top:8px;">
-      <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" id="rememberMe"> Remember Me</label>
-      <a href="#" id="forgotPasswordLink" style="margin-left:auto; color:#ffd700;">Forgot Password?</a>
-    </div>
-    <p style="margin-top:10px;">Don't have an account? <a href="#" id="registerLink">Register</a></p>
-    <button type="button" id="gmailSignInBtn">Sign in with Google to Send Emails</button>
+ <!-- Admin Account & Email Section -->
+<div class="pdf-upload" id="createAccountBox">
+  <h4 style="color:#ffd700;">Create Admin Account</h4>
+
+  <label for="adminEmail">Email Address:</label>
+  <input type="email" id="adminEmail" placeholder="Enter your Gmail" required>
+
+  <label for="adminPassword">Password:</label>
+  <div class="input-with-icon">
+    <input type="password" id="adminPassword" placeholder="Enter password" required>
+    <span class="toggle-pass" id="toggleAdminPass" title="Show/Hide Password">
+      <i class="fa fa-eye"></i>
+    </span>
   </div>
+
+  <div style="display:flex;align-items:center;gap:10px;margin-top:8px;">
+    <label><input type="checkbox" id="rememberMe"> Remember Me</label>
+    <a href="https://accounts.google.com/signin/recovery" target="_blank"
+       style="margin-left:auto;color:#ffd700;">Forgot Password?</a>
+  </div>
+
+  <p style="margin-top:10px;">
+    Don’t have an account?
+    <a href="https://accounts.google.com/signup" target="_blank">Create Google Account</a>
+  </p>
+
+  <button type="button" id="gmailSignInBtn" onclick="openGmail()">
+    Sign in with Google
+  </button>
+</div>
+
+<div class="pdf-upload">
+  <h4 style="color:#ffd700;">Send Uploaded Report via Gmail</h4>
+
+  <label>Recipient Email:</label>
+  <input list="toHistoryList" id="emailRecipient" placeholder="Enter recipient email(s)" required>
+  <datalist id="toHistoryList"></datalist>
+
+  <label>CC (≤ 9 saved):</label>
+  <input list="ccHistoryList" id="emailCC" placeholder="CC emails, comma-separated">
+  <datalist id="ccHistoryList"></datalist>
+
+  <label>BCC (≤ 9 saved):</label>
+  <input list="bccHistoryList" id="emailBCC" placeholder="BCC emails, comma-separated">
+  <datalist id="bccHistoryList"></datalist>
+
+  <small style="display:block;color:#ddd;">
+    Each user’s To, CC, and BCC emails are saved locally for convenience (max 9 each).
+  </small>
+
+  <label>Subject:</label>
+  <input type="text" id="emailSubject" placeholder="Enter subject" required>
+
+  <label>Message:</label>
+  <textarea id="emailMessage" rows="5" placeholder="Enter message"></textarea>
+  <label>Select Uploaded Document or Add Files:</label>
+  <select id="uploadedDocSelect"><option value="">--Select--</option></select>
+  <input type="file" id="fileUpload2" multiple accept=".pdf,.doc,.docx,.jpg,.png">
+  <div id="attachmentsList" style="margin-top:6px;color:#ddd;">No files selected.</div>
+  <button type="button" onclick="sendReport()">Send via Gmail</button>
+</div>
 
   <div class="pdf-upload">
     <h4 style="color:#ffd700;">Upload Document</h4>
@@ -425,6 +470,7 @@ galleryContainer.addEventListener('mouseleave', startAutoSlide);
 
 </body>
 </html>
+
 
 
 
