@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="google-site-verification" content="P4ENe7SzeSHbAgNddWm0AfKeKVoL9tQqjEN_ptMg-EM" />
+<meta name="google-site-verification" content="Yk9zafJ8ceV_JQAeiRq9OIHPHCxHEg23hTIWz_2qyU0" />
 <meta name="robots" content="index, follow">
 <meta name="author" content="Malawi National Council of Sports">
 <title>Malawi National Council of Sports</title>
@@ -173,65 +173,22 @@ nav a:hover { color: #ffd700; }
 <section id="publications">
   <h3>Reports, Policies & Publications / Admin Section</h3>
 
- <!-- Admin Account & Email Section -->
-<div class="pdf-upload" id="createAccountBox">
-  <h4 style="color:#ffd700;">Create Admin Account</h4>
-
-  <label for="adminEmail">Email Address:</label>
-  <input type="email" id="adminEmail" placeholder="Enter your Gmail" required>
-
-  <label for="adminPassword">Password:</label>
-  <div class="input-with-icon">
-    <input type="password" id="adminPassword" placeholder="Enter password" required>
-    <span class="toggle-pass" id="toggleAdminPass" title="Show/Hide Password">
-      <i class="fa fa-eye"></i>
-    </span>
+  <div class="pdf-upload" id="createAccountBox">
+    <h4 style="color:#ffd700;">Create Admin Account</h4>
+    <label>Email:</label>
+    <input type="email" id="adminEmail" placeholder="Enter Email" required>
+    <label>Password:</label>
+    <div class="input-with-icon">
+      <input type="password" id="adminPassword" placeholder="Enter Password" required>
+      <span class="toggle-pass" id="toggleAdminPass" title="Show/Hide Password"><i class="fa fa-eye"></i></span>
+    </div>
+    <div style="display:flex; align-items:center; gap:12px; margin-top:8px;">
+      <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" id="rememberMe"> Remember Me</label>
+      <a href="#" id="forgotPasswordLink" style="margin-left:auto; color:#ffd700;">Forgot Password?</a>
+    </div>
+    <p style="margin-top:10px;">Don't have an account? <a href="#" id="registerLink">Register</a></p>
+    <button type="button" onclick="createAccount()">Create Account via Google</button>
   </div>
-
-  <div style="display:flex;align-items:center;gap:10px;margin-top:8px;">
-    <label><input type="checkbox" id="rememberMe"> Remember Me</label>
-    <a href="https://accounts.google.com/signin/recovery" target="_blank"
-       style="margin-left:auto;color:#ffd700;">Forgot Password?</a>
-  </div>
-
-  <p style="margin-top:10px;">
-    Don’t have an account?
-    <a href="https://accounts.google.com/signup" target="_blank">Create Google Account</a>
-  </p>
-
-  <button type="button" id="gmailSignInBtn" onclick="openGmail()">
-    Sign in with Google
-  </button>
-</div>
-
-<div class="pdf-upload">
-  <h4 style="color:#ffd700;">Send Uploaded Report via Gmail</h4>
-
-  <label>Recipient Email:</label>
-  <input list="toHistoryList" id="emailRecipient" placeholder="Enter recipient email(s)" required>
-  <datalist id="toHistoryList"></datalist>
-  <label>CC (≤ 9 saved):</label>
-  <input list="ccHistoryList" id="emailCC" placeholder="CC emails, comma-separated">
-  <datalist id="ccHistoryList"></datalist>
-  <label>BCC (≤ 9 saved):</label>
-  <input list="bccHistoryList" id="emailBCC" placeholder="BCC emails, comma-separated">
-  <datalist id="bccHistoryList"></datalist>
-
-  <small style="display:block;color:#ddd;">
-    Each user’s To, CC, and BCC emails are saved locally for convenience (max 9 each).
-  </small>
-
-  <label>Subject:</label>
-  <input type="text" id="emailSubject" placeholder="Enter subject" required>
-
-  <label>Message:</label>
-  <textarea id="emailMessage" rows="5" placeholder="Enter message"></textarea>
-  <label>Select Uploaded Document or Add Files:</label>
-  <select id="uploadedDocSelect"><option value="">--Select--</option></select>
-  <input type="file" id="fileUpload2" multiple accept=".pdf,.doc,.docx,.jpg,.png">
-  <div id="attachmentsList" style="margin-top:6px;color:#ddd;">No files selected.</div>
-  <button type="button" onclick="sendReport()">Send via Gmail</button>
-</div>
 
   <div class="pdf-upload">
     <h4 style="color:#ffd700;">Upload Document</h4>
@@ -262,7 +219,7 @@ nav a:hover { color: #ffd700; }
     <datalist id="ccHistoryList"></datalist>
     <label>BCC (optional):</label>
     <input type="text" id="emailBCC" placeholder="Enter BCC email(s) separated by commas (not saved)">
-    <small style="display:block; color:#ddd;">Saved CCs appear as suggestions. They are auto-saved (max 8) when you send emails or create admin accounts. BCC is not saved.</small>
+    <small style="display:block; color:#ddd;">Saved CCs appear as suggestions. They are auto-saved (max 7) when you send emails or create admin accounts. BCC is not saved.</small>
     <label>Subject:</label>
     <input type="text" id="emailSubject" placeholder="Enter email subject" required>
     <label>Message:</label>
@@ -271,7 +228,7 @@ nav a:hover { color: #ffd700; }
     <select id="uploadedDocSelect">
       <option value="">--Select Document--</option>
     </select>
-    <button type="button" id="sendEmailBtn" onclick="sendReport()">Send Report via Gmail</button>
+    <button type="button" onclick="sendReport()">Send Report via Gmail</button>
   </div>
 </section>
 
@@ -360,6 +317,10 @@ function validateEmail(email){
   return re.test(email);
 }
 
+function splitAndCleanEmails(raw){
+  return raw.split(',').map(e => e.trim()).filter(e => e);
+}
+
 function sendReport(){
   const recipient = document.getElementById("emailRecipient").value.trim();
   const ccRaw = document.getElementById("emailCC").value.trim();
@@ -371,36 +332,34 @@ function sendReport(){
   if(!recipient || !subject || !file){ alert("Please fill required fields and select a document."); return; }
   if(!validateEmail(recipient)){ alert('Recipient email is invalid.'); return; }
 
-  // ---------------- Handle CC ----------------
+  // Handle CCs (multiple allowed, saved to history, max 8)
   let ccList = [];
   if(ccRaw){
-    splitAndCleanEmails(ccRaw).forEach(e => {
-      if(validateEmail(e)) ccList.push(e);
-      saveCCHistory(e);
-    });
+    ccList = splitAndCleanEmails(ccRaw);
+    if(ccList.length > 8){ alert("You can enter a maximum of 8 CC emails."); return; }
+    for(const c of ccList){
+      if(!validateEmail(c)){ alert("CC email is invalid: " + c); return; }
+      saveCCHistory(c); // save each CC email to history
+    }
   }
 
-  // ---------------- Handle BCC ----------------
+  // Handle BCCs (multiple allowed, NOT saved, max 8)
   let bccList = [];
   if(bccRaw){
-    splitAndCleanEmails(bccRaw).forEach(e => {
-      if(validateEmail(e)) bccList.push(e);
-      saveCCHistory(e); // save BCC email as well
-    });
+    bccList = splitAndCleanEmails(bccRaw);
+    if(bccList.length > 8){ alert("You can enter a maximum of 8 BCC emails."); return; }
+    for(const b of bccList){
+      if(!validateEmail(b)){ alert("BCC email is invalid: " + b); return; }
+    }
   }
-
-  // ---------------- Handle Recipient ----------------
-  saveCCHistory(recipient); // save recipient email to history
 
   // Build Gmail compose link
   let mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipient)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
   if(ccList.length) mailtoLink += `&cc=${encodeURIComponent(ccList.join(','))}`;
   if(bccList.length) mailtoLink += `&bcc=${encodeURIComponent(bccList.join(','))}`;
 
-  // Open Gmail compose
   window.open(mailtoLink, '_blank');
 }
-
 
 // ----------------- Admin create account (redirect to Google signup) -----------------
 function createAccount(){
@@ -468,9 +427,3 @@ galleryContainer.addEventListener('mouseleave', startAutoSlide);
 
 </body>
 </html>
-
-
-
-
-
-
