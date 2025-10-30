@@ -6,6 +6,22 @@
 <meta name="google-site-verification" content="Yk9zafJ8ceV_JQAeiRq9OIHPHCxHEg23hTIWz_2qyU0" />
 <meta name="robots" content="index, follow">
 <meta name="author" content="Malawi National Council of Sports">
+<meta name="description" content="Official website of the Malawi National Council of Sports (MNCS). Empowering athletes, promoting sports development, and managing national sports programs in Malawi.">
+<meta name="keywords" content="Malawi Sports, MNCS, National Council of Sports, Netball, Football, Basketball, Athletics, Sports Council Malawi, Kamuzu Institute for Sports, Malawi Government Sports">
+<link rel="canonical" href="https://wsangulukani-alt.github.io/Mncssports-websites/" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:title" content="Malawi National Council of Sports" />
+<meta property="og:description" content="Official website of the Malawi National Council of Sports. Promoting sports excellence and development across Malawi." />
+<meta property="og:image" content="https://pbs.twimg.com/profile_images/1504734702917279754/rb3u7Mgr_400x400.jpg" />
+<meta property="og:url" content="https://wsangulukani-alt.github.io/Mncssports-websites/" />
+<meta property="og:type" content="website" />
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Malawi National Council of Sports" />
+<meta name="twitter:description" content="Empowering athletes and promoting sports development in Malawi." />
+<meta name="twitter:image" content="https://pbs.twimg.com/profile_images/1504734702917279754/rb3u7Mgr_400x400.jpg" />
+
 <title>Malawi National Council of Sports</title>
 
 <!-- Google Fonts -->
@@ -91,6 +107,20 @@ nav a:hover { color: #ffd700; }
   .site-title{font-size:1.1rem;}
 }
 </style>
+
+
+  <title>Malawi National Council of Sports – Official Website</title>
+  <meta name="description" content="Promoting sports development, programs, and events across Malawi.">
+  <link rel="canonical" href="https://wsangulukani-alt.github.io/Mncssports-websites/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Malawi National Council of Sports – Official Website">
+  <meta property="og:description" content="Promoting sports development, programs, and events across Malawi.">
+  <meta property="og:url" content="https://wsangulukani-alt.github.io/Mncssports-websites/">
+  <meta property="og:image" content="assets/logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "Organization", "name": "Malawi National Council of Sports", "url": "https://wsangulukani-alt.github.io/Mncssports-websites/", "logo": "assets/logo.png", "sameAs": ["https://facebook.com/", "https://twitter.com/"]}
+  </script>
 
 </head>
 <body>
@@ -219,7 +249,7 @@ nav a:hover { color: #ffd700; }
     <datalist id="ccHistoryList"></datalist>
     <label>BCC (optional):</label>
     <input type="text" id="emailBCC" placeholder="Enter BCC email(s) separated by commas (not saved)">
-    <small style="display:block; color:#ddd;">Saved CCs appear as suggestions. They are auto-saved  (max 10) when you send emails or create admin accounts. BCC is not saved.</small>
+    <small style="display:block; color:#ddd;">Saved CCs appear as suggestions. They are auto-saved (max 7) when you send emails or create admin accounts. BCC is not saved.</small>
     <label>Subject:</label>
     <input type="text" id="emailSubject" placeholder="Enter email subject" required>
     <label>Message:</label>
@@ -425,6 +455,173 @@ galleryContainer.addEventListener('mouseenter', stopAutoSlide);
 galleryContainer.addEventListener('mouseleave', startAutoSlide);
 </script>
 
+
+<script>
+/* Enhanced CC/BCC parsing, history, and send-receipt tracking (no OAuth client id) */
+const CC_KEY = 'mncs_cc_list_v2';
+const SENT_HISTORY_KEY = 'mncs_sent_history';
+const MAX_HISTORY = 200;
+const MAX_RECIPIENTS = 200; // large limit
+
+function validateEmail(email){
+  if(!email) return false;
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
+
+function splitAndCleanEmails(raw){
+  if(!raw) return [];
+  const normalized = raw.replace(/[;\n\r\t]+/g, ',').replace(/\s+/g, ' ');
+  const parts = normalized.includes(',') ? normalized.split(',') : normalized.split(' ');
+  return parts.map(e => e.trim()).filter(e => e);
+}
+
+function loadCCHistory(){
+  try{
+    const raw = localStorage.getItem(CC_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    const datalist = document.getElementById('ccHistoryList');
+    if(datalist) {
+      datalist.innerHTML = '';
+      arr.forEach(email => {
+        const opt = document.createElement('option');
+        opt.value = email;
+        datalist.appendChild(opt);
+      });
+    }
+  }catch(e){ console.error('CC load error', e); }
+}
+
+function saveCCHistoryItem(email){
+  if(!email) return;
+  email = email.trim();
+  if(!validateEmail(email)) return;
+  try{
+    let arr = JSON.parse(localStorage.getItem(CC_KEY) || '[]');
+    arr = arr.filter(e => e.toLowerCase() !== email.toLowerCase());
+    arr.unshift(email);
+    if(arr.length > MAX_HISTORY) arr = arr.slice(0, MAX_HISTORY);
+    localStorage.setItem(CC_KEY, JSON.stringify(arr));
+    loadCCHistory();
+  }catch(e){ console.error('CC save error', e); }
+}
+
+function saveMultipleCCHistory(emails){
+  if(!Array.isArray(emails)) return;
+  for(const e of emails){
+    if(validateEmail(e)) saveCCHistoryItem(e);
+  }
+}
+
+function addSentReceipt(record){
+  try{
+    const raw = localStorage.getItem(SENT_HISTORY_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    arr.unshift(record);
+    if(arr.length > 500) arr.splice(500);
+    localStorage.setItem(SENT_HISTORY_KEY, JSON.stringify(arr));
+  }catch(e){ console.error('Saving send receipt failed', e); }
+}
+
+function getSentHistory(){
+  try{
+    return JSON.parse(localStorage.getItem(SENT_HISTORY_KEY) || '[]');
+  }catch(e){ return []; }
+}
+
+function renderSentHistoryUI(){
+  const container = document.getElementById('pdfViewer') || document.getElementById('sentHistoryContainer');
+  try{
+    const entries = getSentHistory();
+    if(!container) return;
+    let html = '<h4>Sent History (local receipts)</h4>';
+    if(entries.length === 0){
+      html += '<p>No sent history yet.</p>';
+    } else {
+      html += '<ul style="text-align:left; max-height:300px; overflow:auto; padding-left:18px;">';
+      entries.slice(0,50).forEach(e => {
+        const ts = new Date(e.timestamp).toLocaleString();
+        html += `<li style="margin-bottom:8px;"><strong>${e.subject || '(no subject)'}</strong><br>
+                 <small>Sent by: ${e.sender || 'visitor'} — ${ts}<br>
+                 To: ${e.to} ${e.cc ? ' | CC: ' + e.cc : ''} ${e.bcc ? ' | BCC: ' + e.bcc : ''}<br>
+                 Doc: ${e.file || '(none)'} </small></li>`;
+      });
+      html += '</ul>';
+    }
+    container.innerHTML = html;
+  }catch(err){ console.error(err); }
+}
+
+function formatRecipientList(arr){
+  return arr.map(e => e.trim()).filter(e => e).join(', ');
+}
+
+function sendReport(){
+  const recipient = document.getElementById("emailRecipient") ? document.getElementById("emailRecipient").value.trim() : '';
+  const ccRaw = document.getElementById("emailCC") ? document.getElementById("emailCC").value.trim() : '';
+  const bccRaw = document.getElementById("emailBCC") ? document.getElementById("emailBCC").value.trim() : '';
+  const subject = document.getElementById("emailSubject") ? document.getElementById("emailSubject").value.trim() : '';
+  const message = document.getElementById("emailMessage") ? document.getElementById("emailMessage").value.trim() : '';
+  const file = document.getElementById("uploadedDocSelect") ? document.getElementById("uploadedDocSelect").value : '(no-file)';
+  const sender = (document.getElementById('adminEmail') && document.getElementById('adminEmail').value) ? document.getElementById('adminEmail').value : 'Visitor';
+
+  if(!recipient || !subject){ alert("Please fill required fields: recipient and subject."); return; }
+  if(!validateEmail(recipient)){ alert('Recipient email is invalid.'); return; }
+
+  let ccList = [];
+  if(ccRaw){
+    ccList = splitAndCleanEmails(ccRaw);
+    if(ccList.length > MAX_RECIPIENTS){ alert("Too many CC emails."); return; }
+    for(const c of ccList){ if(!validateEmail(c)){ alert("Invalid CC email: " + c); return; } }
+  }
+
+  let bccList = [];
+  if(bccRaw){
+    bccList = splitAndCleanEmails(bccRaw);
+    if(bccList.length > MAX_RECIPIENTS){ alert("Too many BCC emails."); return; }
+    for(const b of bccList){ if(!validateEmail(b)){ alert("Invalid BCC email: " + b); return; } }
+  }
+
+  if(ccList.length) saveMultipleCCHistory(ccList);
+
+  const receipt = {
+    timestamp: new Date().toISOString(),
+    sender: sender,
+    to: recipient,
+    cc: ccList.join(', '),
+    bcc: bccList.join(', '),
+    subject: subject,
+    message: message,
+    file: file
+  };
+  addSentReceipt(receipt);
+  renderSentHistoryUI();
+
+  const toParam = encodeURIComponent(recipient);
+  const suParam = encodeURIComponent(subject);
+  const bodyParam = encodeURIComponent(message + "\n\n(Attached document:) " + file);
+  let mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${toParam}&su=${suParam}&body=${bodyParam}`;
+  if(ccList.length) mailtoLink += `&cc=${encodeURIComponent(formatRecipientList(ccList))}`;
+  if(bccList.length) mailtoLink += `&bcc=${encodeURIComponent(formatRecipientList(bccList))}`;
+
+  window.open(mailtoLink, '_blank');
+}
+
+function createAccount(){
+  const email = document.getElementById('adminEmail') ? document.getElementById('adminEmail').value.trim() : '';
+  if(email && validateEmail(email)) saveCCHistoryItem(email);
+  window.open('https://accounts.google.com/signup', '_blank');
+}
+
+window.addEventListener('load', function(){
+  loadCCHistory();
+  renderSentHistoryUI();
+  try{
+    const last = localStorage.getItem('mncs_last_admin');
+    if(last && document.getElementById('adminEmail')) document.getElementById('adminEmail').value = last;
+  }catch(e){}
+});
+</script>
+
 </body>
 </html>
-
