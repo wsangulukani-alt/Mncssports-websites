@@ -1,0 +1,15 @@
+const express = require('express)
+const path = require ('path);
+
+const app = express();
+const PORT = procee.env . PORT || 3000;
+
+// Serve static files (your website)
+app. use( express . static(path. join(__dirn
+ame, '/')));
+
+// start the Serve
+app. listen(PORT, () => {
+    console. log(`Server running on 
+    http: //localhost:${PORT} `);
+});
