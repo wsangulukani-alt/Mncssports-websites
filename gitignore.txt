@@ -1,0 +1,27 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node / build folders (if any)
+node_modules/
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor settings
+.vscode/
+.idea/
+*.swp
+
+# System / temporary files
+*.tmp
+*.bak
+
+# Environment / config files
+.env
+.env.local
