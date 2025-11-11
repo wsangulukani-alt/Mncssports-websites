@@ -1,0 +1,9 @@
+{
+  "name": "mncssports-website",
+  "version": "1.0.0",
+  "description": "Sports website ready for deployment on Vercel",
+  "main": "index.js",
+  "dependencies": {
+    "nodemailer": "^6.9.3"
+  }
+}
