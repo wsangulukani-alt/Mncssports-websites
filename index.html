@@ -166,15 +166,43 @@ nav a:hover { color: #ffd700; }
   <p>While the Board gives policy direction, the Secretariat is charged with operationalising policy and other day-to-day matters of the Council. The Secretariat is headed by the Chief Executive Officer of the Council and divided into five (5) main departments: the Chief Executive Officer’s Office, Sports and Recreation Development, Finance, Human Resources and Administration, and Marketing, Planning, and Infrastructure services.</p>
 </section>
 
-<section id="news">
-  <h2>Sports News & Updates</h2>
-  <a href="https://www.google.com/search?q=Football+News+Malawi" target="_blank">Football News</a>
-  <a href="https://www.google.com/search?q=Netball+News+Malawi" target="_blank">Netball News</a>
-  <a href="https://www.google.com/search?q=Basketball+News+Malawi" target="_blank">Basketball News</a>
-  <a href="https://www.google.com/search?q=Athletics+News+Malawi" target="_blank">Athletics News</a>
-  <a href="https://www.google.com/search?q=Malawi+News" target="_blank">Malawi News</a>
-  <a href="https://www.google.com/search?q=Malawi+Academy+of+Sports+Training" target="_blank">Training Updates - Malawi Academy for Sports</a>
+<!-- ===================== NEWS SECTION ===================== -->
+<section id="news" style="padding: 40px 20px; background: #f7f7f7;">
+    <h2 style="text-align:center; margin-bottom:10px;">Latest Sports News</h2>
+    <p style="text-align:center; margin:-10px 0 30px 0; font-size:14px;">
+        Updates from Malawi sports and the Academy.
+    </p>
+
+    <!-- ========= Your Google Search Links (These stay safe & not affected) ========= -->
+    <div style="text-align:center; margin-bottom:30px;">
+        <a href="https://www.google.com/search?q=Football+News+Malawi" target="_blank">Football News</a> |
+        <a href="https://www.google.com/search?q=Netball+News+Malawi" target="_blank">Netball News</a> |
+        <a href="https://www.google.com/search?q=Basketball+News+Malawi" target="_blank">Basketball News</a> |
+        <a href="https://www.google.com/search?q=Athletics+News+Malawi" target="_blank">Athletics News</a> |
+        <a href="https://www.google.com/search?q=Malawi+News" target="_blank">Malawi News</a> |
+        <a href="https://www.google.com/search?q=Malawi+Academy+of+Sports+Training" target="_blank">Training Updates</a>
+    </div>
+
+    <!-- ========= DISPLAY AREA FOR NEWS YOU WILL POST ========= -->
+    <div id="news-container" style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    ">
+        <!-- Example News Card (You can delete after testing) -->
+        <div class="news-card" style="
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        ">
+            <h3>Sample News Title</h3>
+            <p style="font-size:14px;">This is where your news will appear after you add them in GitHub.</p>
+            <a href="#" style="color:#006400;">Read More</a>
+        </div>
+    </div>
 </section>
+<!-- ===================== END NEWS SECTION ===================== -->
 
 <!-- Gallery Section -->
 <section id="gallery">
@@ -626,6 +654,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
