@@ -165,7 +165,6 @@ nav a:hover { color: #ffd700; }
   <h3>Composition of the Secretariat</h3>
   <p>While the Board gives policy direction, the Secretariat is charged with operationalising policy and other day-to-day matters of the Council. The Secretariat is headed by the Chief Executive Officer of the Council and divided into five (5) main departments: the Chief Executive Officer’s Office, Sports and Recreation Development, Finance, Human Resources and Administration, and Marketing, Planning, and Infrastructure services.</p>
 </section>
-
 <!-- ===================== NEWS SECTION ===================== -->
 <section id="news" style="padding: 40px 20px; background: #f7f7f7;">
     <h2 style="text-align:center; margin-bottom:10px;">Latest Sports News</h2>
@@ -173,41 +172,44 @@ nav a:hover { color: #ffd700; }
         Updates from Malawi sports and the Academy.
     </p>
 
-    <!-- ========= Your Google Search Links (These stay safe & not affected) ========= -->
-    <div style="text-align:center; margin-bottom:30px;">
-        <a href="https://www.google.com/search?q=Football+News+Malawi" target="_blank">Football News</a> |
-        <a href="https://www.google.com/search?q=Netball+News+Malawi" target="_blank">Netball News</a> |
-        <a href="https://www.google.com/search?q=Basketball+News+Malawi" target="_blank">Basketball News</a> |
-        <a href="https://www.google.com/search?q=Athletics+News+Malawi" target="_blank">Athletics News</a> |
-        <a href="https://www.google.com/search?q=Malawi+News" target="_blank">Malawi News</a> |
-        <a href="https://www.google.com/search?q=Malawi+Academy+of+Sports+Training" target="_blank">Training Updates</a>
-    </div>
-
-    <!-- ========= DISPLAY AREA FOR NEWS YOU WILL POST ========= -->
-    <div class="news-card">
-    <img src="your-image-link-2.jpg" alt="News Image">
-    <h3>Coaches Complete Level 1 Training Course</h3>
-    <p>
-        The Malawi Academy for Sports successfully trained 45 new coaches, promoting quality
-        talent development across districts.
-    </p>
-    <a href="full-news-link-2.html" class="read-more">Read more</a>
-    </div>
-  <div id="news-container" style="
+    <!-- ========= NEWS CONTAINER (ALL CARDS MUST BE INSIDE HERE) ========= -->
+    <div id="news-container" style="
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 20px;
     ">
+
+        <!-- === NEWS CARD 1 === -->
         <div class="news-card" style="
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-">
-    <h3>Coaches and Officials Summit Held in Dedza</h3>
-    <p style="font-size:14px;">District sports officials gathered in Dedza for a regional summit on youth sports development.</p>
-    <a href="news/dedza-summit.html" style="color:#006400;">Read More</a>
-        </div
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        ">
+            <img src="your-image-link-1.jpg" alt="News Image" style="width:100%; border-radius:10px;">
+            <h3>Coaches Complete Level 1 Training Course</h3>
+            <p style="font-size:14px;">
+                The Malawi Academy for Sports successfully trained 45 new coaches, promoting
+                quality talent development across districts.
+            </p>
+            <a href="news/full-news-link-2.html" class="read-more" style="color:#006400;">Read more</a>
+        </div>
+
+        <!-- === NEWS CARD 2 === -->
+        <div class="news-card" style="
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        ">
+            <img src="your-image-link-2.jpg" alt="News Image" style="width:100%; border-radius:10px;">
+            <h3>Coaches and Officials Summit Held in Dedza</h3>
+            <p style="font-size:14px;">
+                District sports officials gathered in Dedza for a regional summit on youth sports development.
+            </p>
+            <a href="news/dedza-summit.html" style="color:#006400;">Read More</a>
+        </div>
+
     </div>
 </section>
 <!-- ===================== END NEWS SECTION ===================== -->
@@ -662,6 +664,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
