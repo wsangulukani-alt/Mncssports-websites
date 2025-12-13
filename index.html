@@ -176,74 +176,23 @@ nav a:hover { color: #ffd700; }
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 20px;
+        justify-items: center;
     ">
 
-        <!-- === NEWS CARD 1 === -->
-        <div class="news-card" style="background:white; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
-            <img src="https://raw.githubusercontent.com/wsangulukani-alt/Mncssports-websites/main/Images/Malawi%20netball%20queens%20in%20competition.jpg" 
-                 alt="Malawi Netball Queens" 
-                 style="width:100%; border-radius:10px;">
-            <h3>Malawi Netball Queens in Competition</h3>
-            <p style="font-size:14px;">
-                The Malawi Netball Queens represented the nation in recent competitions, showing skill, teamwork, and determination on the court.
-            </p>
-            <a href="news/malawi-netball-news.html" style="color:#006400;">Read More</a>
-        </div>
-
-        <!-- === NEWS CARD 2 === -->
-        <div class="news-card" style="background:white; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
-            <img src="https://raw.githubusercontent.com/wsangulukani-alt/Mncssports-websites/main/Images/IMG-20251212-WA0032.jpg" 
-                 alt="Local Sports Event" 
-                 style="width:100%; border-radius:10px;">
-            <h3>Exciting Local Sports Event Highlights</h3>
-            <p style="font-size:14px;">
-                Highlights from the latest local sports event, showcasing incredible talent and community enthusiasm.
-            </p>
-            <a href="news/local-sports-news.html" style="color:#006400;">Read More</a>
-        </div>
-
-        <!-- === NEWS CARD 3 === -->
-        <div class="news-card" style="background:white; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
-            <img src="your-image-link-2.jpg" alt="Coaches Summit" style="width:100%; border-radius:10px;">
-            <h3>Coaches and Officials Summit Held in Dedza</h3>
-            <p style="font-size:14px;">
-                District sports officials gathered in Dedza for a regional summit on youth sports development.
-            </p>
-            <a href="news/dedza-coaches-news.html" style="color:#006400;">Read More</a>
-        </div>
-
-        <!-- === NEWS CARD 4 === -->
-        <div class="news-card" style="background:white; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+        <!-- === AFRICA NETBALL CUP 2025 CARD === -->
+        <div class="news-card" style="background:white; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); max-width:600px;">
             <img src="https://raw.githubusercontent.com/wsangulukani-alt/Mncssports-websites/main/Images/IMG-20251212-WA0032.jpg" 
                  alt="Africa Netball Cup 2025" 
                  style="width:100%; border-radius:10px;">
             <h3>Africa Netball Cup 2025: Saturday Games Preview</h3>
             <p style="font-size:14px;">
-                Griffin Saenda Stadium in Lilongwe will host semi-final matches, including men's and women's games, as teams battle for positions and spots in Sunday’s championship matches.
+                Griffin Saenda Stadium in Lilongwe will host a full schedule of matches on Saturday as the Africa Netball Cup 2025 reaches the semi-final stage. The day will feature men’s semi-final matches, with South Africa set to face Kenya in the first encounter, followed by Eswatini against Zimbabwe. In the women’s category, South Africa will take on Zimbabwe in the first semi-final, while host nation Malawi will face Uganda in what is expected to be a highly competitive and closely watched match. Later in the day, classification matches will also be played, with Botswana meeting Malawi in the men’s 5th/6th place play-off, and Namibia playing Tanzania in the women’s 7th/8th place play-off. All Saturday games will be played at Griffin Saenda Stadium, as teams battle for final positions and places in Sunday’s championship matches. Fans are expected to fill the stadium to witness top teams competing for the championship.
             </p>
-            <a href="news/africa-netball-news.html" style="color:#006400;">Read More</a>
         </div>
 
     </div>
 </section>
 <!-- ===================== END NEWS SECTION ===================== -->
-<script>
-function toggleReadMore(link){
-    const card = link.parentElement;
-    const shortText = card.querySelector('.short-text');
-    const fullText = card.querySelector('.full-text');
-    if(fullText.style.display === "none"){
-        fullText.style.display = "block";
-        shortText.style.display = "none";
-        link.innerText = "Read Less";
-    } else {
-        fullText.style.display = "none";
-        shortText.style.display = "block";
-        link.innerText = "Read More";
-    }
-}
-      </script>
-
 <!-- Gallery Section -->
 <section id="gallery">
   <h2 class="gallery-heading">Sports Gallery</h2>
@@ -694,6 +643,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
