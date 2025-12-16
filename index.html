@@ -186,7 +186,6 @@ nav a:hover { color: #ffd700; }
   <a href="https://www.google.com/search?q=Malawi+News" target="_blank">Malawi News</a>
   <a href="https://www.google.com/search?q=Malawi+Academy+of+Sports+Training" target="_blank">Training Updates - Malawi Academy for Sports</a>
 </section>
-
 <!-- Gallery Section -->
 <section id="gallery">
   <h2 class="gallery-heading">Sports Gallery</h2>
@@ -196,7 +195,7 @@ nav a:hover { color: #ffd700; }
       <div class="gallery-track" id="galleryTrack">
         <div class="gallery-item"><img src="https://bolayapazed.com/wp-content/uploads/2023/08/1691064757614-jpg.webp" alt="Football"><div class="gallery-caption">Football</div></div>
         <div class="gallery-item"><img src="https://www.nyasatimes.com/wp-content/uploads/MVP-from-MAGU-jumps-high-during-the-game.jpg" alt="Basketball"><div class="gallery-caption">Basketball</div></div>
-        <div class="gallery-item"><img src="https://raw.githubusercontent.com/wsangulukani-alt/Mncssports-websites/refs/heads/main/Images/The%20Queens%202025%20.jpg"alt="Netball"><div class="gallery-caption">Netball</div></div>
+        <div class="gallery-item"><img src="https://www.nyasatimes.com/wp-content/uploads/image-101.jpeg" alt="Netball"><div class="gallery-caption">Netball</div></div>
         <div class="gallery-item"><img src="https://www.nyasatimes.com/wp-content/uploads/IMG-20190404-WA0081.jpg" alt="Women Football"><div class="gallery-caption">Women Football</div></div>
         <div class="gallery-item"><img src="https://malawisport.mw/wp-content/uploads/2024/11/kata-zim.jpg" alt="Karate"><div class="gallery-caption">Karate</div></div>
         <div class="gallery-item"><img src="https://res.cloudinary.com/duu3v9gfg/image/fetch/t_fit_1920/https://78884ca60822a34fb0e6-082b8fd5551e97bc65e327988b444396.ssl.cf3.rackcdn.com/up/2018/01/malawi-01-1514914573-1514914573.jpg" alt="Judo"><div class="gallery-caption">Judo</div></div>
@@ -334,12 +333,309 @@ function saveCCHistory(email){
     arr = arr.filter(e => e.toLowerCase() !== email.toLowerCase());
     arr.unshift(email);
     if(arr.length > 7) arr = arr.slice(0,7);
-    localStorage.setIt
+    localStorage.setItem(CC_KEY, JSON.stringify(arr));
+    loadCCHistory();
+  }catch(e){ console.error('CC save error', e); }
+}
+
+// ----------------- Email send and file upload -----------------
+function uploadFile(){
+  const fileInput = document.getElementById("fileUpload");
+  const docSelect = document.getElementById("uploadedDocSelect");
+  if(fileInput.files.length === 0){ alert("Please select a file."); return; }
+  const fileName = fileInput.files[0].name;
+  const option = document.createElement("option");
+  option.value = fileName;
+  option.text = fileName;
+  const exists = Array.from(docSelect.options).some(o => o.value === fileName);
+  if(!exists) docSelect.add(option);
+  document.getElementById("pdfViewer").innerHTML = `<p>Uploaded Document: ${fileName}</p>`;
+}
+
+function validateEmail(email){
+  if(!email) return false;
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
+
+function splitAndCleanEmails(raw){
+  return raw.split(',').map(e => e.trim()).filter(e => e);
+}
+
+function sendReport(){
+  const recipient = document.getElementById("emailRecipient").value.trim();
+  const ccRaw = document.getElementById("emailCC").value.trim();
+  const bccRaw = document.getElementById("emailBCC").value.trim();
+  const subject = document.getElementById("emailSubject").value.trim();
+  const message = document.getElementById("emailMessage").value.trim();
+  const file = document.getElementById("uploadedDocSelect").value;
+
+  if(!recipient || !subject || !file){ alert("Please fill required fields and select a document."); return; }
+  if(!validateEmail(recipient)){ alert('Recipient email is invalid.'); return; }
+
+  // Handle CCs (multiple allowed, saved to history, max 8)
+  let ccList = [];
+  if(ccRaw){
+    ccList = splitAndCleanEmails(ccRaw);
+    if(ccList.length > 8){ alert("You can enter a maximum of 8 CC emails."); return; }
+    for(const c of ccList){
+      if(!validateEmail(c)){ alert("CC email is invalid: " + c); return; }
+      saveCCHistory(c); // save each CC email to history
+    }
+  }
+
+  // Handle BCCs (multiple allowed, NOT saved, max 8)
+  let bccList = [];
+  if(bccRaw){
+    bccList = splitAndCleanEmails(bccRaw);
+    if(bccList.length > 8){ alert("You can enter a maximum of 8 BCC emails."); return; }
+    for(const b of bccList){
+      if(!validateEmail(b)){ alert("BCC email is invalid: " + b); return; }
+    }
+  }
+
+  // Build Gmail compose link
+  let mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipient)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+  if(ccList.length) mailtoLink += `&cc=${encodeURIComponent(ccList.join(','))}`;
+  if(bccList.length) mailtoLink += `&bcc=${encodeURIComponent(bccList.join(','))}`;
+
+  window.open(mailtoLink, '_blank');
+}
+
+// ----------------- Admin create account (redirect to Google signup) -----------------
+function createAccount(){
+  const email = document.getElementById('adminEmail').value.trim();
+  if(email && validateEmail(email)) saveCCHistory(email);
+  window.open('https://accounts.google.com/signup', '_blank');
+}
+
+// Toggle password show/hide
+document.getElementById('toggleAdminPass').addEventListener('click', function(){
+  const p = document.getElementById('adminPassword');
+  const icon = this.querySelector('i');
+  if(p.type === 'password'){ p.type = 'text'; icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash'); }
+  else { p.type = 'password'; icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye'); }
+});
+
+// ----------------- Gallery Sliding -----------------
+let galleryIndex = 0;
+const track = document.getElementById('galleryTrack');
+let autoSlideInterval = null;
+function updateGalleryPosition(){
+  const item = track.querySelector('.gallery-item');
+  if(!item) return;
+  const itemWidth = item.offsetWidth + 20;
+  track.style.transform = `translateX(${-galleryIndex * itemWidth}px)`;
+}
+function nextSlide(){
+  const items = track.children.length;
+  galleryIndex++;
+  if(galleryIndex >= items) galleryIndex = 0;
+  updateGalleryPosition();
+}
+function prevSlide(){
+  const items = track.children.length;
+  galleryIndex--;
+  if(galleryIndex < 0) galleryIndex = items - 1;
+  updateGalleryPosition();
+}
+function manualNext(){ stopAutoSlide(); nextSlide(); startAutoSlide(); }
+function manualPrev(){ stopAutoSlide(); prevSlide(); startAutoSlide(); }
+
+function startAutoSlide(){
+  if(autoSlideInterval) return;
+  autoSlideInterval = setInterval(nextSlide, 4000); // optimized 4 seconds
+}
+function stopAutoSlide(){
+  if(autoSlideInterval){ clearInterval(autoSlideInterval); autoSlideInterval = null; }
+}
+
+window.addEventListener('resize', updateGalleryPosition);
+window.addEventListener('load', function(){
+  loadCCHistory();
+  try{
+    const last = localStorage.getItem('mncs_last_admin');
+    if(last) document.getElementById('adminEmail').value = last;
+  }catch(e){}
+  updateGalleryPosition();
+  startAutoSlide();
+});
+
+const galleryContainer = document.querySelector('.gallery-container');
+galleryContainer.addEventListener('mouseenter', stopAutoSlide);
+galleryContainer.addEventListener('mouseleave', startAutoSlide);
+</script>
 
 
+<script>
+/* Enhanced CC/BCC parsing, history, and send-receipt tracking (no OAuth client id) */
+const CC_KEY = 'mncs_cc_list_v2';
+const SENT_HISTORY_KEY = 'mncs_sent_history';
+const MAX_HISTORY = 200;
+const MAX_RECIPIENTS = 200; // large limit
 
+function validateEmail(email){
+  if(!email) return false;
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
 
+function splitAndCleanEmails(raw){
+  if(!raw) return [];
+  const normalized = raw.replace(/[;\n\r\t]+/g, ',').replace(/\s+/g, ' ');
+  const parts = normalized.includes(',') ? normalized.split(',') : normalized.split(' ');
+  return parts.map(e => e.trim()).filter(e => e);
+}
 
+function loadCCHistory(){
+  try{
+    const raw = localStorage.getItem(CC_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    const datalist = document.getElementById('ccHistoryList');
+    if(datalist) {
+      datalist.innerHTML = '';
+      arr.forEach(email => {
+        const opt = document.createElement('option');
+        opt.value = email;
+        datalist.appendChild(opt);
+      });
+    }
+  }catch(e){ console.error('CC load error', e); }
+}
+
+function saveCCHistoryItem(email){
+  if(!email) return;
+  email = email.trim();
+  if(!validateEmail(email)) return;
+  try{
+    let arr = JSON.parse(localStorage.getItem(CC_KEY) || '[]');
+    arr = arr.filter(e => e.toLowerCase() !== email.toLowerCase());
+    arr.unshift(email);
+    if(arr.length > MAX_HISTORY) arr = arr.slice(0, MAX_HISTORY);
+    localStorage.setItem(CC_KEY, JSON.stringify(arr));
+    loadCCHistory();
+  }catch(e){ console.error('CC save error', e); }
+}
+
+function saveMultipleCCHistory(emails){
+  if(!Array.isArray(emails)) return;
+  for(const e of emails){
+    if(validateEmail(e)) saveCCHistoryItem(e);
+  }
+}
+
+function addSentReceipt(record){
+  try{
+    const raw = localStorage.getItem(SENT_HISTORY_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    arr.unshift(record);
+    if(arr.length > 500) arr.splice(500);
+    localStorage.setItem(SENT_HISTORY_KEY, JSON.stringify(arr));
+  }catch(e){ console.error('Saving send receipt failed', e); }
+}
+
+function getSentHistory(){
+  try{
+    return JSON.parse(localStorage.getItem(SENT_HISTORY_KEY) || '[]');
+  }catch(e){ return []; }
+}
+
+function renderSentHistoryUI(){
+  const container = document.getElementById('pdfViewer') || document.getElementById('sentHistoryContainer');
+  try{
+    const entries = getSentHistory();
+    if(!container) return;
+    let html = '<h4>Sent History (local receipts)</h4>';
+    if(entries.length === 0){
+      html += '<p>No sent history yet.</p>';
+    } else {
+      html += '<ul style="text-align:left; max-height:300px; overflow:auto; padding-left:18px;">';
+      entries.slice(0,50).forEach(e => {
+        const ts = new Date(e.timestamp).toLocaleString();
+        html += `<li style="margin-bottom:8px;"><strong>${e.subject || '(no subject)'}</strong><br>
+                 <small>Sent by: ${e.sender || 'visitor'} — ${ts}<br>
+                 To: ${e.to} ${e.cc ? ' | CC: ' + e.cc : ''} ${e.bcc ? ' | BCC: ' + e.bcc : ''}<br>
+                 Doc: ${e.file || '(none)'} </small></li>`;
+      });
+      html += '</ul>';
+    }
+    container.innerHTML = html;
+  }catch(err){ console.error(err); }
+}
+
+function formatRecipientList(arr){
+  return arr.map(e => e.trim()).filter(e => e).join(', ');
+}
+
+function sendReport(){
+  const recipient = document.getElementById("emailRecipient") ? document.getElementById("emailRecipient").value.trim() : '';
+  const ccRaw = document.getElementById("emailCC") ? document.getElementById("emailCC").value.trim() : '';
+  const bccRaw = document.getElementById("emailBCC") ? document.getElementById("emailBCC").value.trim() : '';
+  const subject = document.getElementById("emailSubject") ? document.getElementById("emailSubject").value.trim() : '';
+  const message = document.getElementById("emailMessage") ? document.getElementById("emailMessage").value.trim() : '';
+  const file = document.getElementById("uploadedDocSelect") ? document.getElementById("uploadedDocSelect").value : '(no-file)';
+  const sender = (document.getElementById('adminEmail') && document.getElementById('adminEmail').value) ? document.getElementById('adminEmail').value : 'Visitor';
+
+  if(!recipient || !subject){ alert("Please fill required fields: recipient and subject."); return; }
+  if(!validateEmail(recipient)){ alert('Recipient email is invalid.'); return; }
+
+  let ccList = [];
+  if(ccRaw){
+    ccList = splitAndCleanEmails(ccRaw);
+    if(ccList.length > MAX_RECIPIENTS){ alert("Too many CC emails."); return; }
+    for(const c of ccList){ if(!validateEmail(c)){ alert("Invalid CC email: " + c); return; } }
+  }
+
+  let bccList = [];
+  if(bccRaw){
+    bccList = splitAndCleanEmails(bccRaw);
+    if(bccList.length > MAX_RECIPIENTS){ alert("Too many BCC emails."); return; }
+    for(const b of bccList){ if(!validateEmail(b)){ alert("Invalid BCC email: " + b); return; } }
+  }
+
+  if(ccList.length) saveMultipleCCHistory(ccList);
+
+  const receipt = {
+    timestamp: new Date().toISOString(),
+    sender: sender,
+    to: recipient,
+    cc: ccList.join(', '),
+    bcc: bccList.join(', '),
+    subject: subject,
+    message: message,
+    file: file
+  };
+  addSentReceipt(receipt);
+  renderSentHistoryUI();
+
+  const toParam = encodeURIComponent(recipient);
+  const suParam = encodeURIComponent(subject);
+  const bodyParam = encodeURIComponent(message + "\n\n(Attached document:) " + file);
+  let mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${toParam}&su=${suParam}&body=${bodyParam}`;
+  if(ccList.length) mailtoLink += `&cc=${encodeURIComponent(formatRecipientList(ccList))}`;
+  if(bccList.length) mailtoLink += `&bcc=${encodeURIComponent(formatRecipientList(bccList))}`;
+
+  window.open(mailtoLink, '_blank');
+}
+
+function createAccount(){
+  const email = document.getElementById('adminEmail') ? document.getElementById('adminEmail').value.trim() : '';
+  if(email && validateEmail(email)) saveCCHistoryItem(email);
+  window.open('https://accounts.google.com/signup', '_blank');
+}
+
+window.addEventListener('load', function(){
+  loadCCHistory();
+  renderSentHistoryUI();
+  try{
+    const last = localStorage.getItem('mncs_last_admin');
+    if(last && document.getElementById('adminEmail')) document.getElementById('adminEmail').value = last;
+  }catch(e){}
+});
+</script>
+
+</body>
+</html>
 
 
 
