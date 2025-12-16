@@ -112,6 +112,21 @@ nav a:hover { color: #ffd700; }
 .input-with-icon input[type="password"], .input-with-icon input[type="text"] { padding-right: 42px; }
 .toggle-pass { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.05rem; color: #ffd700; }
 
+/* ===== FORCE MEDIUM NEWS IMAGES ===== */
+.news-card img {
+  width: 100%;
+  height: 170px;        
+  object-fit: cover;
+  display: block;
+}
+
+/* mobile phones */
+@media (max-width: 600px) {
+  .news-card img {
+    height: 150px;      
+  }
+}
+
 /* smaller screens */
 @media(max-width:600px){
   .gallery-item{min-width:220px;}
@@ -661,6 +676,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
