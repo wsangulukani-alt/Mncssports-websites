@@ -111,57 +111,54 @@ nav a:hover { color: #ffd700; }
 .input-with-icon { position: relative; }
 .input-with-icon input[type="password"], .input-with-icon input[type="text"] { padding-right: 42px; }
 .toggle-pass { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.05rem; color: #ffd700; }
-/* ===== NEWS SECTION HEADING ===== */
+/* ===== HEADING ===== */
 #news h2 {
   text-align: center;       /* center heading */
   color: #ffd700;           /* gold color for Malawi theme */
-  font-size: 2rem;
-  margin-bottom: 40px;
+  font-size: 1.6rem;        /* medium size */
+  margin-bottom: 20px;      /* spacing below heading */
   text-transform: uppercase;
   letter-spacing: 1px;
+  font-weight: 600;         /* slightly bold */
 }
 
 /* ===== NEWS CARDS CONTAINER ===== */
 .news-container {
   display: flex;
-  justify-content: center;  /* center horizontally */
-  flex-wrap: wrap;          /* wrap to next row if needed */
+  flex-direction: column;   /* stack vertically */
+  align-items: center;      /* center each card horizontally */
   gap: 30px;                /* spacing between cards */
 }
 
-/* ===== NEWS CARD STYLING ===== */
+/* ===== NEWS CARD ===== */
 .news-card {
-  background-color: #fff;   /* white card background */
-  color: #000;              /* black text */
-  max-width: 350px;
+  width: 100%;
+  max-width: 350px;         
+  background-color: #fff;
+  color: #000;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* subtle shadow for professional look */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
-  align-items: center;      /* center content inside card */
+  align-items: center;
+  text-align: center;
 }
 
-/* ===== NEWS CARD IMAGE ===== */
 .news-card img {
   width: 100%;
   height: auto;
   max-height: 350px;
-  object-fit: contain;
-  border-radius: 0; /* optional: no rounding on image */
-  display: block;
+  object-fit: cover;
 }
 
-/* ===== NEWS CARD CONTENT ===== */
 .news-card .news-content {
-  text-align: center;       /* center all text */
   padding: 15px 20px;
 }
 
 .news-card h3 {
-  font-size: 1.3rem;
-  margin-bottom: 12px;
-  color: #000;              /* black heading inside card */
+  font-size: 1.2rem;
+  margin-bottom: 10px;
 }
 
 .news-card p {
@@ -172,13 +169,13 @@ nav a:hover { color: #ffd700; }
 
 /* ===== READ MORE BUTTON ===== */
 .news-read-more {
-  text-align: center;       /* center button */
-  margin-top: 30px;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .news-read-more a {
   display: inline-block;
-  padding: 14px 28px;
+  padding: 12px 24px;
   background-color: #ffd700;
   color: #000;
   font-weight: bold;
@@ -193,17 +190,8 @@ nav a:hover { color: #ffd700; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 600px) {
-  .news-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .news-card img {
-    max-height: 220px;      /* medium size on phone */
-  }
-
-  .news-read-more a {
-    padding: 12px 24px;     /* smaller button on mobile */
+  .news-card {
+    max-width: 90%;
   }
 }
 </style>
@@ -266,9 +254,10 @@ nav a:hover { color: #ffd700; }
 
 <section id="news">
   <h2>Sports News & Updates</h2>
+
   <div class="news-container">
-    
-   <!-- === NEWS CARD 1 === -->
+
+    <!-- === NEWS CARD 1 === -->
     <div class="news-card">
       <img src="https://raw.githubusercontent.com/wsangulukani-alt/Mncssports-websites/refs/heads/main/Images/Queens%20defeated%20Photo.jpg" alt="Malawi Queens vs Uganda" />
       <div class="news-content">
@@ -294,9 +283,8 @@ nav a:hover { color: #ffd700; }
 
   </div>
 
-  <!-- === READ MORE (ONLY ONCE AT THE END) === -->
   <div class="news-read-more">
-    <a href="https://www.google.com/search?q=Malawi+sports+news+updates" target="_blank">
+    <a href="https://www.google.com/search?q=Malawi+sports+news+updates" target="_blank" rel="noopener noreferrer">
       Read More Sports News
     </a>
   </div>
@@ -754,6 +742,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
