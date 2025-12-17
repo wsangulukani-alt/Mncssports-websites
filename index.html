@@ -111,53 +111,69 @@ nav a:hover { color: #ffd700; }
 .input-with-icon { position: relative; }
 .input-with-icon input[type="password"], .input-with-icon input[type="text"] { padding-right: 42px; }
 .toggle-pass { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.05rem; color: #ffd700; }
-
-/* ===== MEDIUM NEWS IMAGES – BEAUTIFUL, NO BLACK BACKGROUND ===== */
-.news-card img {
-  width: 100%;
-  height: auto;             /* keeps original proportions */
-  max-height: 350px;        /* slightly bigger on PC for better visibility */
-  object-fit: contain;      /* no cropping */
-  display: block;
-  margin: 0 auto 15px;      /* centers image with spacing below */
-  background: transparent;  /* remove black background */
-  border-radius: 6px;       /* rounded corners for modern look */
+/* ===== NEWS SECTION HEADING ===== */
+#news h2 {
+  text-align: center;       /* center heading */
+  color: #ffd700;           /* gold color for Malawi theme */
+  font-size: 2rem;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-/* NEWS CARD CONTENT CENTERED */
-.news-card .news-content {
-  text-align: center;       /* center all text inside card */
-  padding: 20px;
-  color: #fff;
-}
-
-/* NEWS CARD HEADINGS */
-.news-card h3 {
-  color: #ffd700;
-  margin-bottom: 12px;
-  font-size: 1.3rem;
-}
-
-/* NEWS CARD PARAGRAPHS */
-.news-card p {
-  margin-bottom: 8px;
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
-/* CENTER THE CARDS CONTAINER */
+/* ===== NEWS CARDS CONTAINER ===== */
 .news-container {
   display: flex;
-  justify-content: center;  /* center all cards horizontally */
-  flex-wrap: wrap;          /* wrap cards to next row if needed */
-  gap: 30px;                /* space between cards */
-  margin-bottom: 30px;      /* space before the Read More button */
+  justify-content: center;  /* center horizontally */
+  flex-wrap: wrap;          /* wrap to next row if needed */
+  gap: 30px;                /* spacing between cards */
 }
 
-/* READ MORE BUTTON AT THE BOTTOM OF NEWS SECTION */
+/* ===== NEWS CARD STYLING ===== */
+.news-card {
+  background-color: #fff;   /* white card background */
+  color: #000;              /* black text */
+  max-width: 350px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* subtle shadow for professional look */
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* center content inside card */
+}
+
+/* ===== NEWS CARD IMAGE ===== */
+.news-card img {
+  width: 100%;
+  height: auto;
+  max-height: 350px;
+  object-fit: contain;
+  border-radius: 0; /* optional: no rounding on image */
+  display: block;
+}
+
+/* ===== NEWS CARD CONTENT ===== */
+.news-card .news-content {
+  text-align: center;       /* center all text */
+  padding: 15px 20px;
+}
+
+.news-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  color: #000;              /* black heading inside card */
+}
+
+.news-card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+/* ===== READ MORE BUTTON ===== */
 .news-read-more {
-  text-align: center;       /* center the button */
-  margin-top: 20px;
+  text-align: center;       /* center button */
+  margin-top: 30px;
 }
 
 .news-read-more a {
@@ -175,26 +191,15 @@ nav a:hover { color: #ffd700; }
   background-color: #fff;
 }
 
-/* CENTER NEWS SECTION HEADING */
-#news h2 {
-  text-align: center;       /* centers the heading */
-  width: 100%;
-  margin-bottom: 40px;      /* space between heading and news cards */
-  color: #ffd700;           /* gold color for Malawi theme */
-  font-size: 2rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* MOBILE RESPONSIVE */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 600px) {
-  .news-card img {
-    max-height: 200px;      /* medium on phone */
-  }
-
   .news-container {
     flex-direction: column;
-    align-items: center;    /* center the cards on mobile */
+    align-items: center;
+  }
+
+  .news-card img {
+    max-height: 220px;      /* medium size on phone */
   }
 
   .news-read-more a {
@@ -750,6 +755,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
