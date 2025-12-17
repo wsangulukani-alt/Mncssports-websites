@@ -133,11 +133,11 @@ nav a:hover { color: #ffd700; }
 }
 
 .news-images img {
-  width: 80%;                /* medium size for images */
-  max-width: 400px;
-  height: auto;
+  width: 60%;                /* medium size for desktop */
+  max-width: 400px;          /* prevents images from being too large */
+  height: auto;              /* keeps original aspect ratio */
   border-radius: 8px;
-  object-fit: cover;
+  /* object-fit removed to avoid cropping */
 }
 
 /* ===== NEWS CARDS VERTICAL ===== */
@@ -750,6 +750,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
