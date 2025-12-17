@@ -124,20 +124,60 @@ nav a:hover { color: #ffd700; }
   border-radius: 6px;       /* optional: rounded corners for better look */
 }
 
-/* mobile phones */
+/* NEWS CARD CONTENT CENTERED */
+.news-card .news-content {
+  text-align: center;       /* center all text inside card */
+  padding: 20px;
+  color: #fff;
+}
+
+/* NEWS CARD HEADINGS */
+.news-card h3 {
+  color: #ffd700;
+  margin-bottom: 12px;
+  font-size: 1.3rem;
+}
+
+/* NEWS CARD PARAGRAPHS */
+.news-card p {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* READ MORE BUTTON AT END */
+.news-read-more {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.news-read-more a {
+  display: inline-block;
+  padding: 14px 28px;
+  background-color: #ffd700;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.news-read-more a:hover {
+  background-color: #fff;
+}
+
+/* MOBILE RESPONSIVE */
 @media (max-width: 600px) {
   .news-card img {
-    max-height: 180px;      /* medium on phone */
+    max-height: 180px;
+  }
+  .news-container {
+    flex-direction: column;
+    align-items: center;  /* center the cards on mobile */
   }
 }
 
-/* smaller screens */
-@media(max-width:600px){
-  .gallery-item{min-width:220px;}
-  .header-logo{width:70px;}
-  .site-title{font-size:1.1rem;}
-}
-/* === CENTER NEWS SECTION HEADING === */
+/* CENTER NEWS SECTION HEADING */
 #news h2 {
   text-align: center;   /* centers the heading */
   width: 100%;
@@ -147,7 +187,15 @@ nav a:hover { color: #ffd700; }
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-</style>
+
+/* CENTER THE CARDS CONTAINER */
+.news-container {
+  display: flex;
+  justify-content: center;  /* center all cards horizontally */
+  flex-wrap: wrap;          /* wrap if multiple cards */
+  gap: 30px;                /* space between cards */
+}
+
 
   <title>Malawi National Council of Sports – Official Website</title>
   <meta name="description" content="Promoting sports development, programs, and events across Malawi.">
@@ -695,6 +743,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
