@@ -111,12 +111,11 @@ nav a:hover { color: #ffd700; }
 .input-with-icon { position: relative; }
 .input-with-icon input[type="password"], .input-with-icon input[type="text"] { padding-right: 42px; }
 .toggle-pass { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.05rem; color: #ffd700; }
-
 /* ===== HEADING ===== */
 #news h2 {
-  text-align: center;       /* center heading */
+  text-align: center;       
   color: #ffd700;
-  font-size: 1.6rem;        /* medium size */
+  font-size: 1.6rem;        
   margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -126,18 +125,19 @@ nav a:hover { color: #ffd700; }
 /* ===== IMAGE LIST VERTICAL ===== */
 .news-images {
   display: flex;
-  flex-direction: column;    /* vertical list */
-  align-items: center;       /* center images */
-  gap: 15px;                 /* space between images */
+  flex-direction: column;    
+  align-items: center;       
+  gap: 15px;                 
   margin-bottom: 20px;
 }
 
 .news-images img {
-  width: 60%;                /* medium size for desktop */
-  max-width: 400px;          /* prevents images from being too large */
-  height: auto;              /* keeps original aspect ratio */
+  width: 100%;               /* full width of container */
+  max-width: 350px;          /* medium size */
+  height: auto;              
   border-radius: 8px;
-  /* object-fit removed to avoid cropping */
+  object-fit: contain;       /* show full image */
+  display: block;
 }
 
 /* ===== NEWS CARDS VERTICAL ===== */
@@ -148,10 +148,9 @@ nav a:hover { color: #ffd700; }
   gap: 20px;
 }
 
-/* ===== NEWS CARD ===== */
 .news-card {
   width: 100%;
-  max-width: 350px;
+  max-width: 350px;          /* medium card size */
   background-color: #fff;
   color: #000;
   border-radius: 8px;
@@ -159,6 +158,15 @@ nav a:hover { color: #ffd700; }
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   text-align: center;
   padding: 15px 20px;
+}
+
+.news-card img {
+  width: 100%;
+  max-height: 200px;         /* medium image height */
+  height: auto;              
+  object-fit: contain;       /* prevent cutting */
+  border-radius: 8px;
+  margin-bottom: 12px;
 }
 
 .news-card h3 {
@@ -195,12 +203,13 @@ nav a:hover { color: #ffd700; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 600px) {
-  .news-images img {
-    width: 90%;
+  .news-images img,
+  .news-card {
+    max-width: 90%;          /* responsive medium size on mobile */
   }
 
-  .news-card {
-    max-width: 90%;
+  .news-card img {
+    max-height: 180px;
   }
 }
 
@@ -750,6 +759,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
