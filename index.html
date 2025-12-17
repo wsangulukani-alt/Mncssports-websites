@@ -116,12 +116,12 @@ nav a:hover { color: #ffd700; }
 .news-card img {
   width: 100%;
   height: auto;             /* keeps original proportions */
-  max-height: 300px;        /* bigger on PC */
+  max-height: 350px;        /* slightly bigger on PC for better visibility */
   object-fit: contain;      /* no cropping */
   display: block;
-  margin: 0 auto;
+  margin: 0 auto 15px;      /* centers image with spacing below */
   background: transparent;  /* remove black background */
-  border-radius: 6px;       /* optional: rounded corners for better look */
+  border-radius: 6px;       /* rounded corners for modern look */
 }
 
 /* NEWS CARD CONTENT CENTERED */
@@ -145,10 +145,19 @@ nav a:hover { color: #ffd700; }
   line-height: 1.5;
 }
 
-/* READ MORE BUTTON AT END */
+/* CENTER THE CARDS CONTAINER */
+.news-container {
+  display: flex;
+  justify-content: center;  /* center all cards horizontally */
+  flex-wrap: wrap;          /* wrap cards to next row if needed */
+  gap: 30px;                /* space between cards */
+  margin-bottom: 30px;      /* space before the Read More button */
+}
+
+/* READ MORE BUTTON AT THE BOTTOM OF NEWS SECTION */
 .news-read-more {
-  text-align: center;
-  margin-top: 40px;
+  text-align: center;       /* center the button */
+  margin-top: 20px;
 }
 
 .news-read-more a {
@@ -159,42 +168,40 @@ nav a:hover { color: #ffd700; }
   font-weight: bold;
   border-radius: 8px;
   text-decoration: none;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 .news-read-more a:hover {
   background-color: #fff;
 }
 
-/* MOBILE RESPONSIVE */
-@media (max-width: 600px) {
-  .news-card img {
-    max-height: 180px;
-  }
-  .news-container {
-    flex-direction: column;
-    align-items: center;  /* center the cards on mobile */
-  }
-}
-
 /* CENTER NEWS SECTION HEADING */
 #news h2 {
-  text-align: center;   /* centers the heading */
+  text-align: center;       /* centers the heading */
   width: 100%;
-  margin-bottom: 40px;  /* space between heading and news cards */
-  color: #ffd700;       /* optional: gold color for Malawi theme */
+  margin-bottom: 40px;      /* space between heading and news cards */
+  color: #ffd700;           /* gold color for Malawi theme */
   font-size: 2rem;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-/* CENTER THE CARDS CONTAINER */
-.news-container {
-  display: flex;
-  justify-content: center;  /* center all cards horizontally */
-  flex-wrap: wrap;          /* wrap if multiple cards */
-  gap: 30px;                /* space between cards */
+/* MOBILE RESPONSIVE */
+@media (max-width: 600px) {
+  .news-card img {
+    max-height: 200px;      /* medium on phone */
+  }
+
+  .news-container {
+    flex-direction: column;
+    align-items: center;    /* center the cards on mobile */
+  }
+
+  .news-read-more a {
+    padding: 12px 24px;     /* smaller button on mobile */
+  }
 }
+
 
 
   <title>Malawi National Council of Sports – Official Website</title>
@@ -743,6 +750,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
