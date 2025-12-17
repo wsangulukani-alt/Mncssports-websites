@@ -251,15 +251,120 @@ nav a:hover { color: #ffd700; }
   <h3>Composition of the Secretariat</h3>
   <p>While the Board gives policy direction, the Secretariat is charged with operationalising policy and other day-to-day matters of the Council. The Secretariat is headed by the Chief Executive Officer of the Council and divided into five (5) main departments: the Chief Executive Officer’s Office, Sports and Recreation Development, Finance, Human Resources and Administration, and Marketing, Planning, and Infrastructure services.</p>
 </section>
-<!-- ===== NEWS SECTION ===== -->
+<!-- ================= NEWS SECTION STYLES ================= -->
+<style>
+/* ===== NEWS SECTION ===== */
+#news {
+  padding: 40px 20px;
+  background-color: #f8f8f8;
+}
+
+#news h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  color: #000;
+}
+
+/* ===== NEWS CONTAINER ===== */
+.news-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+/* ===== NEWS CARD ===== */
+.news-card {
+  width: 100%;
+  max-width: 400px;
+  background-color: #fff;
+  color: #000;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 20px;
+}
+
+/* ===== NEWS IMAGE ===== */
+.news-card img {
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+/* ===== NEWS CONTENT ===== */
+.news-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ===== TEXT ===== */
+.news-card h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.news-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* ===== READ MORE BUTTON ===== */
+.news-read-more {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.news-read-more a {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #ffd700;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.news-read-more a:hover {
+  background-color: #fff;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .news-card {
+    max-width: 90%;
+  }
+
+  .news-card img {
+    max-height: 200px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= NEWS SECTION ================= -->
 <section id="news">
   <h2>Sports News & Updates</h2>
 
   <div class="news-container">
 
-    <!-- === NEWS CARD 1 === -->
-    <div class="news-card">
-      <img src="https://raw.githubusercontent.com/wsangulukani-alt/Mncssports-websites/refs/heads/main/Images/Queens%20defeated%20Photo.jpg" alt="Malawi Queens Netball Team celebrates victory against Uganda">
+    <!-- News Card 1 -->
+    <article class="news-card">
+      <img src="https://raw.githubusercontent.com/wsangulukani-alt/Mncssports-websites/refs/heads/main/Images/Queens%20defeated%20Photo.jpg"
+           alt="Malawi Queens Netball Team celebrates victory against Uganda">
+
       <div class="news-content">
         <h3>Malawi Queens Triumph Over Uganda</h3>
         <p><strong>Date:</strong> 16 December 2025</p>
@@ -267,11 +372,13 @@ nav a:hover { color: #ffd700; }
         <p>Melia Soko was the star of the match, leading the team to victory with impressive skills.</p>
         <p><strong>Highlights:</strong> Teamwork, strategic plays, and excellent defense ensured a thrilling win.</p>
       </div>
-    </div>
+    </article>
 
-    <!-- === NEWS CARD 2 === -->
-    <div class="news-card">
-      <img src="https://raw.githubusercontent.com/wsangulukani-alt/Mncssports-websites/refs/heads/main/Images/NetBall%20malawi.jpg" alt="Malawi Netball Team preparing for upcoming matches">
+    <!-- News Card 2 -->
+    <article class="news-card">
+      <img src="https://raw.githubusercontent.com/wsangulukani-alt/Mncssports-websites/refs/heads/main/Images/NetBall%20malawi.jpg"
+           alt="Malawi Netball Team preparing for upcoming matches">
+
       <div class="news-content">
         <h3>Netball Team Prepares for Upcoming Matches</h3>
         <p><strong>Date:</strong> 13 December 2025</p>
@@ -279,17 +386,21 @@ nav a:hover { color: #ffd700; }
         <p>The Malawi Netball team is gearing up for upcoming matches with focused training sessions and strategies.</p>
         <p><strong>Highlights:</strong> Pre-match warm-ups, strategy meetings, and player interviews.</p>
       </div>
-    </div>
+    </article>
 
   </div>
 
-  <!-- ===== READ MORE BUTTON ===== -->
+  <!-- Read More -->
   <div class="news-read-more">
-    <a href="https://www.google.com/search?q=Malawi+sports+news+updates" target="_blank" rel="noopener noreferrer">
+    <a href="https://www.google.com/search?q=Malawi+sports+news+updates"
+       target="_blank" rel="noopener noreferrer">
       Read More Sports News
     </a>
   </div>
 </section>
+
+</body>
+</html>
 
 <!-- Gallery Section -->
 <section id="gallery">
@@ -741,6 +852,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
