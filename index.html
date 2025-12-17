@@ -114,45 +114,49 @@ nav a:hover { color: #ffd700; }
 /* ===== HEADING ===== */
 #news h2 {
   text-align: center;       /* center heading */
-  color: #ffd700;           /* gold color for Malawi theme */
+  color: #ffd700;
   font-size: 1.6rem;        /* medium size */
-  margin-bottom: 20px;      /* spacing below heading */
+  margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-weight: 600;         /* slightly bold */
+  font-weight: 600;
 }
 
-/* ===== NEWS CARDS CONTAINER ===== */
+/* ===== IMAGE LIST VERTICAL ===== */
+.news-images {
+  display: flex;
+  flex-direction: column;    /* vertical list */
+  align-items: center;       /* center images */
+  gap: 15px;                 /* space between images */
+  margin-bottom: 20px;
+}
+
+.news-images img {
+  width: 80%;                /* medium size for images */
+  max-width: 400px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* ===== NEWS CARDS VERTICAL ===== */
 .news-container {
   display: flex;
-  flex-direction: column;   /* stack vertically */
-  align-items: center;      /* center each card horizontally */
-  gap: 30px;                /* spacing between cards */
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
 /* ===== NEWS CARD ===== */
 .news-card {
   width: 100%;
-  max-width: 350px;         
+  max-width: 350px;
   background-color: #fff;
   color: #000;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   text-align: center;
-}
-
-.news-card img {
-  width: 100%;
-  height: auto;
-  max-height: 350px;
-  object-fit: cover;
-}
-
-.news-card .news-content {
   padding: 15px 20px;
 }
 
@@ -190,11 +194,15 @@ nav a:hover { color: #ffd700; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 600px) {
+  .news-images img {
+    width: 90%;
+  }
+
   .news-card {
     max-width: 90%;
   }
 }
-</style>
+
 
   <title>Malawi National Council of Sports – Official Website</title>
   <meta name="description" content="Promoting sports development, programs, and events across Malawi.">
@@ -742,6 +750,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
