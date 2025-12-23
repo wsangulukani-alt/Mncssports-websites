@@ -309,9 +309,21 @@ nav a:hover { color: #ffd700; }
       <div class="news-content">
         <h3>MNCS Opens Residential Youth Training Camp at MUST</h3>
 
-        <p><strong>Date:</strong> 22 December 2025</p>
+        <p>
+          <strong>Date:</strong>
+          <span class="news-date" data-date="2025-12-22">22 December 2025</span>
+          <span class="days-ago"></span>
+        </p>
+
         <p><strong>Venue:</strong> Malawi University of Science and Technology (MUST), Thyolo</p>
-        <p><strong>Source:</strong> Malawi National Sports Council</p>
+
+        <p>
+          <strong>Source:</strong>
+          <a href="https://wsangulukani-alt.github.io/Mncssports-websites/"
+             target="_blank" rel="noopener noreferrer">
+            Malawi National Sports Council
+          </a>
+        </p>
 
         <!-- 4 Images System -->
         <div class="news-images">
@@ -348,7 +360,7 @@ nav a:hover { color: #ffd700; }
       </div>
     </article>
 
-  </div> <!-- ✅ CLOSES .news-container -->
+  </div>
 
   <!-- Read More -->
   <div class="news-read-more">
@@ -357,8 +369,28 @@ nav a:hover { color: #ffd700; }
       Read More Sports News
     </a>
   </div>
-
 </section>
+
+<!-- DAYS AGO SCRIPT -->
+<script>
+  document.querySelectorAll(".news-date").forEach(dateElem => {
+    const daysAgoElem = dateElem.nextElementSibling;
+    const newsDate = new Date(dateElem.dataset.date);
+    const today = new Date();
+
+    const diffDays = Math.floor((today - newsDate) / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 0) {
+      daysAgoElem.textContent = " (Today)";
+    } else if (diffDays === 1) {
+      daysAgoElem.textContent = " (1 day ago)";
+    } else if (diffDays <= 4) {
+      daysAgoElem.textContent = ` (${diffDays} days ago)`;
+    } else {
+      daysAgoElem.style.display = "none";
+    }
+  });
+</script>
   <!-- Gallery Section -->
 <section id="gallery">
   <h2 class="gallery-heading">Sports Gallery</h2>
@@ -809,6 +841,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
