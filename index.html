@@ -417,12 +417,25 @@ nav a:hover { color: #ffd700; }
 <!-- DAYS AGO SCRIPT -->
 <script>
   document.querySelectorAll(".news-date").forEach(dateElem => {
-    const daysAgoElem = dateElem.nextElementSibling;
+    // Read the date from a data attribute
     const newsDate = new Date(dateElem.dataset.date);
     const today = new Date();
 
-    const diffDays = Math.floor((today - newsDate) / (1000 * 60 * 60 * 24));
+    // Calculate difference in days
+    const diffTime = today - newsDate;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
+    // Create or update a span for days ago
+    let daysAgoElem = dateElem.querySelector(".days-ago");
+    if (!daysAgoElem) {
+      daysAgoElem = document.createElement("span");
+      daysAgoElem.classList.add("days-ago");
+      daysAgoElem.style.fontWeight = "normal";
+      daysAgoElem.style.color = "#555";
+      dateElem.appendChild(daysAgoElem);
+    }
+
+    // Set text content based on diffDays
     if (diffDays === 0) {
       daysAgoElem.textContent = " (Today)";
     } else if (diffDays === 1) {
@@ -433,7 +446,7 @@ nav a:hover { color: #ffd700; }
       daysAgoElem.style.display = "none";
     }
   });
-</script>
+     </script>
   <!-- Gallery Section -->
 <section id="gallery">
   <h2 class="gallery-heading">Sports Gallery</h2>
@@ -884,6 +897,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
