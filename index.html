@@ -445,37 +445,40 @@ nav a:hover { color: #ffd700; }
 
 <!-- DAYS AGO SCRIPT -->
 <script>
-  document.querySelectorAll(".news-date").forEach(dateElem => {
-    // Read the date from a data attribute
-    const newsDate = new Date(dateElem.dataset.date);
-    const today = new Date();
+  document.addEventListener("DOMContentLoaded", () => {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-    // Calculate difference in days
-    const diffTime = today - newsDate;
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    document.querySelectorAll(".news-date").forEach(dateElem => {
+      const rawDate = dateElem.dataset.date;
+      if (!rawDate) return;
 
-    // Create or update a span for days ago
-    let daysAgoElem = dateElem.querySelector(".days-ago");
-    if (!daysAgoElem) {
-      daysAgoElem = document.createElement("span");
-      daysAgoElem.classList.add("days-ago");
-      daysAgoElem.style.fontWeight = "normal";
-      daysAgoElem.style.color = "#555";
-      dateElem.appendChild(daysAgoElem);
-    }
+      const [year, month, day] = rawDate.split("-");
+      const newsDate = new Date(year, month - 1, day);
 
-    // Set text content based on diffDays
-    if (diffDays === 0) {
-      daysAgoElem.textContent = " (Today)";
-    } else if (diffDays === 1) {
-      daysAgoElem.textContent = " (1 day ago)";
-    } else if (diffDays <= 4) {
-      daysAgoElem.textContent = ` (${diffDays} days ago)`;
-    } else {
-      daysAgoElem.style.display = "none";
-    }
+      const diffDays = Math.round(
+        (today - newsDate) / (1000 * 60 * 60 * 24)
+      );
+
+      let label = dateElem.querySelector(".days-ago");
+      if (!label) {
+        label = document.createElement("span");
+        label.className = "days-ago";
+        label.style.color = "#555";
+        label.style.fontWeight = "normal";
+        dateElem.appendChild(label);
+      }
+
+      if (diffDays === 0) {
+        label.textContent = " (Today)";
+      } else if (diffDays === 1) {
+        label.textContent = " (1 day ago)";
+      } else if (diffDays > 1) {
+        label.textContent = ` (${diffDays} days ago)`;
+      }
+    });
   });
-     </script>
+</script>
   <!-- Gallery Section -->
 <section id="gallery">
   <h2 class="gallery-heading">Sports Gallery</h2>
@@ -926,6 +929,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
