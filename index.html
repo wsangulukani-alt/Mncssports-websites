@@ -446,6 +446,8 @@ nav a:hover { color: #ffd700; }
 <!-- DAYS AGO SCRIPT -->
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+    const HIDE_AFTER_DAYS = 3; // 🔴 HIDE AFTER 3 DAYS
+
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
@@ -460,6 +462,7 @@ nav a:hover { color: #ffd700; }
         (today - newsDate) / (1000 * 60 * 60 * 24)
       );
 
+      // Create or update label
       let label = dateElem.querySelector(".days-ago");
       if (!label) {
         label = document.createElement("span");
@@ -469,6 +472,7 @@ nav a:hover { color: #ffd700; }
         dateElem.appendChild(label);
       }
 
+      // Show text
       if (diffDays === 0) {
         label.textContent = " (Today)";
       } else if (diffDays === 1) {
@@ -476,9 +480,17 @@ nav a:hover { color: #ffd700; }
       } else if (diffDays > 1) {
         label.textContent = ` (${diffDays} days ago)`;
       }
+
+      // 🔴 AUTO HIDE OLD NEWS CARD
+      if (diffDays > HIDE_AFTER_DAYS) {
+        const newsCard = dateElem.closest(".news-card");
+        if (newsCard) {
+          newsCard.style.display = "none";
+        }
+      }
     });
   });
-</script>
+         </script>
   <!-- Gallery Section -->
 <section id="gallery">
   <h2 class="gallery-heading">Sports Gallery</h2>
@@ -929,6 +941,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
