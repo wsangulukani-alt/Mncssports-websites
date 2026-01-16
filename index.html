@@ -298,7 +298,18 @@ nav a:hover { color: #ffd700; }
   <h3>Composition of the Secretariat</h3>
   <p>While the Board gives policy direction, the Secretariat is charged with operationalising policy and other day-to-day matters of the Council. The Secretariat is headed by the Chief Executive Officer of the Council and divided into five (5) main departments: the Chief Executive Officer’s Office, Sports and Recreation Development, Finance, Human Resources and Administration, and Marketing, Planning, and Infrastructure services.</p>
 </section>
+<!-- 🔒 ADMIN UPLOAD FORM -->
+<div id="uploadForm">
+  <h3>Upload News (Admin Only)</h3>
 
+  <input type="text" id="newsTitle" placeholder="News Title">
+  <textarea id="newsSummary" placeholder="News Summary"></textarea>
+  <input type="file" id="newsImage" accept="image/*">
+
+  <button onclick="uploadNews()">Upload News</button>
+</div>
+
+<!-- 📰 NEWS SECTION -->
 <section id="news">
   <h2>Sports News & Updates</h2>
 
@@ -311,6 +322,97 @@ nav a:hover { color: #ffd700; }
     </a>
   </div>
 </section>
+
+<!-- 🔥 FIREBASE SCRIPT -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs, query, orderBy }
+  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+  import { getStorage, ref, uploadBytes, getDownloadURL }
+  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+
+  // 🔥 REPLACE WITH YOUR FIREBASE DETAILS
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const storage = getStorage(app);
+
+  // ⬆️ UPLOAD NEWS WITH IMAGE
+  window.uploadNews = async function () {
+    const title = newsTitle.value;
+    const summary = newsSummary.value;
+    const imageFile = newsImage.files[0];
+
+    if (!title || !summary || !imageFile) {
+      alert("Please fill all fields and select an image");
+      return;
+    }
+
+    try {
+      const imageRef = ref(storage, `newsImages/${Date.now()}_${imageFile.name}`);
+      await uploadBytes(imageRef, imageFile);
+      const imageURL = await getDownloadURL(imageRef);
+
+      await addDoc(collection(db, "news"), {
+        title,
+        summary,
+        image: imageURL,
+        date: new Date()
+      });
+
+      alert("News uploaded successfully!");
+
+      newsTitle.value = "";
+      newsSummary.value = "";
+      newsImage.value = "";
+
+      loadNews();
+
+    } catch (err) {
+      console.error(err);
+      alert("Upload failed");
+    }
+  };
+
+  // ⬇️ LOAD NEWS
+  async function loadNews() {
+    const container = document.getElementById("newsContainer");
+    container.innerHTML = "<p>Loading news...</p>";
+
+    const q = query(collection(db, "news"), orderBy("date", "desc"));
+    const snapshot = await getDocs(q);
+
+    container.innerHTML = "";
+
+    snapshot.forEach(doc => {
+      const n = doc.data();
+      const date = n.date?.toDate().toDateString() || "";
+
+      container.innerHTML += `
+        <div class="news-card">
+          <img src="${n.image}" alt="News image">
+          <h3>${n.title}</h3>
+          <p>${n.summary}</p>
+          <small>${date}</small>
+        </div>
+      `;
+    });
+
+    if (snapshot.empty) {
+      container.innerHTML = "<p>No news available.</p>";
+    }
+  }
+
+  loadNews();
+<script>
 <!-- DAYS AGO SCRIPT -->
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -809,6 +911,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
