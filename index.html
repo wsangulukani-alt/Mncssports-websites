@@ -322,33 +322,43 @@ nav a:hover { color: #ffd700; }
     </a>
   </div>
 </section>
-
 <!-- 🔥 FIREBASE SCRIPT -->
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getFirestore, collection, addDoc, getDocs, query, orderBy }
-  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-  import { getStorage, ref, uploadBytes, getDownloadURL }
-  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+  /* 🔥 Firebase SDKs */
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+  import {
+    getFirestore, collection, addDoc,
+    query, orderBy, getDocs
+  } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+  import {
+    getStorage, ref, uploadBytes, getDownloadURL
+  } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-storage.js";
 
-  // 🔥 REPLACE WITH YOUR FIREBASE DETAILS
+  /* 🔐 MNCS Firebase Configuration */
   const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyA64LGnM4TDeAx5swdYMKD7h3Kfa6EQfHc",
+    authDomain: "malawi-national-sports.firebaseapp.com",
+    projectId: "malawi-national-sports",
+    storageBucket: "malawi-national-sports.firebasestorage.app",
+    messagingSenderId: "494070827456",
+    appId: "1:494070827456:web:4555f22efeb521a5bc2025"
   };
 
+  /* 🚀 Initialize Firebase */
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const storage = getStorage(app);
 
-  // ⬆️ UPLOAD NEWS WITH IMAGE
+  console.log("✅ MNCS Firebase connected successfully");
+
+  /* 📰 UPLOAD NEWS WITH IMAGE */
   window.uploadNews = async function () {
-    const title = newsTitle.value;
-    const summary = newsSummary.value;
+    const newsTitle = document.getElementById("newsTitle");
+    const newsSummary = document.getElementById("newsSummary");
+    const newsImage = document.getElementById("newsImage");
+
+    const title = newsTitle.value.trim();
+    const summary = newsSummary.value.trim();
     const imageFile = newsImage.files[0];
 
     if (!title || !summary || !imageFile) {
@@ -357,7 +367,11 @@ nav a:hover { color: #ffd700; }
     }
 
     try {
-      const imageRef = ref(storage, `newsImages/${Date.now()}_${imageFile.name}`);
+      const imageRef = ref(
+        storage,
+        `newsImages/${Date.now()}_${imageFile.name}`
+      );
+
       await uploadBytes(imageRef, imageFile);
       const imageURL = await getDownloadURL(imageRef);
 
@@ -368,7 +382,7 @@ nav a:hover { color: #ffd700; }
         date: new Date()
       });
 
-      alert("News uploaded successfully!");
+      alert("✅ News uploaded successfully!");
 
       newsTitle.value = "";
       newsSummary.value = "";
@@ -376,25 +390,33 @@ nav a:hover { color: #ffd700; }
 
       loadNews();
 
-    } catch (err) {
-      console.error(err);
-      alert("Upload failed");
+    } catch (error) {
+      console.error(error);
+      alert("❌ Upload failed");
     }
   };
 
-  // ⬇️ LOAD NEWS
+  /* ⬇️ LOAD NEWS */
   async function loadNews() {
     const container = document.getElementById("newsContainer");
     container.innerHTML = "<p>Loading news...</p>";
 
-    const q = query(collection(db, "news"), orderBy("date", "desc"));
-    const snapshot = await getDocs(q);
+    const q = query(
+      collection(db, "news"),
+      orderBy("date", "desc")
+    );
 
+    const snapshot = await getDocs(q);
     container.innerHTML = "";
+
+    if (snapshot.empty) {
+      container.innerHTML = "<p>No news available.</p>";
+      return;
+    }
 
     snapshot.forEach(doc => {
       const n = doc.data();
-      const date = n.date?.toDate().toDateString() || "";
+      const date = n.date?.toDate?.().toDateString?.() || "";
 
       container.innerHTML += `
         <div class="news-card">
@@ -405,14 +427,10 @@ nav a:hover { color: #ffd700; }
         </div>
       `;
     });
-
-    if (snapshot.empty) {
-      container.innerHTML = "<p>No news available.</p>";
-    }
   }
 
   loadNews();
-<script>
+</script>
 <!-- DAYS AGO SCRIPT -->
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -460,7 +478,7 @@ nav a:hover { color: #ffd700; }
       }
     });
   });
-         </script>
+</script>
   <!-- Gallery Section -->
 <section id="gallery">
   <h2 class="gallery-heading">Sports Gallery</h2>
@@ -911,6 +929,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
