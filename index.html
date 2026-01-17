@@ -431,13 +431,13 @@ nav a:hover { color: #ffd700; }
         else if (diffDays === 1) displayDate = "Yesterday";
         else displayDate = `${diffDays} days ago`;
 
-        container.innerHTML += `
-          <div class="news-card">
-            <img src="${imageURL}" alt="News image">
-            <h3>${n.title}</h3>
-            <p>${n.summary}</p>
-            <small>${displayDate}</small>
-          </div>
+         container.innerHTML += `
+         <div class="news-card">
+        <img src="${n.image}" alt="${n.title}">
+        <h3>${n.title}</h3>
+        <p>${n.summary}</p>
+        <small>${displayDate}</small>
+        </div>
         `;
       });
     } catch (err) {
@@ -946,6 +946,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
