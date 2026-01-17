@@ -402,7 +402,7 @@ nav a:hover { color: #ffd700; }
     container.innerHTML = "<p>Loading news...</p>";
 
     const q = query(
-      collection(db, "News"),
+      collection(db, "news"),
       orderBy("date", "desc")
     );
 
@@ -929,6 +929,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
