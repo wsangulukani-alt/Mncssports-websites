@@ -395,70 +395,67 @@ nav a:hover { color: #ffd700; }
       alert("❌ Upload failed");
     }
   };
+  // 📰 Load News Function
+  async function loadNews() {
+    const container = document.getElementById("newsContainer");
+    container.innerHTML = "<p>Loading news...</p>";
 
-  /* ⬇️ LOAD NEWS */
-async function loadNews() {
-  const container = document.getElementById("newsContainer");
-  container.innerHTML = "<p>Loading news...</p>";
+    try {
+      const q = query(collection(db, "news"), orderBy("date", "desc"));
+      const snapshot = await getDocs(q);
+      container.innerHTML = "";
 
-  try {
-    const q = query(collection(db, "news"), orderBy("date", "desc"));
-    const snapshot = await getDocs(q);
-    container.innerHTML = "";
-
-    if (snapshot.empty) {
-      container.innerHTML = "<p>No news available.</p>";
-      return;
-    }
-
-    snapshot.forEach(doc => {
-      const n = doc.data();
-
-      // Safe image
-      const imageURL = n.image || "https://via.placeholder.com/150";
-
-      // Safe date
-      let newsDate = new Date();
-      if (n.date && typeof n.date.toDate === "function") {
-        newsDate = n.date.toDate();
+      if (snapshot.empty) {
+        container.innerHTML = "<p>No news available.</p>";
+        return;
       }
 
-      // Calculate days ago
-      const now = new Date();
-      const diffTime = now - newsDate;
-      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      snapshot.forEach(doc => {
+        const n = doc.data();
 
-      // Format relative text + actual date
-      const options = { year: 'numeric', month: 'short', day: 'numeric' };
-      const formattedDate = newsDate.toLocaleDateString(undefined, options);
+        // ✅ Safe image fallback
+        const imageURL = n.image || "https://via.placeholder.com/150";
 
-      let displayDate = "";
-      if (diffDays === 0) displayDate = `Today, ${formattedDate}`;
-      else if (diffDays === 1) displayDate = `Yesterday, ${formattedDate}`;
-      else displayDate = `${diffDays} days ago, ${formattedDate}`;
+        // ✅ Firestore Timestamp → JS Date safely
+        let newsDate = new Date();
+        if (n.date instanceof Timestamp) newsDate = n.date.toDate();
 
-      // Safe title & summary
-      const title = n.title || "No title";
-      const summary = n.summary || "No summary";
+        // ✅ Calculate days ago
+        const now = new Date();
+        const diffTime = now - newsDate;
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-      // Append news card
-      container.innerHTML += `
-        <div class="news-card">
-          <img src="${imageURL}" alt="News image">
-          <h3>${title}</h3>
-          <p>${summary}</p>
-          <small>${displayDate}</small>
-        </div>
-      `;
-    });
+        // ✅ Format date and time
+        const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' };
+        const formattedDate = newsDate.toLocaleDateString(undefined, options);
 
-  } catch (err) {
-    console.error("Error loading news:", err);
-    container.innerHTML = "<p>Error loading news.</p>";
+        const displayDate = diffDays === 0 ? `Today, ${formattedDate}` :
+                            diffDays === 1 ? `Yesterday, ${formattedDate}` :
+                            `${diffDays} days ago, ${formattedDate}`;
+
+        // ✅ Safe title & summary
+        const title = n.title || "No title";
+        const summary = n.summary || "No summary";
+
+        // ✅ Append news card
+        container.innerHTML += `
+          <div class="news-card">
+            <img src="${imageURL}" alt="News image">
+            <h3>${title}</h3>
+            <p>${summary}</p>
+            <small>${displayDate}</small>
+          </div>
+        `;
+      });
+
+    } catch (err) {
+      console.error("Error loading news:", err);
+      container.innerHTML = "<p>Error loading news.</p>";
+    }
   }
-}
 
-loadNews();
+  loadNews();
+</script>
   
 <!-- DAYS AGO SCRIPT -->
 <script>
@@ -958,6 +955,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
