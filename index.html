@@ -397,40 +397,60 @@ nav a:hover { color: #ffd700; }
   };
 
   /* ⬇️ LOAD NEWS */
+  <script type="module">
   async function loadNews() {
     const container = document.getElementById("newsContainer");
     container.innerHTML = "<p>Loading news...</p>";
 
-    const q = query(
-      collection(db, "news"),
-      orderBy("date", "desc")
-    );
+    try {
+      const q = query(
+        collection(db, "news"),
+        orderBy("date", "desc")
+      );
+      const snapshot = await getDocs(q);
+      container.innerHTML = "";
 
-    const snapshot = await getDocs(q);
-    container.innerHTML = "";
+      if (snapshot.empty) {
+        container.innerHTML = "<p>No news available.</p>";
+        return;
+      }
 
-    if (snapshot.empty) {
-      container.innerHTML = "<p>No news available.</p>";
-      return;
+      snapshot.forEach(doc => {
+        const n = doc.data();
+
+        // Safe image fallback
+        const imageURL = n.image || 'https://via.placeholder.com/150';
+
+        // Convert Firestore timestamp to JS Date
+        const newsDate = n.date?.toDate?.() || new Date();
+
+        // Calculate days ago
+        const now = new Date();
+        const diffTime = now - newsDate;
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        let displayDate = "";
+        if (diffDays === 0) displayDate = "Today";
+        else if (diffDays === 1) displayDate = "Yesterday";
+        else displayDate = `${diffDays} days ago`;
+
+        container.innerHTML += `
+          <div class="news-card">
+            <img src="${imageURL}" alt="News image">
+            <h3>${n.title}</h3>
+            <p>${n.summary}</p>
+            <small>${displayDate}</small>
+          </div>
+        `;
+      });
+    } catch (err) {
+      console.error(err);
+      container.innerHTML = "<p>Error loading news.</p>";
     }
-
-    snapshot.forEach(doc => {
-      const n = doc.data();
-      const date = n.date?.toDate?.().toDateString?.() || "";
-
-      container.innerHTML += `
-        <div class="news-card">
-          <img src="${n.image}" alt="News image">
-          <h3>${n.title}</h3>
-          <p>${n.summary}</p>
-          <small>${date}</small>
-        </div>
-      `;
-    });
   }
 
   loadNews();
 </script>
+  
 <!-- DAYS AGO SCRIPT -->
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -929,6 +949,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
