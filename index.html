@@ -417,9 +417,6 @@ nav a:hover { color: #ffd700; }
       const title = n.title || n.Title || "No title";
       const summary = n.summary || n.Summary || "No summary available";
       const imageURL = n.image?.trim() || n.Image?.trim() || "https://via.placeholder.com/150";
-      const category = n.category || "General";
-      const author = n.author || "Admin";
-      const link = n.link || "#";
       const tags = Array.isArray(n.tags) ? n.tags : [];
 
       // 🔹 Convert Firestore timestamp to JS Date
@@ -443,17 +440,13 @@ nav a:hover { color: #ffd700; }
       // 🔹 Optional: hide very old news (adjust as needed)
       const HIDE_AFTER_DAYS = 30;
       if (diffDays > HIDE_AFTER_DAYS) return;
-
-      // 🔹 Append each news card
+       // 🔹 Append each news card
       container.innerHTML += `
         <div class="news-card">
           <img src="${imageURL}" alt="${title}">
           <h3>${title}</h3>
           <p>${summary}</p>
           <small>${exactDate} (${relativeLabel})</small>
-          <p><strong>Category:</strong> ${category} | <strong>Author:</strong> ${author}</p>
-          ${tags.length ? `<p><strong>Tags:</strong> ${tags.join(", ")}</p>` : ""}
-          <a href="${link}" target="_blank">Read more</a>
         </div>
       `;
     });
@@ -917,6 +910,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
