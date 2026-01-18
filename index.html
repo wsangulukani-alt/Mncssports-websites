@@ -11,107 +11,7 @@
 <meta name="keywords" content="Malawi Sports, MNCS, National Council of Sports, Netball, Football, Basketball, Athletics, Sports Council Malawi, Kamuzu Institute for Sports, Malawi Government Sports">
 <link rel="canonical" href="https://wsangulukani-alt.github.io/Mncssports-websites/" />
 <link rel="stylesheet" href="style.css">
-/* ==============================
-   HAMBURGER MENU (LEFT) 
-   Mobile Only
-================================= */
-
-/* Hamburger container */
-.hamburger {
-  display: none; /* hidden on desktop */
-  flex-direction: column;
-  justify-content: space-between;
-  width: 28px;
-  height: 22px;
-  cursor: pointer;
-  margin-right: 15px; /* space from logo */
-  z-index: 1100; /* above everything */
-}
-
-/* Hamburger bars */
-.hamburger span {
-  display: block;
-  height: 3px;
-  width: 100%;
-  background-color: #ffd700; /* gold */
-  border-radius: 2px;
-  transition: all 0.3s ease-in-out;
-}
-
-/* Active state: hamburger transforms into X */
-.hamburger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
-
-/* Mobile nav menu */
-#nav-menu {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-/* Mobile-specific styles */
-@media (max-width: 768px) {
-  /* Show hamburger on mobile */
-  .hamburger {
-    display: flex;
-  }
-
-  /* Hide nav links by default */
-  #nav-menu {
-    position: absolute;
-    top: 60px; /* below header */
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 20px 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease;
-    z-index: 1000;
-  }
-
-  /* Show menu when active */
-  #nav-menu.active {
-    max-height: 500px; /* enough to show all links */
-  }
-
-  /* Style nav links for mobile */
-  #nav-menu a {
-    font-size: 1.2rem;
-    margin: 0;
-    padding: 10px 20px;
-    color: #ffd700;
-    font-weight: 600;
-    display: block;
-    width: 100%;
-    text-align: center;
-  }
-
-  #nav-menu a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    border-radius: 6px;
-  }
-
-  /* Hide search bar by default on mobile */
-  .search-bar {
-    display: none;
-  }
-}
-   
-   <!-- Open Graph meta tags for the main MNCS page -->
+ <!-- Open Graph meta tags for the main MNCS page -->
 <meta property="og:title" content="Malawi National Council of Sports News & Updates" />
 <meta property="og:description" content="Check out the latest news and updates from the Malawi National Council of Sports, including our Happy New Year 2026 greetings to all athletes and sports lovers." />
 <meta property="og:image" content="https://raw.githubusercontent.com/wsangulukani-alt/Mncssports-websites/refs/heads/main/Images/file_00000000ee2071fd88d25cae661d6846%20(3).png" />
@@ -1007,6 +907,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
