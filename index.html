@@ -396,7 +396,6 @@ nav a:hover { color: #ffd700; }
     }
   };
   // 📰 Load News Function
-
    async function loadNews() {
   const container = document.getElementById("newsContainer");
   container.innerHTML = "<p>Loading news...</p>";
@@ -404,7 +403,7 @@ nav a:hover { color: #ffd700; }
   try {
     const q = query(collection(db, "news"), orderBy("date", "desc"));
     const snapshot = await getDocs(q);
-    container.innerHTML = "";
+    container.innerHTML = ""; // clear container
 
     if (snapshot.empty) {
       container.innerHTML = "<p>No news available.</p>";
@@ -414,19 +413,23 @@ nav a:hover { color: #ffd700; }
     snapshot.forEach(doc => {
       const n = doc.data();
 
-      // ✅ Safe fallbacks for missing fields
+      // ✅ Robust Safe fallbacks
       const title = n.title || n.Title || "No title";
       const summary = n.summary || n.Summary || "No summary available";
-      const imageURL = n.image || n.Image || "https://via.placeholder.com/150";
+      const imageURL = n.image?.trim() || n.Image?.trim() || "https://via.placeholder.com/150";
+      const category = n.category || "General";
+      const author = n.author || "Admin";
+      const link = n.link || "#";
+      const tags = Array.isArray(n.tags) ? n.tags : [];
 
       // 🔹 Convert Firestore timestamp to JS Date
       const newsDate = n.date?.toDate?.() || new Date();
 
-      // 🔹 Exact posting date (e.g., 18 Jan 2026)
+      // 🔹 Exact posting date
       const options = { day: "numeric", month: "short", year: "numeric" };
       const exactDate = newsDate.toLocaleDateString("en-GB", options);
 
-      // 🔹 Relative day label (Today, Yesterday, X days ago)
+      // 🔹 Relative day label
       const now = new Date();
       const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
       const newsDay = new Date(newsDate.getFullYear(), newsDate.getMonth(), newsDate.getDate());
@@ -437,20 +440,24 @@ nav a:hover { color: #ffd700; }
       else if (diffDays === 1) relativeLabel = "Yesterday";
       else relativeLabel = `${diffDays} days ago`;
 
-      // 🔹 Optional: hide news older than 3 days
-      const HIDE_AFTER_DAYS = 3;
+      // 🔹 Optional: hide very old news (adjust as needed)
+      const HIDE_AFTER_DAYS = 30;
       if (diffDays > HIDE_AFTER_DAYS) return;
 
-      // 🔹 Add news card to container
+      // 🔹 Append each news card
       container.innerHTML += `
         <div class="news-card">
           <img src="${imageURL}" alt="${title}">
           <h3>${title}</h3>
           <p>${summary}</p>
           <small>${exactDate} (${relativeLabel})</small>
+          <p><strong>Category:</strong> ${category} | <strong>Author:</strong> ${author}</p>
+          ${tags.length ? `<p><strong>Tags:</strong> ${tags.join(", ")}</p>` : ""}
+          <a href="${link}" target="_blank">Read more</a>
         </div>
       `;
     });
+
   } catch (err) {
     console.error(err);
     container.innerHTML = "<p>Error loading news.</p>";
@@ -910,6 +917,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
