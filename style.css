@@ -388,3 +388,89 @@ nav a:hover {
   }
 }
 
+/* ==================================================
+   DESKTOP DEFAULT (NO CHANGE)
+================================================== */
+.hamburger,
+.close-btn {
+  display: none;
+}
+
+/* ==================================================
+   MOBILE VIEW ONLY
+================================================== */
+@media (max-width: 768px) {
+
+  /* Header layout */
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding-right: 12px;
+  }
+
+  /* =========================
+     HAMBURGER (☰)
+  ========================= */
+  .hamburger {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10001;
+  }
+
+  .hamburger span {
+    width: 26px;
+    height: 3px;
+    background-color: #ffd700; /* yellow on black */
+    margin: 4px 0;
+    border-radius: 3px;
+  }
+
+  /* =========================
+     SLIDE-IN NAV MENU
+  ========================= */
+  nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 260px;
+    height: 100vh;
+    background-color: #000;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    transition: right 0.3s ease;
+    z-index: 10000;
+  }
+
+  nav.active {
+    right: 0;
+  }
+
+  nav a {
+    color: #ffd700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  nav a:hover {
+    opacity: 0.85;
+  }
+
+  /* =========================
+     CLOSE BUTTON (✖)
+  ========================= */
+  .close-btn {
+    display: block;
+    color: #ffd700;
+    font-size: 24px;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-bottom: 20px;
+  }
+    }
