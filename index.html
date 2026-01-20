@@ -941,10 +941,24 @@ window.addEventListener('load', function(){
     if(last && document.getElementById('adminEmail')) document.getElementById('adminEmail').value = last;
   }catch(e){}
 });
+const hamburger = document.getElementById("hamburger");
+const nav = document.querySelector("nav");
+const closeNav = document.getElementById("closeNav");
+
+if (hamburger && nav && closeNav) {
+  hamburger.addEventListener("click", () => {
+    nav.classList.add("active");
+  });
+
+  closeNav.addEventListener("click", () => {
+    nav.classList.remove("active");
+  });
+}
 </script>
 
 </body>
 </html>
+
 
 
 
