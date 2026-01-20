@@ -362,3 +362,29 @@ nav a:hover {
   .site-title{font-size:1.1rem;}
   }
 
+/* ==============================
+   FORCE HAMBURGER VISIBILITY (FINAL FIX)
+   MOBILE ONLY
+================================ */
+@media (max-width: 768px) {
+
+  /* Make sure header allows absolute positioning */
+  .header-container {
+    position: relative !important;
+  }
+
+  /* Force hamburger to appear */
+  .hamburger {
+    display: flex !important;
+    position: absolute !important;
+    top: 18px;
+    left: 15px;
+    z-index: 9999 !important;
+  }
+
+  /* Ensure bars are visible on dark header */
+  .hamburger span {
+    background-color: #ffd700 !important;
+  }
+}
+
