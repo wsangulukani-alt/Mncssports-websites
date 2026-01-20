@@ -253,7 +253,65 @@ nav a:hover {
   margin-top:15px; 
   font-size:0.95rem; 
 }
+/* ==============================
+   HAMBURGER MENU – MOBILE ONLY
+   (Does NOT affect desktop)
+================================ */
 
+/* Hide hamburger and close button on desktop */
+.hamburger,
+.close-btn {
+  display: none;
+}
+
+/* 📱 MOBILE VIEW ONLY */
+@media (max-width: 768px) {
+
+  /* Hamburger button */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    margin-left: 10px;
+    z-index: 1100;
+  }
+
+  .hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: #000; /* change to white if header is dark */
+    margin: 4px 0;
+    border-radius: 3px;
+  }
+
+  /* Slide-in navigation */
+  nav {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 260px;
+    height: 100%;
+    background: #ffffff;
+    flex-direction: column;
+    padding: 20px;
+    gap: 15px;
+    transition: left 0.3s ease;
+    z-index: 1050;
+  }
+
+  nav.active {
+    left: 0;
+  }
+
+  /* Close (X) button inside nav */
+  .close-btn {
+    display: block;
+    font-size: 24px;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-bottom: 20px;
+  }
+    }
 /* =========================
    NEWS LIST (ADDED ONLY)
 ========================= */
@@ -303,3 +361,4 @@ nav a:hover {
   .header-logo{width:70px;}
   .site-title{font-size:1.1rem;}
   }
+
