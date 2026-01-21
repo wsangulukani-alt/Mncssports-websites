@@ -957,18 +957,21 @@ const nav = document.querySelector("nav");
 const closeNav = document.getElementById("closeNav");
 
 if (hamburger && nav && closeNav) {
+  // Open menu
   hamburger.addEventListener("click", () => {
-    nav.classList.add("active");
+    nav.classList.add("open");  // <-- use 'open', not 'active'
   });
 
+  // Close menu
   closeNav.addEventListener("click", () => {
-    nav.classList.remove("active");
+    nav.classList.remove("open");  // <-- must match CSS
   });
 }
 </script>
 
 </body>
 </html>
+
 
 
 
