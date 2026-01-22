@@ -334,36 +334,38 @@ header {
 <body>
 <header>
   <div class="header-container">
+    <!-- Logo & Site Title on the left -->
     <div class="header-left">
       <img src="https://pbs.twimg.com/profile_images/1504734702917279754/rb3u7Mgr_400x400.jpg"
+           alt="Malawi Sports Logo"
            class="header-logo">
       <div class="site-title">Malawi National Council of Sports</div>
     </div>
-    <!-- Hamburger -->
+
+    <!-- Hamburger on the RIGHT -->
     <div class="hamburger" id="hamburger">
       <span></span>
       <span></span>
       <span></span>
     </div>
 
+    <!-- Navigation -->
+    <nav id="mobileNav">
+      <span class="close-btn" id="closeNav">✕</span>
+
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#news">News</a>
+      <a href="#publications">Publications</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+
+      <span class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button type="button" onclick="googleSearch()">Search</button>
+      </span>
+    </nav>
   </div>
-
-  <!-- MOBILE NAV (IMPORTANT: OUTSIDE header-container) -->
-  <nav id="mainNav">
-    <span class="close-btn" id="closeNav">✕</span>
-
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#news">News</a>
-    <a href="#publications">Publications</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#contact">Contact</a>
-
-    <div class="search-bar">
-      <input type="text" placeholder="Search...">
-      <button>Search</button>
-    </div>
-  </nav>
 </header>
 <section id="home">
   <h2>Welcome to the Malawi National Council of Sports</h2>
@@ -1012,6 +1014,7 @@ closeNav.addEventListener("click", () => {
 </script>
 </body>
 </html>
+
 
 
 
