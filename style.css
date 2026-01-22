@@ -4,7 +4,10 @@ body, h1, h2, h3, p, ul, li, a, input, button {
   font-family: 'Poppins', Arial, sans-serif;
 }
 
-body { background: linear-gradient(to bottom right, #000, #006b3f, #ff0000); color: #fff; }
+body { 
+  background: linear-gradient(to bottom right, #000, #006b3f, #ff0000); 
+  color: #fff; 
+}
 
 /* ===== HEADER ===== */
 header {
@@ -19,12 +22,25 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative; /* for centering hamburger */
 }
 
-.header-left { display: flex; align-items: center; gap: 10px; }
-.header-logo { width: 70px; border-radius: 8px; background: white; padding: 5px; }
-.site-title { color: #ffd700; font-size: 1.4rem; }
+.header-left { 
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+}
+
+.header-logo { 
+  width: 70px; 
+  border-radius: 8px; 
+  background: white; 
+  padding: 5px; 
+}
+
+.site-title { 
+  color: #ffd700; 
+  font-size: 1.4rem; 
+}
 
 /* ===== NAVIGATION ===== */
 #mainNav {
@@ -33,8 +49,15 @@ header {
   align-items: center;
 }
 
-#mainNav a { color: white; font-weight: 600; text-decoration: none; }
-#mainNav a:hover { color: #ffd700; }
+#mainNav a { 
+  color: white; 
+  font-weight: 600; 
+  text-decoration: none; 
+}
+
+#mainNav a:hover { 
+  color: #ffd700; 
+}
 
 .search-bar input {
   padding: 5px 8px;
@@ -58,9 +81,6 @@ header {
   flex-direction: column;
   cursor: pointer;
   gap: 5px;
-  position: absolute; /* center horizontally */
-  left: 50%;
-  transform: translateX(-50%);
   z-index: 2000;
 }
 
@@ -72,10 +92,17 @@ header {
 }
 
 /* Close button inside mobile nav */
-.close-btn { display: none; cursor: pointer; color: #ffd700; font-size: 24px; }
+.close-btn { 
+  display: none; 
+  cursor: pointer; 
+  color: #ffd700; 
+  font-size: 24px; 
+}
 
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
+
+  /* Hide desktop nav if you have it */
   #mainNav {
     position: fixed;
     top: 0;
@@ -90,12 +117,31 @@ header {
     z-index: 1500;
   }
 
-  #mainNav.active { right: 0; }
+  #mainNav.active { 
+    right: 0;  /* show when active */
+  }
 
-  #mainNav a { font-size: 1.2rem; color: #ffd700; text-align: left; }
+  #mainNav a { 
+    font-size: 1.2rem; 
+    color: #ffd700; 
+    text-align: left; 
+  }
 
-  .search-bar { display: flex; flex-direction: column; gap: 10px; }
+  .search-bar { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+  }
 
-  .hamburger { display: flex; }  /* show hamburger */
-  .close-btn { display: block; align-self: flex-end; margin-bottom: 20px; }
+  .hamburger { 
+    display: flex; 
+    position: relative;
+    margin-left: auto; /* push to right */
+  }
+
+  .close-btn { 
+    display: block; 
+    align-self: flex-end; 
+    margin-bottom: 20px; 
+  }
 }
