@@ -894,25 +894,25 @@ window.addEventListener('load', function(){
     if(last && document.getElementById('adminEmail')) document.getElementById('adminEmail').value = last;
   }catch(e){}
 });
-const hamburger = document.getElementById("hamburger");
-const nav = document.querySelector("nav");
-const closeNav = document.getElementById("closeNav");
+  // Hamburger menu
+  const hamburger = document.getElementById("hamburger");
+  const mobileNav = document.getElementById("mobileNav");
+  const closeNav = document.getElementById("closeNav");
 
-if (hamburger && nav && closeNav) {
-  // Open menu
-  hamburger.addEventListener("click", () => {
-    nav.classList.add("open");  // <-- use 'open', not 'active'
-  });
+  if (hamburger && mobileNav && closeNav) {
+    hamburger.addEventListener("click", () => {
+      mobileNav.classList.add("active");  // CSS must have #mobileNav.active
+    });
 
-  // Close menu
-  closeNav.addEventListener("click", () => {
-    nav.classList.remove("open");  // <-- must match CSS
-  });
-}
+    closeNav.addEventListener("click", () => {
+      mobileNav.classList.remove("active");
+    });
+  }
 </script>
 
 </body>
 </html>
+
 
 
 
