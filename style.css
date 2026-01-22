@@ -1,4 +1,6 @@
-/* General Styles */
+/* =========================
+   GENERAL STYLES
+========================= */
 body, h1, h2, h3, p, ul, li, a, input, textarea, button {
   margin: 0;
   padding: 0;
@@ -16,306 +18,178 @@ a {
   text-decoration: none;
 }
 
-a:hover { 
-  text-decoration: underline; 
+a:hover {
+  text-decoration: underline;
 }
 
-section { 
-  padding: 60px 25px; 
-  text-align: center; 
+section {
+  padding: 60px 25px;
+  text-align: center;
 }
 
-section:nth-child(even) { 
-  background: rgba(255, 255, 255, 0.05); 
+section:nth-child(even) {
+  background: rgba(255, 255, 255, 0.05);
 }
 
-h1, h2, h3 { 
-  color: #ffd700; 
-  text-transform: uppercase; 
+h1, h2, h3 {
+  color: #ffd700;
+  text-transform: uppercase;
 }
 
-p { 
-  margin: 15px 0; 
+p {
+  margin: 15px 0;
 }
 
-button { 
-  cursor: pointer; 
+button {
+  cursor: pointer;
 }
 
-/* Header */
-header { 
-  background: rgba(0,0,0,0.95); 
-  padding:15px 20px; 
-  position:sticky; 
-  top:0; 
-  z-index:1000; 
-  box-shadow:0 3px 10px rgba(255,255,255,0.15); 
+/* =========================
+   HEADER
+========================= */
+header {
+  background: rgba(0,0,0,0.95);
+  padding: 15px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 3px 10px rgba(255,255,255,0.15);
 }
 
-.header-container { 
-  display:flex; 
-  align-items:center; 
-  justify-content:space-between; 
-  flex-wrap:wrap; 
-  gap:12px; 
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.header-left { 
-  display:flex; 
-  align-items:center; 
-  gap:12px; 
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.header-logo { 
-  width:90px; 
-  border-radius:10px; 
-  background:white; 
-  padding:5px; 
-  box-shadow:0 0 15px rgba(255,255,255,0.3); 
+.header-logo {
+  width: 90px;
+  border-radius: 10px;
+  background: white;
+  padding: 5px;
 }
 
-.site-title { 
-  font-size:1.6rem; 
-  color:#ffd700; 
-  text-shadow:1px 1px 4px black; 
+.site-title {
+  font-size: 1.6rem;
+  color: #ffd700;
 }
 
-/* Navigation */
-nav { 
-  text-align:center; 
-  margin-top:10px; 
+/* =========================
+   DESKTOP NAV
+========================= */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
-nav a { 
-  color:white; 
-  margin:0 12px; 
-  font-weight:600; 
+nav a {
+  color: white;
+  font-weight: 600;
 }
 
-nav a:hover { 
-  color:#ffd700; 
+nav a:hover {
+  color: #ffd700;
 }
 
-.search-bar { 
-  display:inline-block; 
-  margin-left:10px; 
+.search-bar input {
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: none;
 }
 
-.search-bar input { 
-  padding:6px 10px; 
-  border-radius:5px; 
-  border:none; 
-  width:180px; 
+.search-bar button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  background: #ffd700;
+  font-weight: bold;
+  color: black;
 }
 
-.search-bar button { 
-  padding:6px 12px; 
-  border:none; 
-  border-radius:5px; 
-  background:#ffd700; 
-  font-weight:bold; 
-  color:black; 
-}
-
-.search-bar button:hover { 
-  background:white; 
-  color:black; 
-}
-
-/* Sports News Buttons */
-#news { 
-  display:flex; 
-  flex-wrap:wrap; 
-  justify-content:center; 
-  gap:15px; 
-  padding:40px 20px; 
-}
-
-#news a { 
-  display:inline-block; 
-  padding:12px 22px; 
-  font-size:1.1rem; 
-  font-weight:600; 
-  color:#fff; 
-  background:linear-gradient(135deg,#006b3f,#ff0000); 
-  border-radius:12px; 
-  box-shadow:0 6px 15px rgba(0,0,0,0.3); 
-  transition:all 0.3s ease; 
-}
-
-#news a:hover { 
-  transform:translateY(-3px); 
-  box-shadow:0 8px 20px rgba(0,0,0,0.45); 
-  background:linear-gradient(135deg,#ffd700,#ff4500); 
-  color:#000; 
-}
-
-/* Gallery */
-.gallery-heading { 
-  text-align:center; 
-  margin-bottom:30px; 
-}
-
-.gallery-container { 
-  position:relative; 
-  max-width:1000px; 
-  margin:40px auto; 
-  overflow:hidden; 
-}
-
-.gallery-track { 
-  display:flex; 
-  transition: transform 0.6s ease-in-out; 
-}
-
-.gallery-item { 
-  min-width:280px; 
-  margin:0 10px; 
-  position:relative; 
-  border-radius:15px; 
-  overflow:hidden; 
-  box-shadow:0 0 10px rgba(255,255,255,0.12); 
-}
-
-.gallery-item img { 
-  width:100%; 
-  height:200px; 
-  object-fit:cover; 
-  border-radius:15px; 
-}
-
-.gallery-caption { 
-  position:absolute; 
-  bottom:0; 
-  width:100%; 
-  background:rgba(0,0,0,0.7); 
-  color:#ffd700; 
-  padding:8px 0; 
-  font-weight:bold; 
-  text-align:center; 
-}
-
-/* Admin Section */
-.pdf-upload { 
-  background: rgba(255,255,255,0.12); 
-  padding:18px; 
-  border-radius:10px; 
-  max-width:640px; 
-  margin:18px auto; 
-  text-align:left; 
-}
-
-.pdf-upload label { 
-  display:block; 
-  margin-bottom:6px; 
-  font-weight:600; 
-  color:#fff; 
-}
-
-.pdf-upload select, 
-.pdf-upload input, 
-.pdf-upload textarea { 
-  width:100%; 
-  padding:10px; 
-  margin:10px 0; 
-  border-radius:6px; 
-  border:none; 
-}
-
-.pdf-upload button { 
-  padding:10px 20px; 
-  background:#ffd700; 
-  border:none; 
-  border-radius:6px; 
-  font-weight:700; 
-  color:black; 
-}
-
-/* Contact / Footer */
-#contact { 
-  background: rgba(0,0,0,0.95); 
-  padding:50px 20px; 
-  text-align:center; 
-}
-
-.social-icons { 
-  margin-top:15px; 
-}
-
-.social-icons a { 
-  color:#ffd700; 
-  margin:0 12px; 
-  font-size:2.2rem; 
-}
-
-#footer p { 
-  color:#aaa; 
-  margin-top:15px; 
-  font-size:0.95rem; 
-}
-/* ==============================
-   HAMBURGER MENU – MOBILE ONLY
-   (Does NOT affect desktop)
-================================ */
-
-/* Hide hamburger and close button on desktop */
+/* =========================
+   HAMBURGER (DEFAULT HIDDEN)
+========================= */
 .hamburger,
 .close-btn {
   display: none;
 }
 
-/* 📱 MOBILE VIEW ONLY */
+/* =========================
+   MOBILE HAMBURGER MENU
+========================= */
 @media (max-width: 768px) {
 
-  /* Hamburger button */
+  /* Hide desktop nav */
+  nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 260px;
+    height: 100vh;
+    background: #000;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    transition: right 0.3s ease;
+    z-index: 1500;
+  }
+
+  nav.active {
+    right: 0;
+  }
+
+  nav a {
+    color: #ffd700;
+    font-size: 1.1rem;
+  }
+
+  /* Hamburger icon */
   .hamburger {
     display: flex;
     flex-direction: column;
     cursor: pointer;
-    margin-left: 10px;
-    z-index: 1100;
+    gap: 5px;
+    z-index: 2000;
   }
 
   .hamburger span {
-    width: 25px;
+    width: 26px;
     height: 3px;
-    background-color: #000; /* change to white if header is dark */
-    margin: 4px 0;
+    background-color: #ffd700;
     border-radius: 3px;
   }
 
-  /* Slide-in navigation */
-  nav {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    width: 260px;
-    height: 100%;
-    background: #ffffff;
-    flex-direction: column;
-    padding: 20px;
-    gap: 15px;
-    transition: left 0.3s ease;
-    z-index: 1050;
-  }
-
-  nav.active {
-    left: 0;
-  }
-
-  /* Close (X) button inside nav */
+  /* Close button */
   .close-btn {
     display: block;
+    color: #ffd700;
     font-size: 24px;
     cursor: pointer;
     align-self: flex-end;
     margin-bottom: 20px;
   }
-    }
-/* =========================
-   NEWS LIST (ADDED ONLY)
-========================= */
 
+  /* Adjust header text */
+  .site-title {
+    font-size: 1.1rem;
+  }
+
+  .header-logo {
+    width: 70px;
+  }
+}
+
+/* =========================
+   NEWS LIST
+========================= */
 #newsContainer {
   display: flex;
   flex-direction: column;
@@ -326,10 +200,7 @@ nav a:hover {
 .news-card {
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
 }
 
 .news-card img {
@@ -338,139 +209,29 @@ nav a:hover {
   object-fit: cover;
 }
 
-.news-card h3 {
-  font-size: 1.2rem;
-  margin: 10px;
-  color: #000;
-}
-
-.news-card p {
-  margin: 0 10px 10px 10px;
-  color: #000;
-}
-
+.news-card h3,
+.news-card p,
 .news-card small {
-  margin: 0 10px 10px 10px;
-  color: #555;
-  font-size: 0.85rem;
+  color: #000;
+  margin: 10px;
 }
 
-/* Mobile */
-@media(max-width:600px){
-  .gallery-item{min-width:220px;}
-  .header-logo{width:70px;}
-  .site-title{font-size:1.1rem;}
-  }
-
-/* ==============================
-   FORCE HAMBURGER VISIBILITY (FINAL FIX)
-   MOBILE ONLY
-================================ */
-@media (max-width: 768px) {
-
-  /* Make sure header allows absolute positioning */
-  .header-container {
-    position: relative !important;
-  }
-
-  /* Force hamburger to appear */
-  .hamburger {
-    display: flex !important;
-    position: absolute !important;
-    top: 18px;
-    left: 15px;
-    z-index: 9999 !important;
-  }
-
-  /* Ensure bars are visible on dark header */
-  .hamburger span {
-    background-color: #ffd700 !important;
-  }
+/* =========================
+   FOOTER
+========================= */
+#contact {
+  background: rgba(0,0,0,0.95);
+  padding: 50px 20px;
+  text-align: center;
 }
 
-/* ==================================================
-   DESKTOP DEFAULT (NO CHANGE)
-================================================== */
-.hamburger,
-.close-btn {
-  display: none;
+.social-icons a {
+  color: #ffd700;
+  font-size: 2.2rem;
+  margin: 0 12px;
 }
 
-/* ==================================================
-   MOBILE VIEW ONLY
-================================================== */
-@media (max-width: 768px) {
-
-  /* Header layout */
-  .header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    padding-right: 12px;
-  }
-
-  /* =========================
-     HAMBURGER (☰)
-  ========================= */
-  .hamburger {
-    display: flex !important;
-    flex-direction: column;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 10001;
-  }
-
-  .hamburger span {
-    width: 26px;
-    height: 3px;
-    background-color: #ffd700; /* yellow on black */
-    margin: 4px 0;
-    border-radius: 3px;
-  }
-
-  /* =========================
-     SLIDE-IN NAV MENU
-  ========================= */
-  nav {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 260px;
-    height: 100vh;
-    background-color: #000;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    transition: right 0.3s ease;
-    z-index: 10000;
-  }
-
-  nav.active {
-    right: 0;
-  }
-
-  nav a {
-    color: #ffd700;
-    font-size: 1.1rem;
-    text-decoration: none;
-    font-weight: 500;
-  }
-
-  nav a:hover {
-    opacity: 0.85;
-  }
-
-  /* =========================
-     CLOSE BUTTON (✖)
-  ========================= */
-  .close-btn {
-    display: block;
-    color: #ffd700;
-    font-size: 24px;
-    cursor: pointer;
-    align-self: flex-end;
-    margin-bottom: 20px;
-  }
-    }
+#footer p {
+  color: #aaa;
+  margin-top: 15px;
+}
