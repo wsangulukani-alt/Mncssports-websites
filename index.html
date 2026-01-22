@@ -248,7 +248,6 @@ nav a:hover { color: #ffd700; }
 <body>
 <header>
   <div class="header-container">
-    <!-- Logo & Site Title -->
     <div class="header-left">
       <img src="https://pbs.twimg.com/profile_images/1504734702917279754/rb3u7Mgr_400x400.jpg"
            alt="Malawi Sports Logo"
@@ -256,17 +255,16 @@ nav a:hover { color: #ffd700; }
       <div class="site-title">Malawi National Council of Sports</div>
     </div>
 
-    <!-- Hamburger centered -->
+    <!-- Hamburger on the right -->
     <div class="hamburger" id="hamburger">
       <span></span>
       <span></span>
       <span></span>
     </div>
 
-    <!-- Navigation -->
+    <!-- Mobile navigation -->
     <nav id="mainNav">
       <span class="close-btn" id="closeNav">✕</span>
-
       <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#news">News</a>
@@ -894,24 +892,28 @@ window.addEventListener('load', function(){
     if(last && document.getElementById('adminEmail')) document.getElementById('adminEmail').value = last;
   }catch(e){}
 });
-  // Hamburger menu
+<script>
   const hamburger = document.getElementById("hamburger");
-  const mobileNav = document.getElementById("mobileNav");
+  const mainNav = document.getElementById("mainNav");
   const closeNav = document.getElementById("closeNav");
 
-  if (hamburger && mobileNav && closeNav) {
+  if (hamburger && mainNav && closeNav) {
+    // Open menu
     hamburger.addEventListener("click", () => {
-      mobileNav.classList.add("active");  // CSS must have #mobileNav.active
+      mainNav.classList.add("active");
     });
 
+    // Close menu
     closeNav.addEventListener("click", () => {
-      mobileNav.classList.remove("active");
+      mainNav.classList.remove("active");
     });
   }
 </script>
 
+
 </body>
 </html>
+
 
 
 
