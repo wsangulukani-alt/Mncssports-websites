@@ -60,6 +60,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
 }
 
 .header-left {
@@ -83,18 +84,18 @@ header {
 /* =========================
    DESKTOP NAV
 ========================= */
-nav {
+nav.desktop-nav {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-nav a {
+nav.desktop-nav a {
   color: white;
   font-weight: 600;
 }
 
-nav a:hover {
+nav.desktop-nav a:hover {
   color: #ffd700;
 }
 
@@ -114,23 +115,48 @@ nav a:hover {
 }
 
 /* =========================
-   HAMBURGER (DEFAULT HIDDEN)
+   HAMBURGER & MOBILE NAV
 ========================= */
-.hamburger,
+.hamburger {
+  display: none; /* hidden by default */
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  z-index: 2000;
+}
+
+.hamburger span {
+  width: 26px;
+  height: 3px;
+  background-color: #ffd700;
+  border-radius: 3px;
+}
+
 .close-btn {
   display: none;
 }
 
 /* =========================
-   MOBILE HAMBURGER MENU
+   MOBILE STYLES
 ========================= */
 @media (max-width: 768px) {
 
   /* Hide desktop nav */
-  nav {
+  nav.desktop-nav {
+    display: none;
+  }
+
+  /* Show hamburger on right */
+  .hamburger {
+    display: flex;
+    margin-left: auto; /* push to right */
+  }
+
+  /* Mobile nav */
+  #mobileNav {
     position: fixed;
     top: 0;
-    right: -100%;
+    right: -100%;   /* hidden offscreen */
     width: 260px;
     height: 100vh;
     background: #000;
@@ -142,32 +168,17 @@ nav a:hover {
     z-index: 1500;
   }
 
-  nav.active {
-    right: 0;
+  #mobileNav.active {
+    right: 0; /* slide in */
   }
 
-  nav a {
+  #mobileNav a {
     color: #ffd700;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    text-align: left;
   }
 
-  /* Hamburger icon */
-  .hamburger {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 5px;
-    z-index: 2000;
-  }
-
-  .hamburger span {
-    width: 26px;
-    height: 3px;
-    background-color: #ffd700;
-    border-radius: 3px;
-  }
-
-  /* Close button */
+  /* Close button inside mobile nav */
   .close-btn {
     display: block;
     color: #ffd700;
@@ -177,7 +188,7 @@ nav a:hover {
     margin-bottom: 20px;
   }
 
-  /* Adjust header text */
+  /* Adjust header logo & text */
   .site-title {
     font-size: 1.1rem;
   }
@@ -235,4 +246,3 @@ nav a:hover {
   color: #aaa;
   margin-top: 15px;
 }
-
