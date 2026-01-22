@@ -907,7 +907,23 @@ hamburger.addEventListener("click", () => {
 closeNav.addEventListener("click", () => {
   mobileNav.classList.remove("active");
 });
+  // Mobile nav
+  const hamburger = document.getElementById("hamburger");
+  const mobileNav = document.getElementById("mainNav");
+  const closeNav = document.getElementById("closeNav");
+
+  if(hamburger && mobileNav && closeNav){
+    // Open mobile menu
+    hamburger.addEventListener("click", () => {
+      mobileNav.classList.add("active");
+    });
+
+    // Close mobile menu
+    closeNav.addEventListener("click", () => {
+      mobileNav.classList.remove("active");
+    });
   }
+});
 </script>
 </body>
 </html>
