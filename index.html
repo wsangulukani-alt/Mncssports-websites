@@ -230,68 +230,6 @@ nav a:hover { color: #ffd700; }
     font-size: 1.5rem;
   }
 }
-
-/* ==============================
-   HAMBURGER MENU (MOBILE ONLY)
-================================ */
-.hamburger {
-  display: none;              /* hidden on desktop */
-  flex-direction: column;
-  cursor: pointer;
-}
-
-.hamburger span {
-  width: 25px;
-  height: 3px;
-  background: #000;
-  margin: 4px 0;
-  border-radius: 3px;
-}
-
-/* Close button hidden on desktop */
-.close-btn {
-  display: none;
-}
-
-/* MOBILE ONLY */
-@media (max-width: 768px) {
-
-  /* Show hamburger on mobile */
-  .hamburger {
-    display: flex;
-    margin-left: 10px;
-    z-index: 1100;
-  }
-
-  /* Mobile nav sliding menu */
-  nav {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    width: 260px;
-    height: 100%;
-    background: #fff;
-    flex-direction: column;
-    padding: 20px;
-    gap: 15px;
-    transition: 0.3s ease;
-    z-index: 1050;
-  }
-
-  nav.active {
-    left: 0;                   /* slide in menu */
-  }
-
-  /* Show close button inside mobile menu */
-  .close-btn {
-    display: block;
-    font-size: 24px;
-    cursor: pointer;
-    align-self: flex-end;
-    margin-bottom: 20px;
-  }
-}
-
 </style>
 
   <title>Malawi National Council of Sports – Official Website</title>
@@ -310,20 +248,22 @@ nav a:hover { color: #ffd700; }
 <body>
 <header>
   <div class="header-container">
-    <!-- Logo & Site Title on the left -->
+    <!-- Logo & Site Title -->
     <div class="header-left">
       <img src="https://pbs.twimg.com/profile_images/1504734702917279754/rb3u7Mgr_400x400.jpg"
            alt="Malawi Sports Logo"
            class="header-logo">
       <div class="site-title">Malawi National Council of Sports</div>
     </div>
-    <!-- Hamburger on the RIGHT for mobile -->
+
+    <!-- Hamburger centered -->
     <div class="hamburger" id="hamburger">
       <span></span>
       <span></span>
       <span></span>
     </div>
-    <!-- Navigation (works for desktop & mobile) -->
+
+    <!-- Navigation -->
     <nav id="mainNav">
       <span class="close-btn" id="closeNav">✕</span>
 
@@ -334,10 +274,10 @@ nav a:hover { color: #ffd700; }
       <a href="#gallery">Gallery</a>
       <a href="#contact">Contact</a>
 
-      <span class="search-bar">
-        <input type="text" id="searchInput" placeholder="Search...">
-        <button type="button" onclick="googleSearch()">Search</button>
-      </span>
+      <div class="search-bar">
+        <input type="text" placeholder="Search...">
+        <button type="button">Search</button>
+      </div>
     </nav>
   </div>
 </header>
@@ -973,6 +913,7 @@ if (hamburger && nav && closeNav) {
 
 </body>
 </html>
+
 
 
 
