@@ -334,7 +334,7 @@ header {
 <body>
 <header>
   <div class="header-container">
-    <!-- Logo & Site Title on the left -->
+    <!-- Logo & Site Title -->
     <div class="header-left">
       <img src="https://pbs.twimg.com/profile_images/1504734702917279754/rb3u7Mgr_400x400.jpg"
            alt="Malawi Sports Logo"
@@ -342,7 +342,7 @@ header {
       <div class="site-title">Malawi National Council of Sports</div>
     </div>
 
-    <!-- Hamburger on the RIGHT -->
+    <!-- Hamburger for mobile -->
     <div class="hamburger" id="hamburger">
       <span></span>
       <span></span>
@@ -360,10 +360,10 @@ header {
       <a href="#gallery">Gallery</a>
       <a href="#contact">Contact</a>
 
-      <span class="search-bar">
+      <div class="search-bar">
         <input type="text" id="searchInput" placeholder="Search...">
         <button type="button" onclick="googleSearch()">Search</button>
-      </span>
+      </div>
     </nav>
   </div>
 </header>
@@ -984,36 +984,34 @@ window.addEventListener('load', function(){
 const hamburger = document.getElementById("hamburger");
 const mobileNav = document.getElementById("mainNav");
 const closeNav = document.getElementById("closeNav");
-
-// Open mobile menu
-hamburger.addEventListener("click", () => {
-  mobileNav.classList.add("active");
+// Toggle menu
+hamburger.addEventListener('click', () => {
+  if (mobileNav.style.right === '0px') {
+    mobileNav.style.right = '-300px';
+    hamburger.classList.remove('open');
+  } else {
+    mobileNav.style.right = '0px';
+    hamburger.classList.add('open');
+  }
 });
 
-// Close mobile menu
-closeNav.addEventListener("click", () => {
-  mobileNav.classList.remove("active");
+// Close menu
+closeBtn.addEventListener('click', () => {
+  mobileNav.style.right = '-300px';
+  hamburger.classList.remove('open');
 });
-  // Mobile nav
-  const hamburger = document.getElementById("hamburger");
-  const mobileNav = document.getElementById("mainNav");
-  const closeNav = document.getElementById("closeNav");
 
-  if(hamburger && mobileNav && closeNav){
-    // Open mobile menu
-    hamburger.addEventListener("click", () => {
-      mobileNav.classList.add("active");
-    });
-
-    // Close mobile menu
-    closeNav.addEventListener("click", () => {
-      mobileNav.classList.remove("active");
-    });
+// Optional: click outside to close menu
+window.addEventListener('click', (e) => {
+  if (!mobileNav.contains(e.target) && !hamburger.contains(e.target)) {
+    mobileNav.style.right = '-300px';
+    hamburger.classList.remove('open');
   }
 });
 </script>
 </body>
 </html>
+
 
 
 
