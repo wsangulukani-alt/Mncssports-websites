@@ -230,6 +230,93 @@ nav a:hover { color: #ffd700; }
     font-size: 1.5rem;
   }
 }
+/* ===== HEADER ===== */
+header {
+  background: #000;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-logo {
+  width: 60px;
+  background: #fff;
+  padding: 4px;
+  border-radius: 6px;
+}
+
+.site-title {
+  color: #ffd700;
+  font-size: 1.2rem;
+}
+
+/* ===== HAMBURGER ===== */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 30px;
+  height: 3px;
+  background: #ffd700;
+}
+
+/* ===== MOBILE NAV ===== */
+#mainNav {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 260px;
+  height: 100vh;
+  background: #000;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: right 0.3s ease;
+  z-index: 1500;
+}
+
+#mainNav.active {
+  right: 0;
+}
+
+#mainNav a {
+  color: #ffd700;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+/* ===== CLOSE BUTTON ===== */
+.close-btn {
+  color: #ffd700;
+  font-size: 24px;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+/* ===== MOBILE ONLY ===== */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+}
 </style>
 
   <title>Malawi National Council of Sports – Official Website</title>
@@ -927,6 +1014,7 @@ closeNav.addEventListener("click", () => {
 </script>
 </body>
 </html>
+
 
 
 
