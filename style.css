@@ -1,146 +1,120 @@
 /* ===== GENERAL ===== */
-body, h1, h2, h3, p, ul, li, a, input, button {
-  margin: 0; padding: 0;
-  font-family: 'Poppins', Arial, sans-serif;
-}
-
-body { 
-  background: linear-gradient(to bottom right, #000, #006b3f, #ff0000); 
-  color: #fff; 
-}
+body, h1, p, a, input, button { margin:0; padding:0; font-family: 'Poppins', sans-serif; }
+body { background: linear-gradient(to bottom right, #000, #006b3f, #ff0000); color: #fff; }
 
 /* ===== HEADER ===== */
-header {
-  background: rgba(0,0,0,0.95);
-  padding: 10px 20px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
 .header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 20px;
 }
 
-.header-left { 
-  display: flex; 
-  align-items: center; 
-  gap: 10px; 
-}
-
-.header-logo { 
-  width: 70px; 
-  border-radius: 8px; 
-  background: white; 
-  padding: 5px; 
-}
-
-.site-title { 
-  color: #ffd700; 
-  font-size: 1.4rem; 
-}
-
-/* ===== NAVIGATION ===== */
-#mainNav {
+.header-left {
   display: flex;
-  gap: 15px;
   align-items: center;
+  gap: 10px;
 }
 
-#mainNav a { 
-  color: white; 
-  font-weight: 600; 
-  text-decoration: none; 
+.header-logo {
+  width: 70px;
+  border-radius: 8px;
+  background: white;
+  padding: 5px;
 }
 
-#mainNav a:hover { 
-  color: #ffd700; 
-}
-
-.search-bar input {
-  padding: 5px 8px;
-  border-radius: 4px;
-  border: none;
-}
-
-.search-bar button {
-  padding: 5px 10px;
-  border: none;
-  background: #ffd700;
-  color: black;
+.site-title {
+  color: #ffd700;
+  font-size: 1.4rem;
   font-weight: bold;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 /* ===== HAMBURGER ===== */
 .hamburger {
-  display: none; /* hidden on desktop */
+  display: none; /* hidden by default */
   flex-direction: column;
-  cursor: pointer;
   gap: 5px;
+  cursor: pointer;
   z-index: 2000;
 }
 
 .hamburger span {
   width: 30px;
   height: 3px;
-  background: #ffd700; /* yellow lines */
+  background: #ffd700;
   border-radius: 2px;
+  transition: all 0.3s ease;
 }
 
-/* Close button inside mobile nav */
-.close-btn { 
-  display: none; 
-  cursor: pointer; 
-  color: #ffd700; 
-  font-size: 24px; 
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* ===== MOBILE ===== */
+/* ===== MOBILE NAV ===== */
+#mobileNav {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 250px;
+  height: 100%;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 20px 20px 20px;
+  gap: 20px;
+  transition: right 0.3s ease;
+  z-index: 1500;
+}
+
+#mobileNav.active {
+  right: 0;
+}
+
+#mobileNav a {
+  color: #ffd700;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+#mobileNav a:hover {
+  color: #fff;
+}
+
+.close-btn {
+  align-self: flex-end;
+  font-size: 24px;
+  cursor: pointer;
+  color: #ffd700;
+}
+
+.search-bar { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 10px; 
+}
+
+.search-bar input {
+  padding: 5px;
+  border-radius: 4px;
+  border: none;
+}
+
+.search-bar button {
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: none;
+  background: #ffd700;
+  color: black;
+  cursor: pointer;
+}
+
+/* ===== MEDIA QUERIES: MOBILE ONLY ===== */
 @media (max-width: 768px) {
-
-  #mainNav {
-    position: fixed;
-    top: 0;
-    right: -100%;  /* hide by default */
-    width: 250px;
-    height: 100%;
-    background: #000;
-    flex-direction: column;
-    padding: 20px;
-    gap: 20px;
-    transition: right 0.3s ease;
-    z-index: 1500;
-  }
-
-  #mainNav.active { 
-    right: 0;  /* show when active */
-  }
-
-  #mainNav a { 
-    font-size: 1.2rem; 
-    color: #ffd700; 
-    text-align: left; 
-  }
-
-  .search-bar { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 10px; 
-  }
-
-  .hamburger { 
-    display: flex; 
-    position: relative;
-    margin-left: auto; /* push to right */
-  }
-
-  .close-btn { 
-    display: block; 
-    align-self: flex-end; 
-    margin-bottom: 20px; 
-  }
+  .hamburger { display: flex; }
 }
