@@ -310,18 +310,23 @@ nav a:hover { color: #ffd700; }
 <body>
 <header>
   <div class="header-container">
+    <!-- Logo & Site Title on the left -->
     <div class="header-left">
       <img src="https://pbs.twimg.com/profile_images/1504734702917279754/rb3u7Mgr_400x400.jpg"
            alt="Malawi Sports Logo"
            class="header-logo">
       <div class="site-title">Malawi National Council of Sports</div>
     </div>
+
+    <!-- Hamburger on the RIGHT -->
     <div class="hamburger" id="hamburger">
       <span></span>
       <span></span>
       <span></span>
     </div>
-    <nav>
+
+    <!-- Navigation -->
+    <nav id="mobileNav">
       <span class="close-btn" id="closeNav">✕</span>
 
       <a href="#home">Home</a>
@@ -336,9 +341,9 @@ nav a:hover { color: #ffd700; }
         <button type="button" onclick="googleSearch()">Search</button>
       </span>
     </nav>
-
   </div>
-  </header>
+</header>
+
 <section id="home">
   <h2>Welcome to the Malawi National Council of Sports</h2>
   <p>Empowering athletes and promoting sports development across Malawi.</p>
@@ -971,6 +976,7 @@ if (hamburger && nav && closeNav) {
 
 </body>
 </html>
+
 
 
 
