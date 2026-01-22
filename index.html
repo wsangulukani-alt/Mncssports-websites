@@ -248,6 +248,7 @@ nav a:hover { color: #ffd700; }
 <body>
 <header>
   <div class="header-container">
+    <!-- Logo & Title -->
     <div class="header-left">
       <img src="https://pbs.twimg.com/profile_images/1504734702917279754/rb3u7Mgr_400x400.jpg"
            alt="Malawi Sports Logo"
@@ -892,27 +893,25 @@ window.addEventListener('load', function(){
     if(last && document.getElementById('adminEmail')) document.getElementById('adminEmail').value = last;
   }catch(e){}
 });
-<script>
-  const hamburger = document.getElementById("hamburger");
-  const mainNav = document.getElementById("mainNav");
-  const closeNav = document.getElementById("closeNav");
+// Select elements
+const hamburger = document.getElementById("hamburger");
+const mobileNav = document.getElementById("mainNav");
+const closeNav = document.getElementById("closeNav");
 
-  if (hamburger && mainNav && closeNav) {
-    // Open menu
-    hamburger.addEventListener("click", () => {
-      mainNav.classList.add("active");
-    });
+// Open mobile menu
+hamburger.addEventListener("click", () => {
+  mobileNav.classList.add("active");
+});
 
-    // Close menu
-    closeNav.addEventListener("click", () => {
-      mainNav.classList.remove("active");
-    });
+// Close mobile menu
+closeNav.addEventListener("click", () => {
+  mobileNav.classList.remove("active");
+});
   }
 </script>
-
-
 </body>
 </html>
+
 
 
 
