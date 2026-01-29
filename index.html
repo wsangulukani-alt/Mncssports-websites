@@ -914,66 +914,52 @@ window.addEventListener('load', function(){
 });
 <script>
 const galleryTrack = document.getElementById("galleryTrack");
-const scrollAmount = 300; // how many pixels to move per step
+const arrowLeft = document.getElementById("arrowLeft");
+const arrowRight = document.getElementById("arrowRight");
+
+let scrollPos = 0;
+const scrollStep = 280; // amount to scroll per arrow click
 let autoScroll;
 
-// Move left
-function manualPrev() {
-  galleryTrack.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+// Manual arrows
+arrowLeft.addEventListener("click", () => {
+  scrollPos -= scrollStep;
+  if(scrollPos < 0) scrollPos = galleryTrack.scrollWidth - galleryTrack.clientWidth;
+  galleryTrack.scrollTo({ left: scrollPos, behavior: 'smooth' });
   resetAutoScroll();
-}
+});
 
-// Move right
-function manualNext() {
-  galleryTrack.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+arrowRight.addEventListener("click", () => {
+  scrollPos += scrollStep;
+  if(scrollPos > galleryTrack.scrollWidth - galleryTrack.clientWidth) scrollPos = 0;
+  galleryTrack.scrollTo({ left: scrollPos, behavior: 'smooth' });
   resetAutoScroll();
-}
+});
 
-// Automatic scrolling
+// Auto scroll
 function startAutoScroll() {
   autoScroll = setInterval(() => {
-    // if at the end, scroll back to start
-    if (galleryTrack.scrollLeft + galleryTrack.clientWidth >= galleryTrack.scrollWidth) {
-      galleryTrack.scrollTo({ left: 0, behavior: 'smooth' });
-    } else {
-      galleryTrack.scrollBy({ left: 1, behavior: 'smooth' }); // small amount for smooth slow scroll
-    }
-  }, 20); // moves 1px every 20ms => slow continuous scroll
+    scrollPos += 1; // scroll 1px for smooth slow movement
+    if(scrollPos > galleryTrack.scrollWidth - galleryTrack.clientWidth) scrollPos = 0;
+    galleryTrack.scrollTo({ left: scrollPos, behavior: 'smooth' });
+  }, 20); // slower scroll, adjust for speed
 }
 
-// Pause auto-scroll when user hovers over gallery
-galleryTrack.addEventListener('mouseenter', () => clearInterval(autoScroll));
-galleryTrack.addEventListener('mouseleave', startAutoScroll);
-
-// Reset auto-scroll on manual click
 function resetAutoScroll() {
   clearInterval(autoScroll);
   startAutoScroll();
 }
 
-// Start scrolling when page loads
+// Pause auto-scroll on hover
+galleryTrack.addEventListener("mouseenter", () => clearInterval(autoScroll));
+galleryTrack.addEventListener("mouseleave", startAutoScroll);
+
+// Start on page load
 startAutoScroll();
-</script>
- <!-- Hamburger menu JS -->
-<script>
- const hamburger = document.getElementById("hamburger");
-const nav = document.querySelector("nav");
-const closeNav = document.getElementById("closeNav");
-
-if (hamburger && nav && closeNav) {
-  // Open menu
-  hamburger.addEventListener("click", () => {
-    nav.classList.add("open");  // <-- use 'open', not 'active'
-  });
-
-  // Close menu
-  closeNav.addEventListener("click", () => {
-    nav.classList.remove("open");  // <-- must match CSS
-  });
-}
 </script>
 </body>
 </html>
+
 
 
 
