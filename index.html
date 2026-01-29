@@ -524,8 +524,8 @@ loadNews();
 <section id="gallery">
   <h2 class="gallery-heading">Sports Gallery</h2>
   <div class="gallery-container">
-    <button class="arrow-btn arrow-left" onclick="manualPrev()">&#10094;</button>
-    <div class="gallery-viewport" style="overflow:hidden;">
+    <button class="arrow-btn arrow-left" id="arrowLeft">&#10094;</button>
+    <div class="gallery-viewport">
       <div class="gallery-track" id="galleryTrack">
         <div class="gallery-item"><img src="https://bolayapazed.com/wp-content/uploads/2023/08/1691064757614-jpg.webp" alt="Football"><div class="gallery-caption">Football</div></div>
         <div class="gallery-item"><img src="https://www.nyasatimes.com/wp-content/uploads/MVP-from-MAGU-jumps-high-during-the-game.jpg" alt="Basketball"><div class="gallery-caption">Basketball</div></div>
@@ -541,7 +541,7 @@ loadNews();
         <div class="gallery-item"><img src="https://www.nyasatimes.com/wp-content/uploads/a-Nyasa-Times-pic-5326.jpg" alt="Chess"><div class="gallery-caption">Chess</div></div>
       </div>
     </div>
-    <button class="arrow-btn arrow-right" onclick="manualNext()">&#10095;</button>
+    <button class="arrow-btn arrow-right" id="arrowRight">&#10095;</button>
   </div>
 </section>
 <section id="publications">
@@ -974,6 +974,7 @@ if (hamburger && nav && closeNav) {
 </script>
 </body>
 </html>
+
 
 
 
