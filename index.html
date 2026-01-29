@@ -963,7 +963,42 @@ window.addEventListener('load', function(){
     if(last && document.getElementById('adminEmail')) document.getElementById('adminEmail').value = last;
   }catch(e){}
 });
-const hamburger = document.getElementById("hamburger");
+<!-- Gallery JS: arrows + auto-scroll -->
+<script>
+  const galleryTrack = document.getElementById("galleryTrack");
+  const scrollAmount = 300;
+  let autoScroll;
+
+  function manualPrev() {
+    galleryTrack.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    resetAutoScroll();
+  }
+
+  function manualNext() {
+    galleryTrack.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    resetAutoScroll();
+  }
+
+  function startAutoScroll() {
+    autoScroll = setInterval(() => {
+      if (galleryTrack.scrollLeft + galleryTrack.clientWidth >= galleryTrack.scrollWidth) {
+        galleryTrack.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        galleryTrack.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    }, 3000);
+  }
+
+  function resetAutoScroll() {
+    clearInterval(autoScroll);
+    startAutoScroll();
+  }
+
+  startAutoScroll();
+ </script>
+<!-- Hamburger menu JS -->
+<script>
+ const hamburger = document.getElementById("hamburger");
 const nav = document.querySelector("nav");
 const closeNav = document.getElementById("closeNav");
 
@@ -981,6 +1016,7 @@ if (hamburger && nav && closeNav) {
 </script>
 </body>
 </html>
+
 
 
 
