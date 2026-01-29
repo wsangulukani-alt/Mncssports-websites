@@ -524,8 +524,8 @@ loadNews();
 <section id="gallery">
   <h2 class="gallery-heading">Sports Gallery</h2>
   <div class="gallery-container">
-    <button class="arrow-btn arrow-left" id="arrowLeft">&#10094;</button>
-    <div class="gallery-viewport">
+    <button class="arrow-btn arrow-left" onclick="manualPrev()">&#10094;</button>
+    <div class="gallery-viewport" style="overflow:hidden;">
       <div class="gallery-track" id="galleryTrack">
         <div class="gallery-item"><img src="https://bolayapazed.com/wp-content/uploads/2023/08/1691064757614-jpg.webp" alt="Football"><div class="gallery-caption">Football</div></div>
         <div class="gallery-item"><img src="https://www.nyasatimes.com/wp-content/uploads/MVP-from-MAGU-jumps-high-during-the-game.jpg" alt="Basketball"><div class="gallery-caption">Basketball</div></div>
@@ -541,7 +541,7 @@ loadNews();
         <div class="gallery-item"><img src="https://www.nyasatimes.com/wp-content/uploads/a-Nyasa-Times-pic-5326.jpg" alt="Chess"><div class="gallery-caption">Chess</div></div>
       </div>
     </div>
-    <button class="arrow-btn arrow-right" id="arrowRight">&#10095;</button>
+    <button class="arrow-btn arrow-right" onclick="manualNext()">&#10095;</button>
   </div>
 </section>
 <section id="publications">
@@ -747,7 +747,55 @@ document.getElementById('toggleAdminPass').addEventListener('click', function(){
   if(p.type === 'password'){ p.type = 'text'; icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash'); }
   else { p.type = 'password'; icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye'); }
 });
+// ----------------- Gallery Sliding -----------------
+let galleryIndex = 0;
+const track = document.getElementById('galleryTrack');
+let autoSlideInterval = null;
+function updateGalleryPosition(){
+  const item = track.querySelector('.gallery-item');
+  if(!item) return;
+  const itemWidth = item.offsetWidth + 20;
+  track.style.transform = `translateX(${-galleryIndex * itemWidth}px)`;
+}
+function nextSlide(){
+  const items = track.children.length;
+  galleryIndex++;
+  if(galleryIndex >= items) galleryIndex = 0;
+  updateGalleryPosition();
+}
+function prevSlide(){
+  const items = track.children.length;
+  galleryIndex--;
+  if(galleryIndex < 0) galleryIndex = items - 1;
+  updateGalleryPosition();
+}
+function manualNext(){ stopAutoSlide(); nextSlide(); startAutoSlide(); }
+function manualPrev(){ stopAutoSlide(); prevSlide(); startAutoSlide(); }
 
+function startAutoSlide(){
+  if(autoSlideInterval) return;
+  autoSlideInterval = setInterval(nextSlide, 4000); // optimized 4 seconds
+}
+function stopAutoSlide(){
+  if(autoSlideInterval){ clearInterval(autoSlideInterval); autoSlideInterval = null; }
+}
+
+window.addEventListener('resize', updateGalleryPosition);
+window.addEventListener('load', function(){
+  loadCCHistory();
+  try{
+    const last = localStorage.getItem('mncs_last_admin');
+    if(last) document.getElementById('adminEmail').value = last;
+  }catch(e){}
+  updateGalleryPosition();
+  startAutoSlide();
+});
+
+const galleryContainer = document.querySelector('.gallery-container');
+galleryContainer.addEventListener('mouseenter', stopAutoSlide);
+galleryContainer.addEventListener('mouseleave', startAutoSlide);
+</script>
+<script>
 /* Enhanced CC/BCC parsing, history, and send-receipt tracking (no OAuth client id) */
 const CC_KEY = 'mncs_cc_list_v2';
 const SENT_HISTORY_KEY = 'mncs_sent_history';
@@ -963,6 +1011,7 @@ galleryContainer.addEventListener('mouseleave', startAutoSlide);
 </script>
 </body>
 </html>
+
 
 
 
