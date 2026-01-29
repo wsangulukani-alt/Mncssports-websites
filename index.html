@@ -544,6 +544,7 @@ loadNews();
     <button class="arrow-btn arrow-right" onclick="manualNext()">&#10095;</button>
   </div>
 </section>
+
 <section id="publications">
   <h3>Reports, Policies & Publications / Admin Section</h3>
 
@@ -615,7 +616,7 @@ loadNews();
         Malawi National Council of Sports / Kamuzu Institute for Sports, Lilongwe Malawi
       </a>
     </p>
-    <p><ion-icon name="call-outline"></ion-icon> +265 999 564 646</p>
+    <p><ion-icon name="call-outline"></ion-icon>+265 999 564 646 </p>
     <p><ion-icon name="mail-outline"></ion-icon> rsdocentre@gmail.com</p>
     <a href="https://www.youtube.com/results?search_query=Malawi+National+Council+of+Sports" target="_blank">
       <i class="fa fa-youtube-play" aria-hidden="true" style="font-size:24px;"></i>
@@ -625,12 +626,12 @@ loadNews();
   <div class="social-icons">
     <a href="https://www.facebook.com" target="_blank"><ion-icon name="logo-facebook"></ion-icon></a>
     <a href="https://twitter.com" target="_blank"><ion-icon name="logo-twitter"></ion-icon></a>
-    <a href="https://wa.me//265 999 564 646" target="_blank"><ion-icon name="logo-whatsapp"></ion-icon></a>
+    <a href="https://wa.me/265991631170" target="_blank"><ion-icon name="logo-whatsapp"></ion-icon></a>
   </div>
 </section>
 
 <footer id="footer">
-  <p>&copy; 2026 Malawi National Council of Sports. Designed by Arthur Sangulukani Developers Network. All rights reserved.</p>
+  <p>&copy; 2025 Malawi National Council of Sports. Designed by Arthur Sangulukani Developers Network. All rights reserved.</p>
 </footer>
 
 <script>
@@ -734,12 +735,14 @@ function sendReport(){
 
   window.open(mailtoLink, '_blank');
 }
+
 // ----------------- Admin create account (redirect to Google signup) -----------------
 function createAccount(){
   const email = document.getElementById('adminEmail').value.trim();
   if(email && validateEmail(email)) saveCCHistory(email);
   window.open('https://accounts.google.com/signup', '_blank');
 }
+
 // Toggle password show/hide
 document.getElementById('toggleAdminPass').addEventListener('click', function(){
   const p = document.getElementById('adminPassword');
@@ -747,6 +750,7 @@ document.getElementById('toggleAdminPass').addEventListener('click', function(){
   if(p.type === 'password'){ p.type = 'text'; icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash'); }
   else { p.type = 'password'; icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye'); }
 });
+
 // ----------------- Gallery Sliding -----------------
 let galleryIndex = 0;
 const track = document.getElementById('galleryTrack');
@@ -790,12 +794,14 @@ window.addEventListener('load', function(){
   updateGalleryPosition();
   startAutoSlide();
 });
+
 const galleryContainer = document.querySelector('.gallery-container');
 galleryContainer.addEventListener('mouseenter', stopAutoSlide);
 galleryContainer.addEventListener('mouseleave', startAutoSlide);
 </script>
 
- <script>
+
+<script>
 /* Enhanced CC/BCC parsing, history, and send-receipt tracking (no OAuth client id) */
 const CC_KEY = 'mncs_cc_list_v2';
 const SENT_HISTORY_KEY = 'mncs_sent_history';
@@ -961,122 +967,6 @@ window.addEventListener('load', function(){
   }catch(e){}
 });
 </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
