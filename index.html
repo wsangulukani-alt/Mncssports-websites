@@ -521,31 +521,80 @@ header {
 // Load news on page load
 loadNews();
 </script>
-  <!-- Gallery Section -->
+<!-- Gallery Section -->
 <section id="gallery">
   <h2 class="gallery-heading">Sports Gallery</h2>
   <div class="gallery-container">
     <button class="arrow-btn arrow-left" onclick="manualPrev()">&#10094;</button>
+
     <div class="gallery-viewport" style="overflow:hidden;">
       <div class="gallery-track" id="galleryTrack">
-        <div class="gallery-item"><img src="https://bolayapazed.com/wp-content/uploads/2023/08/1691064757614-jpg.webp" alt="Football"><div class="gallery-caption">Football</div></div>
-        <div class="gallery-item"><img src="https://www.nyasatimes.com/wp-content/uploads/MVP-from-MAGU-jumps-high-during-the-game.jpg" alt="Basketball"><div class="gallery-caption">Basketball</div></div>
-        <div class="gallery-item"><img src="https://raw.githubusercontent.com/wsangulukani-alt/Mncssports-websites/refs/heads/main/Images/The%20Queens%202025%20.jpg" alt="Netball"><div class="gallery-caption">Netball</div></div>
-        <div class="gallery-item"><img src="https://www.nyasatimes.com/wp-content/uploads/IMG-20190404-WA0081.jpg" alt="Women Football"><div class="gallery-caption">Women Football</div></div>
-        <div class="gallery-item"><img src="https://malawisport.mw/wp-content/uploads/2024/11/kata-zim.jpg" alt="Karate"><div class="gallery-caption">Karate</div></div>
-        <div class="gallery-item"><img src="https://res.cloudinary.com/duu3v9gfg/image/fetch/t_fit_1920/https://78884ca60822a34fb0e6-082b8fd5551e97bc65e327988b444396.ssl.cf3.rackcdn.com/up/2018/01/malawi-01-1514914573-1514914573.jpg" alt="Judo"><div class="gallery-caption">Judo</div></div>
-        <div class="gallery-item"><img src="https://tse1.mm.bing.net/th/id/OIP.UIyT6VkIOi3o7fSH_NqDLwHaE8?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Volleyball"><div class="gallery-caption">Volleyball</div></div>
-        <div class="gallery-item"><img src="https://tse4.mm.bing.net/th/id/OIP.ussmU6wwIrA_4EG8UGFXjAHaEL?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Lawn Tennis"><div class="gallery-caption">Lawn Tennis</div></div>
-        <div class="gallery-item"><img src="https://www.nyasatimes.com/wp-content/uploads/Mkwanda-at-the-receiving-end.jpg" alt="Boxing"><div class="gallery-caption">Boxing</div></div>
-        <div class="gallery-item"><img src="https://raw.githubusercontent.com/malawiacademysports/MAS-website/f639bbe3e3047734658168668e7204d139bfa1c0/Malawi%20Academy%20for%20Sports%20Website/Images/swimming.jpg"alt="Swimming" loading="lazy"><div class="gallery-caption">Swimming</div></div
-        <div class="gallery-item"><img src="https://dgalywyr863hv.cloudfront.net/pictures/clubs/698521/15818901/2/large.jpg" alt="Cycling"><div class="gallery-caption">Cycling</div></div>
-        <div class="gallery-item"><img src="https://www.nyasatimes.com/wp-content/uploads/a-Nyasa-Times-pic-5326.jpg" alt="Chess"><div class="gallery-caption">Chess</div></div>
+
+        <div class="gallery-item">
+          <img src="https://bolayapazed.com/wp-content/uploads/2023/08/1691064757614-jpg.webp" alt="Football" loading="lazy">
+          <div class="gallery-caption">Football</div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://www.nyasatimes.com/wp-content/uploads/MVP-from-MAGU-jumps-high-during-the-game.jpg" alt="Basketball" loading="lazy">
+          <div class="gallery-caption">Basketball</div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://raw.githubusercontent.com/wsangulukani-alt/Mncssports-websites/refs/heads/main/Images/The%20Queens%202025%20.jpg" alt="Netball" loading="lazy">
+          <div class="gallery-caption">Netball</div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://www.nyasatimes.com/wp-content/uploads/IMG-20190404-WA0081.jpg" alt="Women Football" loading="lazy">
+          <div class="gallery-caption">Women Football</div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://malawisport.mw/wp-content/uploads/2024/11/kata-zim.jpg" alt="Karate" loading="lazy">
+          <div class="gallery-caption">Karate</div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://res.cloudinary.com/duu3v9gfg/image/fetch/t_fit_1920/https://78884ca60822a34fb0e6-082b8fd5551e97bc65e327988b444396.ssl.cf3.rackcdn.com/up/2018/01/malawi-01-1514914573-1514914573.jpg" alt="Judo" loading="lazy">
+          <div class="gallery-caption">Judo</div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://tse1.mm.bing.net/th/id/OIP.UIyT6VkIOi3o7fSH_NqDLwHaE8?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Volleyball" loading="lazy">
+          <div class="gallery-caption">Volleyball</div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://tse4.mm.bing.net/th/id/OIP.ussmU6wwIrA_4EG8UGFXjAHaEL?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Lawn Tennis" loading="lazy">
+          <div class="gallery-caption">Lawn Tennis</div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://www.nyasatimes.com/wp-content/uploads/Mkwanda-at-the-receiving-end.jpg" alt="Boxing" loading="lazy">
+          <div class="gallery-caption">Boxing</div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://raw.githubusercontent.com/malawiacademysports/MAS-website/f639bbe3e3047734658168668e7204d139bfa1c0/Malawi%20Academy%20for%20Sports%20Website/Images/swimming.jpg" alt="Swimming" loading="lazy">
+          <div class="gallery-caption">Swimming</div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://dgalywyr863hv.cloudfront.net/pictures/clubs/698521/15818901/2/large.jpg" alt="Cycling" loading="lazy">
+          <div class="gallery-caption">Cycling</div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://www.nyasatimes.com/wp-content/uploads/a-Nyasa-Times-pic-5326.jpg" alt="Chess" loading="lazy">
+          <div class="gallery-caption">Chess</div>
+        </div>
+
       </div>
     </div>
     <button class="arrow-btn arrow-right" onclick="manualNext()">&#10095;</button>
   </div>
 </section>
-
 <section id="publications">
   <h3>Reports, Policies & Publications / Admin Section</h3>
 
@@ -983,6 +1032,7 @@ if (hamburger && nav && closeNav) {
 </script>
 </body>
 </html>
+
 
 
 
