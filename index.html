@@ -912,52 +912,43 @@ window.addEventListener('load', function(){
     if(last && document.getElementById('adminEmail')) document.getElementById('adminEmail').value = last;
   }catch(e){}
 });
-<script>
-  const galleryTrack = document.getElementById("galleryTrack");
-  const galleryContainer = document.querySelector(".gallery-container");
-  const scrollAmount = 300; // how much each click scrolls
-  let autoScrollInterval;
+/* ==================== Gallery Sliding Functions ==================== */
+const galleryTrack = document.getElementById("galleryTrack");
+const galleryContainer = document.querySelector(".gallery-container");
+const scrollAmount = 300; // pixels per click
+let autoScrollInterval;
 
-  // Arrow click functions
-  function manualPrev() {
-    galleryTrack.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-    resetAutoScroll();
-  }
+// Arrow click handlers
+function manualPrev(){ galleryTrack.scrollBy({ left:-scrollAmount, behavior:'smooth' }); resetAutoScroll(); }
+function manualNext(){ galleryTrack.scrollBy({ left:scrollAmount, behavior:'smooth' }); resetAutoScroll(); }
 
-  function manualNext() {
-    galleryTrack.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    resetAutoScroll();
-  }
-  // Auto scroll function
-  function startAutoScroll() {
-    autoScrollInterval = setInterval(() => {
-      if (galleryTrack.scrollLeft + galleryTrack.clientWidth >= galleryTrack.scrollWidth) {
-        galleryTrack.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        galleryTrack.scrollBy({ left: scrollAmount, behavior: "smooth" });
-      }
-    }, 3000); // scroll every 3 seconds
-  }
+// Auto scrolling
+function startAutoScroll(){
+  clearInterval(autoScrollInterval);
+  autoScrollInterval = setInterval(() => {
+    if(galleryTrack.scrollLeft + galleryTrack.clientWidth >= galleryTrack.scrollWidth){
+      galleryTrack.scrollTo({ left:0, behavior:'smooth' });
+    } else {
+      galleryTrack.scrollBy({ left:scrollAmount, behavior:'smooth' });
+    }
+  }, 3000); // scroll every 3 seconds
+}
 
-  function resetAutoScroll() {
-    clearInterval(autoScrollInterval);
-    startAutoScroll();
-  }
-
-  // Pause on hover
-  galleryContainer.addEventListener("mouseenter", () => clearInterval(autoScrollInterval));
-  galleryContainer.addEventListener("mouseleave", startAutoScroll);
-
-  // Start automatic scrolling
+// Reset auto scroll on manual click
+function resetAutoScroll(){
+  clearInterval(autoScrollInterval);
   startAutoScroll();
+}
+
+// Pause on hover
+galleryContainer.addEventListener("mouseenter", ()=>clearInterval(autoScrollInterval));
+galleryContainer.addEventListener("mouseleave", startAutoScroll);
+
+// Start scrolling after page load
+window.addEventListener('load', startAutoScroll);
 </script>
 </body>
 </html>
-
-
-
-
-
 
 
 
