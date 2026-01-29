@@ -747,8 +747,11 @@ document.getElementById('toggleAdminPass').addEventListener('click', function(){
   if(p.type === 'password'){ p.type = 'text'; icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash'); }
   else { p.type = 'password'; icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye'); }
 });
-// ----------------- Gallery Sliding ----------------
 <script>
+/* ===============================
+   GALLERY AUTO SLIDER (FINAL)
+================================ */
+
 let galleryIndex = 0;
 let autoSlideInterval = null;
 
@@ -756,25 +759,26 @@ const track = document.getElementById('galleryTrack');
 const galleryContainer = document.querySelector('.gallery-container');
 
 function updateGalleryPosition() {
+  if (!track) return;
+
   const item = track.querySelector('.gallery-item');
   if (!item) return;
 
-  const gap = 20;
+  const gap = 20; // must match CSS margin (10px left + 10px right)
   const itemWidth = item.offsetWidth + gap;
+
   track.style.transform = `translateX(${-galleryIndex * itemWidth}px)`;
 }
 
 function nextSlide() {
   const items = track.children.length;
-  galleryIndex++;
-  if (galleryIndex >= items) galleryIndex = 0;
+  galleryIndex = (galleryIndex + 1) % items;
   updateGalleryPosition();
 }
 
 function prevSlide() {
   const items = track.children.length;
-  galleryIndex--;
-  if (galleryIndex < 0) galleryIndex = items - 1;
+  galleryIndex = (galleryIndex - 1 + items) % items;
   updateGalleryPosition();
 }
 
@@ -792,7 +796,7 @@ function manualPrev() {
 
 function startAutoSlide() {
   stopAutoSlide();
-  autoSlideInterval = setInterval(nextSlide, 4000); // 4 seconds
+  autoSlideInterval = setInterval(nextSlide, 4000); // ⏱️ 4 seconds
 }
 
 function stopAutoSlide() {
@@ -802,19 +806,25 @@ function stopAutoSlide() {
   }
 }
 
-// Pause on hover
-galleryContainer.addEventListener('mouseenter', stopAutoSlide);
-galleryContainer.addEventListener('mouseleave', startAutoSlide);
+/* Pause on hover */
+if (galleryContainer) {
+  galleryContainer.addEventListener('mouseenter', stopAutoSlide);
+  galleryContainer.addEventListener('mouseleave', startAutoSlide);
+}
 
-// Start when page fully loads
+/* Page load */
 window.addEventListener('load', () => {
+
+  // 🔐 SAFE call — will NOT crash if missing
+  if (typeof loadCCHistory === "function") {
+    loadCCHistory();
+  }
+
   updateGalleryPosition();
   startAutoSlide();
 });
 
 window.addEventListener('resize', updateGalleryPosition);
-</script>
-
 <script>
 /* Enhanced CC/BCC parsing, history, and send-receipt tracking (no OAuth client id) */
 const CC_KEY = 'mncs_cc_list_v2';
@@ -984,6 +994,7 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
 
 
