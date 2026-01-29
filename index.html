@@ -914,34 +914,44 @@ window.addEventListener('load', function(){
 });
 <script>
 const galleryTrack = document.getElementById("galleryTrack");
-const scrollAmount = 300;
+const scrollAmount = 300; // how many pixels to move per step
 let autoScroll;
 
+// Move left
 function manualPrev() {
   galleryTrack.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
   resetAutoScroll();
 }
 
+// Move right
 function manualNext() {
   galleryTrack.scrollBy({ left: scrollAmount, behavior: 'smooth' });
   resetAutoScroll();
 }
 
+// Automatic scrolling
 function startAutoScroll() {
   autoScroll = setInterval(() => {
+    // if at the end, scroll back to start
     if (galleryTrack.scrollLeft + galleryTrack.clientWidth >= galleryTrack.scrollWidth) {
       galleryTrack.scrollTo({ left: 0, behavior: 'smooth' });
     } else {
-      galleryTrack.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      galleryTrack.scrollBy({ left: 1, behavior: 'smooth' }); // small amount for smooth slow scroll
     }
-  }, 3000);
+  }, 20); // moves 1px every 20ms => slow continuous scroll
 }
 
+// Pause auto-scroll when user hovers over gallery
+galleryTrack.addEventListener('mouseenter', () => clearInterval(autoScroll));
+galleryTrack.addEventListener('mouseleave', startAutoScroll);
+
+// Reset auto-scroll on manual click
 function resetAutoScroll() {
   clearInterval(autoScroll);
   startAutoScroll();
 }
 
+// Start scrolling when page loads
 startAutoScroll();
 </script>
  <!-- Hamburger menu JS -->
@@ -964,6 +974,7 @@ if (hamburger && nav && closeNav) {
 </script>
 </body>
 </html>
+
 
 
 
