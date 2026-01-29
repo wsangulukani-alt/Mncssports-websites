@@ -912,43 +912,58 @@ window.addEventListener('load', function(){
     if(last && document.getElementById('adminEmail')) document.getElementById('adminEmail').value = last;
   }catch(e){}
 });
-/* ==================== Gallery Sliding Functions ==================== */
-const galleryTrack = document.getElementById("galleryTrack");
-const galleryContainer = document.querySelector(".gallery-container");
-const scrollAmount = 300; // pixels per click
-let autoScrollInterval;
+// ----------------- Gallery Sliding -----------------
+let galleryIndex = 0;
+const track = document.getElementById('galleryTrack');
+let autoSlideInterval = null;
+function updateGalleryPosition(){
+  const item = track.querySelector('.gallery-item');
+  if(!item) return;
+  const itemWidth = item.offsetWidth + 20;
+  track.style.transform = `translateX(${-galleryIndex * itemWidth}px)`;
+}
+function nextSlide(){
+  const items = track.children.length;
+  galleryIndex++;
+  if(galleryIndex >= items) galleryIndex = 0;
+  updateGalleryPosition();
+}
+function prevSlide(){
+  const items = track.children.length;
+  galleryIndex--;
+  if(galleryIndex < 0) galleryIndex = items - 1;
+  updateGalleryPosition();
+}
+function manualNext(){ stopAutoSlide(); nextSlide(); startAutoSlide(); }
+function manualPrev(){ stopAutoSlide(); prevSlide(); startAutoSlide(); }
 
-// Arrow click handlers
-function manualPrev(){ galleryTrack.scrollBy({ left:-scrollAmount, behavior:'smooth' }); resetAutoScroll(); }
-function manualNext(){ galleryTrack.scrollBy({ left:scrollAmount, behavior:'smooth' }); resetAutoScroll(); }
-
-// Auto scrolling
-function startAutoScroll(){
-  clearInterval(autoScrollInterval);
-  autoScrollInterval = setInterval(() => {
-    if(galleryTrack.scrollLeft + galleryTrack.clientWidth >= galleryTrack.scrollWidth){
-      galleryTrack.scrollTo({ left:0, behavior:'smooth' });
-    } else {
-      galleryTrack.scrollBy({ left:scrollAmount, behavior:'smooth' });
-    }
-  }, 3000); // scroll every 3 seconds
+function startAutoSlide(){
+  if(autoSlideInterval) return;
+  autoSlideInterval = setInterval(nextSlide, 4000); // optimized 4 seconds
+}
+function stopAutoSlide(){
+  if(autoSlideInterval){ clearInterval(autoSlideInterval); autoSlideInterval = null; }
 }
 
-// Reset auto scroll on manual click
-function resetAutoScroll(){
-  clearInterval(autoScrollInterval);
-  startAutoScroll();
-}
+window.addEventListener('resize', updateGalleryPosition);
+window.addEventListener('load', function(){
+  loadCCHistory();
+  try{
+    const last = localStorage.getItem('mncs_last_admin');
+    if(last) document.getElementById('adminEmail').value = last;
+  }catch(e){}
+  updateGalleryPosition();
+  startAutoSlide();
+});
 
-// Pause on hover
-galleryContainer.addEventListener("mouseenter", ()=>clearInterval(autoScrollInterval));
-galleryContainer.addEventListener("mouseleave", startAutoScroll);
-
-// Start scrolling after page load
-window.addEventListener('load', startAutoScroll);
+const galleryContainer = document.querySelector('.gallery-container');
+galleryContainer.addEventListener('mouseenter', stopAutoSlide);
+galleryContainer.addEventListener('mouseleave', startAutoSlide);
+</script>
 </script>
 </body>
 </html>
+
 
 
 
