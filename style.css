@@ -52,6 +52,23 @@ nav a:hover { color:#ffd700; }
 .arrow-left { left:6px; } .arrow-right { right:6px; }
 .arrow-btn:hover { background:#ffd700; color:black; }
 
+/* ----------------- SCROLL FUNCTIONALITY ADDITIONS ----------------- */
+/* Make gallery scrollable for arrows + auto-scroll */
+.gallery-track {
+  overflow-x: auto;          /* enable horizontal scrolling */
+  scroll-behavior: smooth;   /* smooth scroll when JS moves gallery */
+  scrollbar-width: none;     /* hide scrollbar in Firefox */
+}
+.gallery-track::-webkit-scrollbar {
+  display: none;             /* hide scrollbar in Chrome/Safari */
+}
+.gallery-item {
+  flex-shrink: 0;            /* prevent images from shrinking */
+}
+.gallery-container {
+  position: relative;        /* needed for arrow positioning */
+}
+
 /* Admin Section */
 .pdf-upload { background: rgba(255,255,255,0.12); padding:18px; border-radius:10px; max-width:640px; margin:18px auto; text-align:left; }
 .pdf-upload label { display:block; margin-bottom:6px; font-weight:600; color:#fff; }
@@ -79,4 +96,3 @@ nav a:hover { color:#ffd700; }
   .header-logo{width:70px;}
   .site-title{font-size:1.1rem;}
 }
-
