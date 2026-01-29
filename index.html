@@ -545,7 +545,47 @@ loadNews();
     <button class="arrow-btn arrow-right" onclick="manualNext()">&#10095;</button>
   </div>
 </section>
+<script>
+const galleryTrack = document.getElementById('galleryTrack');
+const galleryContainer = document.querySelector('.gallery-container');
+const scrollAmount = 300; // pixels to scroll per step
+let autoScrollInterval;
 
+// Arrow buttons
+function manualNext() {
+  galleryTrack.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  resetAutoScroll();
+}
+
+function manualPrev() {
+  galleryTrack.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  resetAutoScroll();
+}
+
+// Auto scroll
+function startAutoScroll() {
+  autoScrollInterval = setInterval(() => {
+    if (galleryTrack.scrollLeft + galleryTrack.clientWidth >= galleryTrack.scrollWidth) {
+      galleryTrack.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      galleryTrack.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  }, 3000); // every 3 seconds
+}
+
+// Reset auto-scroll on manual navigation
+function resetAutoScroll() {
+  clearInterval(autoScrollInterval);
+  startAutoScroll();
+}
+
+// Pause auto-scroll when hovering
+galleryContainer.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+galleryContainer.addEventListener('mouseleave', startAutoScroll);
+
+// Start auto scroll when page loads
+window.addEventListener('load', startAutoScroll);
+</script>
 <section id="publications">
   <h3>Reports, Policies & Publications / Admin Section</h3>
 
@@ -752,56 +792,6 @@ document.getElementById('toggleAdminPass').addEventListener('click', function(){
   else { p.type = 'password'; icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye'); }
 });
 
-// ----------------- Gallery Sliding -----------------
-let galleryIndex = 0;
-const track = document.getElementById('galleryTrack');
-let autoSlideInterval = null;
-function updateGalleryPosition(){
-  const item = track.querySelector('.gallery-item');
-  if(!item) return;
-  const itemWidth = item.offsetWidth + 20;
-  track.style.transform = `translateX(${-galleryIndex * itemWidth}px)`;
-}
-function nextSlide(){
-  const items = track.children.length;
-  galleryIndex++;
-  if(galleryIndex >= items) galleryIndex = 0;
-  updateGalleryPosition();
-}
-function prevSlide(){
-  const items = track.children.length;
-  galleryIndex--;
-  if(galleryIndex < 0) galleryIndex = items - 1;
-  updateGalleryPosition();
-}
-function manualNext(){ stopAutoSlide(); nextSlide(); startAutoSlide(); }
-function manualPrev(){ stopAutoSlide(); prevSlide(); startAutoSlide(); }
-
-function startAutoSlide(){
-  if(autoSlideInterval) return;
-  autoSlideInterval = setInterval(nextSlide, 4000); // optimized 4 seconds
-}
-function stopAutoSlide(){
-  if(autoSlideInterval){ clearInterval(autoSlideInterval); autoSlideInterval = null; }
-}
-
-window.addEventListener('resize', updateGalleryPosition);
-window.addEventListener('load', function(){
-  loadCCHistory();
-  try{
-    const last = localStorage.getItem('mncs_last_admin');
-    if(last) document.getElementById('adminEmail').value = last;
-  }catch(e){}
-  updateGalleryPosition();
-  startAutoSlide();
-});
-
-const galleryContainer = document.querySelector('.gallery-container');
-galleryContainer.addEventListener('mouseenter', stopAutoSlide);
-galleryContainer.addEventListener('mouseleave', startAutoSlide);
-</script>
-
-
 <script>
 /* Enhanced CC/BCC parsing, history, and send-receipt tracking (no OAuth client id) */
 const CC_KEY = 'mncs_cc_list_v2';
@@ -971,4 +961,5 @@ window.addEventListener('load', function(){
 
 </body>
 </html>
+
 
