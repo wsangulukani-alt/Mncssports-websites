@@ -913,52 +913,47 @@ window.addEventListener('load', function(){
   }catch(e){}
 });
 <script>
-const galleryTrack = document.getElementById("galleryTrack");
-const arrowLeft = document.getElementById("arrowLeft");
-const arrowRight = document.getElementById("arrowRight");
+  const galleryTrack = document.getElementById("galleryTrack");
+  const galleryContainer = document.querySelector(".gallery-container");
+  const scrollAmount = 300; // how much each click scrolls
+  let autoScrollInterval;
 
-let scrollPos = 0;
-const scrollStep = 280; // amount to scroll per arrow click
-let autoScroll;
+  // Arrow click functions
+  function manualPrev() {
+    galleryTrack.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    resetAutoScroll();
+  }
 
-// Manual arrows
-arrowLeft.addEventListener("click", () => {
-  scrollPos -= scrollStep;
-  if(scrollPos < 0) scrollPos = galleryTrack.scrollWidth - galleryTrack.clientWidth;
-  galleryTrack.scrollTo({ left: scrollPos, behavior: 'smooth' });
-  resetAutoScroll();
-});
+  function manualNext() {
+    galleryTrack.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    resetAutoScroll();
+  }
+  // Auto scroll function
+  function startAutoScroll() {
+    autoScrollInterval = setInterval(() => {
+      if (galleryTrack.scrollLeft + galleryTrack.clientWidth >= galleryTrack.scrollWidth) {
+        galleryTrack.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        galleryTrack.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      }
+    }, 3000); // scroll every 3 seconds
+  }
 
-arrowRight.addEventListener("click", () => {
-  scrollPos += scrollStep;
-  if(scrollPos > galleryTrack.scrollWidth - galleryTrack.clientWidth) scrollPos = 0;
-  galleryTrack.scrollTo({ left: scrollPos, behavior: 'smooth' });
-  resetAutoScroll();
-});
+  function resetAutoScroll() {
+    clearInterval(autoScrollInterval);
+    startAutoScroll();
+  }
 
-// Auto scroll
-function startAutoScroll() {
-  autoScroll = setInterval(() => {
-    scrollPos += 1; // scroll 1px for smooth slow movement
-    if(scrollPos > galleryTrack.scrollWidth - galleryTrack.clientWidth) scrollPos = 0;
-    galleryTrack.scrollTo({ left: scrollPos, behavior: 'smooth' });
-  }, 20); // slower scroll, adjust for speed
-}
+  // Pause on hover
+  galleryContainer.addEventListener("mouseenter", () => clearInterval(autoScrollInterval));
+  galleryContainer.addEventListener("mouseleave", startAutoScroll);
 
-function resetAutoScroll() {
-  clearInterval(autoScroll);
+  // Start automatic scrolling
   startAutoScroll();
-}
-
-// Pause auto-scroll on hover
-galleryTrack.addEventListener("mouseenter", () => clearInterval(autoScroll));
-galleryTrack.addEventListener("mouseleave", startAutoScroll);
-
-// Start on page load
-startAutoScroll();
 </script>
 </body>
 </html>
+
 
 
 
