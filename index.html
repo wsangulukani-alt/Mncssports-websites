@@ -960,57 +960,10 @@ window.addEventListener('load', function(){
     if(last && document.getElementById('adminEmail')) document.getElementById('adminEmail').value = last;
   }catch(e){}
 });
-// ----------------- Gallery Sliding -----------------
-let galleryIndex = 0;
-const track = document.getElementById('galleryTrack');
-let autoSlideInterval = null;
-function updateGalleryPosition(){
-  const item = track.querySelector('.gallery-item');
-  if(!item) return;
-  const itemWidth = item.offsetWidth + 20;
-  track.style.transform = `translateX(${-galleryIndex * itemWidth}px)`;
-}
-function nextSlide(){
-  const items = track.children.length;
-  galleryIndex++;
-  if(galleryIndex >= items) galleryIndex = 0;
-  updateGalleryPosition();
-}
-function prevSlide(){
-  const items = track.children.length;
-  galleryIndex--;
-  if(galleryIndex < 0) galleryIndex = items - 1;
-  updateGalleryPosition();
-}
-function manualNext(){ stopAutoSlide(); nextSlide(); startAutoSlide(); }
-function manualPrev(){ stopAutoSlide(); prevSlide(); startAutoSlide(); }
-
-function startAutoSlide(){
-  if(autoSlideInterval) return;
-  autoSlideInterval = setInterval(nextSlide, 4000); // optimized 4 seconds
-}
-function stopAutoSlide(){
-  if(autoSlideInterval){ clearInterval(autoSlideInterval); autoSlideInterval = null; }
-}
-
-window.addEventListener('resize', updateGalleryPosition);
-window.addEventListener('load', function(){
-  loadCCHistory();
-  try{
-    const last = localStorage.getItem('mncs_last_admin');
-    if(last) document.getElementById('adminEmail').value = last;
-  }catch(e){}
-  updateGalleryPosition();
-  startAutoSlide();
-});
-
-const galleryContainer = document.querySelector('.gallery-container');
-galleryContainer.addEventListener('mouseenter', stopAutoSlide);
-galleryContainer.addEventListener('mouseleave', startAutoSlide);
-</script>
 </script>
 </body>
 </html>
+
 
 
 
